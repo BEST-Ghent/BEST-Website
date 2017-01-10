@@ -1,0 +1,18 @@
+# DATA-ONLY CONTAINER
+data:
+ container_name: best_data
+ image: busybox
+ volumes:
+  - ../src:/var/www
+
+# APPLICATION CONTAINER
+app:
+ restart: always
+ container_name: best_app
+ build: ..
+ dockerfile: dev_env_docker/Dockerfile_app
+ volumes_from:
+  - data
+ working_dir: /var/www
+ ports:
+  - "8030:80"
