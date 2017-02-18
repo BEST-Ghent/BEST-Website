@@ -6297,7 +6297,7 @@ section.hero.hero-sc {
       margin-bottom: 100px; } }
 
 section {
-  color: #a1a1a1;
+  color: #666666;
   font-weight: 300;
   background-color: white;
   padding-top: 100px;
@@ -6422,7 +6422,7 @@ section.hero-partners ~ section li:before {
     color: black;
     padding-top: 35px; }
   #section-about p {
-    color: #a1a1a1; }
+    color: #666666; }
   @media only screen and (max-width: 768px) {
     #section-about h1 {
       padding-top: 0px; } }
