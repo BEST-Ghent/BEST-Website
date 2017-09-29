@@ -8765,7 +8765,7 @@ section.hero p strong {
 }
 
 section.hero.hero-about {
-  background-image: url("../img/about.png");
+  background-image: url("../img/lbg_jackets.jpg");
 }
 
 section.hero.hero-about .overlay {
@@ -9003,16 +9003,10 @@ section.hero-partners~section li:before {
 }
 
 #section-home {
-  background: url("../img/home.jpg");
+  background-image: url("../img/home.jpg");
   background-size: cover;
 }
 
-@media only screen and (max-width: 768px) {
-  #section-home {
-    background: url("../img/home_mobile.jpg");
-    background-size: cover;
-  }
-}
 
 #section-about {
   background-color: white;
