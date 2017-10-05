@@ -8410,9 +8410,9 @@ button.close {
 
 div.polaroids {
   padding-top: 40px;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -8431,7 +8431,7 @@ div.polaroids a {
   background: #fff;
   display: inline;
   float: left;
-  margin: 0 0 27px 30px;
+  margin: 0 0 0 0;
   width: auto;
   padding: 10px 10px 15px;
   text-align: center;
@@ -8785,7 +8785,7 @@ section.hero.hero-courses {
 }
 
 section.hero.hero-courses .overlay {
-  background-color: rgba(251, 186, 80, 0.7);
+  background-color: rgba(251, 186, 80, 0.6);
 }
 
 section.hero.hero-ebecmiddelbaar {
@@ -8793,7 +8793,7 @@ section.hero.hero-ebecmiddelbaar {
 }
 
 section.hero.hero-ebecmiddelbaar .overlay {
-  background-color: rgba(145, 199, 55, 0.7);
+  background-color: rgba(145, 199, 55, 0.6);
 }
 
 section.hero.hero-ebecuniversity {
@@ -8801,7 +8801,7 @@ section.hero.hero-ebecuniversity {
 }
 
 section.hero.hero-ebecuniversity .overlay {
-  background-color: rgba(145, 199, 55, 0.7);
+  background-color: rgba(145, 199, 55, 0.6);
 }
 
 section.hero.hero-partners {
