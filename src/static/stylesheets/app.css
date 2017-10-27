@@ -5372,10 +5372,9 @@ tbody.collapse.in {
 }
 
 .navbar {
-  position: relative;
+  position: sticky;
   min-height: 50px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
+  margin-top: 20px;
 }
 
 .navbar:before,
@@ -8410,9 +8409,9 @@ button.close {
 
 div.polaroids {
   padding-top: 40px;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -8431,7 +8430,7 @@ div.polaroids a {
   background: #fff;
   display: inline;
   float: left;
-  margin: 0 0 27px 30px;
+  margin: 0 0 0 0;
   width: auto;
   padding: 10px 10px 15px;
   text-align: center;
@@ -8785,7 +8784,7 @@ section.hero.hero-courses {
 }
 
 section.hero.hero-courses .overlay {
-  background-color: rgba(251, 186, 80, 0.7);
+  background-color: rgba(251, 186, 80, 0.6);
 }
 
 section.hero.hero-ebecmiddelbaar {
@@ -8793,7 +8792,7 @@ section.hero.hero-ebecmiddelbaar {
 }
 
 section.hero.hero-ebecmiddelbaar .overlay {
-  background-color: rgba(145, 199, 55, 0.7);
+  background-color: rgba(145, 199, 55, 0.6);
 }
 
 section.hero.hero-ebecuniversity {
@@ -8801,11 +8800,11 @@ section.hero.hero-ebecuniversity {
 }
 
 section.hero.hero-ebecuniversity .overlay {
-  background-color: rgba(145, 199, 55, 0.7);
+  background-color: rgba(145, 199, 55, 0.6);
 }
 
 section.hero.hero-partners {
-  background-image: url("../img/partners.jpg");
+  background-image: url("../img/partners_1.jpg");
 }
 
 section.hero.hero-partners .overlay {
@@ -9236,6 +9235,7 @@ nav #nav-top.home>li>a {
 
 .navbar-top {
   top: 0;
+  /*position:fixed */ /*needed for sticky*/
 }
 
 .navbar-top .icon-bar {
@@ -9245,8 +9245,11 @@ nav #nav-top.home>li>a {
 .navbar-top .navbar-toggle {
   float: left;
   top: 0;
-  position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-toggle{
+	position: fixed;
 }
 
 .navbar-top #nav-top li>a,
