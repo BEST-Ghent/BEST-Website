@@ -34,6 +34,29 @@
     </script>
 </head>
 
+
+    <!-- Coockie notification -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+          "palette": {
+                  "popup": {
+                            "background": "#edeff5",
+                                  "text": "#838391"
+                                          },
+                      "button": {
+                                "background": "#4b81e8"
+                                        }
+                    },
+            "position": "bottom-left",
+              "content": {
+                      "message": "BEST Ghent uses cookies to ensure you get the best experience on our website. "
+                            }
+    })});
+    </script>
+
 <!-- ICONS -->
 <meta name="msapplication-config" content="static/img/ico/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
