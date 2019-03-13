@@ -7,9 +7,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css"
-    />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="static/stylesheets/app.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- FONTS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700' rel='stylesheet' type='text/css'>
@@ -170,6 +170,22 @@ window.addEventListener("load", function(){
                 </div>
             </div>
         </div>
+        <div class="section" id="section-agenda" data-anchor="agenda">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+                            <h1>Upcoming events</h1>
+                            <div id="calendarList"></div>
+                            <div>
+                                <p><b>Click the link below to add our event calendar to your Google calendar!</b></p>
+                            </div>
+                            <a class="btn btn-blue" href="https://calendar.google.com/calendar/r?cid=7jfkdjs4s3mqru71uqq7ef0750@group.calendar.google.com" target="_blank"><i class="fab fa-google"></i> Add to Google Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <nav class="navbar navbar-sticky">
@@ -181,6 +197,7 @@ window.addEventListener("load", function(){
                 <li data-menuanchor="ebec"><a href="#ebec/1"><span>EBEC</span></a></li>
                 <li data-menuanchor="partners"><a href="#partners"><span>Partners</span></a></li>
                 <li data-menuanchor="contact"><a href="#contact"><span>Contact</span></a></li>
+                <li data-menuanchor="agenda"><a href="#agenda"><span>Agenda</span></a></li>
             </ul>
         </div>
         <div class="navbar-header">
@@ -202,6 +219,7 @@ window.addEventListener("load", function(){
                 <li data-menuanchor="ebec"><a href="#ebec/1"><span>EBEC</span></a></li>
                 <li data-menuanchor="partners"><a href="#partners"><span>Partners</span></a></li>
                 <li data-menuanchor="contact"><a href="#contact"><span>Contact</span></a></li>
+                <li data-menuanchor="agenda"><a href="#agenda"><span>Agenda</span></a></li>
             </ul>
         </div>
     </nav>
@@ -213,6 +231,9 @@ window.addEventListener("load", function(){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
     <script src="static/scripts/app.js"></script>
+    <!-- Scripts to load google calendar events -->
+    <script src="static/scripts/calendar.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
 
 </body>

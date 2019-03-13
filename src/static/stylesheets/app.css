@@ -9058,6 +9058,12 @@ section.hero-partners~section li:before {
   left: 0px;
 }
 
+#section-agenda {
+  background-color: #ffa07a;
+  text-align: left;
+  color: #faa925;
+}
+
 nav .nav li>a,
 nav .nav li>a span {
   -webkit-transition: .4s;
