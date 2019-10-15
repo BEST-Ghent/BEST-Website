@@ -8803,6 +8803,14 @@ section.hero.hero-ebecuniversity .overlay {
   background-color: rgba(145, 199, 55, 0.6);
 }
 
+section.hero.hero-training {
+  background-image: url("../img/training/training.jpg");
+}
+
+section.hero.hero-training .overlay {
+  background-color: rgba(251, 186, 80, 0.6);
+}
+
 section.hero.hero-partners {
   background-image: url("../img/partners_1.jpg");
 }
@@ -8960,6 +8968,19 @@ section.hero-ebecuniversity~section li:before {
   color: #91c737;
 }
 
+section.hero-training~section h1 b,
+section.hero-training~section h1 strong {
+  color: #fbba50;
+}
+
+section.hero-training~section~.section-end {
+  background-color: #fbba50;
+}
+
+section.hero-training~section li:before {
+  color: #fbba50;
+}
+
 section.hero-partners~section h1 b,
 section.hero-partners~section h1 strong {
   color: #252829;
@@ -9036,6 +9057,10 @@ section.hero-partners~section li:before {
 
 #section-ebec p {
   max-width: 770px;
+}
+
+#section-training {
+  background-color: #faa925;
 }
 
 #section-partners {
