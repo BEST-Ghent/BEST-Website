@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#fullpage').fullpage({
         menu: '#nav-top, #nav-mobile',
         lockAnchors: false,
-        anchors: ['home', 'about', 'courses', 'ebec', 'partners', 'contact'],
+        anchors: ['home', 'about', 'courses', 'ebec', 'training', 'partners', 'contact'],
         navigation: false,
         slidesNavigation: false,
 

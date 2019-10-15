@@ -9038,6 +9038,10 @@ section.hero-partners~section li:before {
   max-width: 770px;
 }
 
+#section-training {
+  background-color: #faa925;
+}
+
 #section-partners {
   background-color: #0071b9;
 }
