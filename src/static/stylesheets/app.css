@@ -8804,7 +8804,7 @@ section.hero.hero-ebecuniversity .overlay {
 }
 
 section.hero.hero-training {
-  background-image: url("../img/traing.jpg");
+  background-image: url("../img/training/training.jpg");
 }
 
 section.hero.hero-training .overlay {
@@ -8966,6 +8966,19 @@ section.hero-ebecuniversity~section~.section-end {
 
 section.hero-ebecuniversity~section li:before {
   color: #91c737;
+}
+
+section.hero-training~section h1 b,
+section.hero-training~section h1 strong {
+  color: #fbba50;
+}
+
+section.hero-training~section~.section-end {
+  background-color: #fbba50;
+}
+
+section.hero-training~section li:before {
+  color: #fbba50;
 }
 
 section.hero-partners~section h1 b,
