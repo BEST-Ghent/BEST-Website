@@ -8803,6 +8803,14 @@ section.hero.hero-ebecuniversity .overlay {
   background-color: rgba(145, 199, 55, 0.6);
 }
 
+section.hero.hero-training {
+  background-image: url("../img/traing.jpg");
+}
+
+section.hero.hero-training .overlay {
+  background-color: rgba(251, 186, 80, 0.6);
+}
+
 section.hero.hero-partners {
   background-image: url("../img/partners_1.jpg");
 }
