@@ -8,8 +8,9 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css"/>
-    <link rel="stylesheet" type="text/css" href="static/stylesheets/app.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/stylesheets/style.css" />
 
     <!-- FONTS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700' rel='stylesheet' type='text/css'>
@@ -58,6 +59,10 @@ window.addEventListener("load", function(){
     </script>
 
 <!-- ICONS -->
+<link rel="icon" type="image/png" href="../static/img/ico/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../static/img/ico/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="../static/img/ico/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../static/img/ico/favicon-16x16.png" sizes="16x16">
 <meta name="msapplication-config" content="static/img/ico/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 
@@ -66,20 +71,21 @@ window.addEventListener("load", function(){
         <div class="section" id="section-home" data-anchor="home">
             <div class="overlay">
                 <div>
-                    <img src='static/img/logo_white.svg' alt="White BEST Ghent logo" class="center-block img-logo">
+                    <img src='static/img/home/logo_white.svg' alt="White BEST Ghent logo" class="center-block img-logo">
                 </div>
             </div>
         </div>
+
         <div class="section" id="section-about" data-anchor="about">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="text-center">
-                            <img src="static/img/logo_color.svg" alt="Coloured BEST Ghent logo" class="center-block  img-logo">
+                            <img src="static/img/home/logo_color.svg" alt="Coloured BEST Ghent logo" class="center-block  img-logo">
 
                             <h1>Some facts and numbers</h1>
 
-                            <p>BEST Ghent is a European student organisation spread over 96 universities in 33 countries and
+                            <p>BEST Ghent is a European student organisation spread over 95 universities in 33 countries and
                                 reaches about 1.300.000 students every year. Impressive, right?</p>
 
 
@@ -89,6 +95,7 @@ window.addEventListener("load", function(){
                 </div>
             </div>
         </div>
+
         <div class="section" id="section-courses" data-anchor="courses">
             <div class="container">
                 <div class="row">
@@ -108,6 +115,7 @@ window.addEventListener("load", function(){
                 </div>
             </div>
         </div>
+
         <div class="section" id="section-ebec" data-anchor="ebec">
             <div class="container">
                 <div class="row">
@@ -130,6 +138,25 @@ window.addEventListener("load", function(){
                 </div>
             </div>
         </div>
+
+        <div class="section" id="section-training" data-anchor="training">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+
+                            <h1>Training</h1>
+
+                            <p>To fulfil our mission, developing students, we offer students all kinds of training sessions, both on soft skills and hard skills. You can now subscribe for the BEST Soft Skill Training with Smart Solutions or take a look below to find out what you can do!</p>
+
+                            <a href="https://forms.gle/RpKfc8gDmvcCLs25A" class="btn btn-orange">Join BSST</a>
+                            <a href="training/" class="btn btn-orange">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="section" id="section-partners" data-anchor="partners">
             <div class="container">
                 <div class="row">
@@ -144,11 +171,50 @@ window.addEventListener("load", function(){
 
 
                             <a href="partners/" class="btn btn-black">SHOW PARTNERSHIPS</a>
+							<div class="row text-center">
+                                <div class="col-md-3">
+                                    <div class="polaroids clearfix">
+                                        <a href="http://www.belgianrail.be/">
+                                            <span class="plugin_picture">
+                                                <img src="static/img/ebec/Belgische_Spoorwegen.jpg" alt=""  style="max-width:100%"/>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="polaroids clearfix">
+                                        <a href="http://www.unilin.com/">
+                                            <span class="plugin_picture">
+                                                <img src="static/img/ebec/UNILIN.jpg" alt="" style="max-width:100%"/>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="polaroids clearfix">
+                                        <a href="https://www2.deloitte.com/be/en/industries/technology-media-and-telecommunications.html?icid=top_technology-media-and-telecommunications">
+                                            <span class="plugin_picture">
+                                                <img src="static/img/ebec/Deloitte.jpg" alt="" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="polaroids clearfix">
+                                        <a href="">
+                                            <span class="plugin_picture">
+                                                <img src="static/img/partners/optimile2.png" alt="" />
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="section" id="section-contact" data-anchor="contact">
             <div class="container">
                 <div class="row">
@@ -164,7 +230,7 @@ window.addEventListener("load", function(){
 									Jozef Plateaustraat 22,
                                 9000 Gent </strong>
                             </p>
-                            <a href="https://www.facebook.com/BESTGhent/" class="btn btn-blue">FACEBOOK</a>
+                            <a href="https://www.facebook.com/BESTGhent/" class="btn btn-blue"><i class="fa fa-facebook"></i></a><a href="https://www.instagram.com/bestghent/" class="btn btn-blue"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -195,6 +261,7 @@ window.addEventListener("load", function(){
                 <li data-menuanchor="about"><a href="#about"><span>About</span></a></li>
                 <li data-menuanchor="courses"><a href="#courses"><span>Courses</span></a></li>
                 <li data-menuanchor="ebec"><a href="#ebec/1"><span>EBEC</span></a></li>
+                <li data-menuanchor="training"><a href="#training"><span>Training</span></a></li>
                 <li data-menuanchor="partners"><a href="#partners"><span>Partners</span></a></li>
                 <li data-menuanchor="contact"><a href="#contact"><span>Contact</span></a></li>
                 <li data-menuanchor="agenda"><a href="#agenda"><span>Agenda</span></a></li>
@@ -217,6 +284,7 @@ window.addEventListener("load", function(){
                 <li data-menuanchor="about"><a href="#about"><span>About</span></a></li>
                 <li data-menuanchor="courses"><a href="#courses"><span>Courses</span></a></li>
                 <li data-menuanchor="ebec"><a href="#ebec/1"><span>EBEC</span></a></li>
+                <li data-menuanchor="training"><a href="#training"><span>Training</span></a></li>
                 <li data-menuanchor="partners"><a href="#partners"><span>Partners</span></a></li>
                 <li data-menuanchor="contact"><a href="#contact"><span>Contact</span></a></li>
                 <li data-menuanchor="agenda"><a href="#agenda"><span>Agenda</span></a></li>
@@ -230,10 +298,10 @@ window.addEventListener("load", function(){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
-    <script src="static/scripts/app.js"></script>
     <!-- Scripts to load google calendar events -->
     <script src="static/scripts/calendar.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script src="static/scripts/script.js"></script>
 
 
 </body>
