@@ -28,7 +28,12 @@ function loadCalendar(feed) {
     events = feed.result.items;
     var html = "<ul style='list-style: none;'>";
     for (var i = 0; i < numberOfEvents; i++) {
-        html += toHTML(events[i]);
+        if (events[i]) {
+            html += toHTML(events[i]);
+        } else {
+            html += "<p><strong>No more upcomming events!</strong></p>";
+            break;
+        }
     }
     html += "</ul>"
     document.getElementById("calendarList").innerHTML = html;
