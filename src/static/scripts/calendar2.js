@@ -31,7 +31,7 @@ function loadCalendar(feed) {
         if (events[i]) {
             html += toHTML(events[i]);
         } else {
-            html += "<p><strong>No more upcomming events!</strong></p>";
+            html += "<p><strong>No more upcoming events!</strong></p>";
             break;
         }
     }
