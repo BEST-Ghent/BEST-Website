@@ -1,6 +1,6 @@
 var API_KEY = 'AIzaSyBmLSsecQmN5wKP2X7x78RfNnsTILc_ETE';
 // number of events to display at a time
-var numberOfEvents = 3;
+var numberOfEvents = 5;
 var calendar = {};
 
 function handleClientLoad() {
@@ -55,6 +55,11 @@ function toHTML(event){
     }
     html += "</p></li>";
     return html;
+}
+
+function loadMoreEvents() {
+    numberOfEvents += 5;
+    loadCalendar(calendar);
 }
 
 function errorLoading() {

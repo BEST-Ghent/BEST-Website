@@ -329,6 +329,11 @@ strong {
   font-weight: bold;
 }
 
+li strong {
+  font-weight: bold;
+  font-size: 120%;
+}
+
 dfn {
   font-style: italic;
 }
@@ -8819,6 +8824,14 @@ section.hero.hero-partners .overlay {
   background-color: rgba(37, 40, 41, 0.6);
 }
 
+section.hero.hero-calendar {
+  background-image: url("../img/about/lbg_jackets.jpg");
+}
+
+section.hero.hero-calendar .overlay {
+  background-color: rgba(255, 186, 80, 0.7);
+}
+
 @media only screen and (max-width: 768px) {
   section.hero h1 {
     margin-top: 100px;
@@ -8893,7 +8906,6 @@ section li:before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0 10px;
-  content: "\e013";
 }
 
 @media only screen and (max-width: 768px) {
@@ -9084,7 +9096,7 @@ section.hero-partners~section li:before {
 }
 
 #section-agenda {
-  background-color: #ffa07a;
+  background-color: #ffbc00;
   text-align: left;
   color: #faa925;
 }
@@ -9340,6 +9352,16 @@ nav #nav-top.home>li>a {
 .btn-orange:hover {
   color: white;
   background-color: #fab037;
+}
+
+.btn-yellow {
+  color: white;
+  background-color: #ffcc3c;
+}
+
+.btn-yellow:hover {
+  color: white;
+  background-color: #ffc31b;
 }
 
 .btn-green {
