@@ -2,7 +2,8 @@ $(document).ready(function () {
     $('#fullpage').fullpage({
         menu: '#nav-top, #nav-mobile',
         lockAnchors: false,
-        anchors: ['home', 'about', 'courses', 'ebec', 'training', 'partners', 'contact'],
+
+        anchors: ['home', 'about', 'courses', 'ebec', 'training', 'partners', 'calendar', 'contact'],
         navigation: false,
         slidesNavigation: false,
 
@@ -59,19 +60,4 @@ $(document).ready(function () {
         dots: true,
         nav: false
     });
-	
-	//change text color while scrolling - needed for sticky
-	/*
-	var h = $(".overlay").height();
-	$(document).scroll(function(){
-		if($(this).scrollTop() > h)
-		{   
-			$('nav #nav-top li > a').css({"color":"rgba(0, 113, 185, 0.6)"});
-		}
-		if($(this).scrollTop() < h)
-		{   
-			$('nav #nav-top li > a').css({"color":"white"});
-		} 
-	});
-	*/
 });

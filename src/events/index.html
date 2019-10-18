@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -10,9 +9,9 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../static/stylesheets/style-v1.css" />
-
-
 
     <!-- FONTS -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700' rel='stylesheet' type='text/css'>
@@ -61,89 +60,34 @@
 
 <body>
 
-
-
-
-
-    <section class="hero hero-ebecmiddelbaar">
+    <section class="hero hero-calendar">
         <div class="overlay">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-
-                        <h1>Schuilt er een <b>ingenieur</b> in jou?</h1>
-
-                        <p>Bedenk een oplossing voor een probleem waar zelfs universiteitsstudenten hun tanden op stuk bijten!</p>
-
+                        <h1>Public <b>Events</b></h1>
+                        <p>Interested in joining BEST? You can always stop by on one of our events!</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-7">
-                    <h1>Ga de <b>strijd</b> aan!</h1>
-
-                    <p><span>Vind jij jezelf een handige Harry of een slimme Rik? Knutsel je bij een probleem al gauw zelf iets in elkaar in plaats van bij de pakken te blijven zitten? Of wil je gewoon jouw team of school roem en glorie brengen in een spannende strijd met jouw medestudenten?</span>                        <span>Schrijf je dan als de bliksem in voor de EBEC competitie en ontdek of er zich een echte ingenieur in jou schuil houdt!</span></p>
-
-                </div>
-
-                <div class="col-sm-5">
-                    <div class="polaroids clearfix">
-                        <a> <span class="plugin_picture">
-                            <img src="../static/img/ebec/EBEC_middelbaar_3.jpg" alt="" />
-                        </span> </a>
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <h1>Upcoming events</h1>
+                        <div id="calendarList"></div>
+                        <div>
+                            <p>
+                                See more upcoming events or add our event calendar to your google calendar!<br>
+                                <a class="btn btn-yellow" onclick="loadMoreEvents();"> More events</a>
+                                <a class="btn btn-yellow" href="https://calendar.google.com/calendar/embed?src=5bgthi7odqdrqn03inffum4hhs%40group.calendar.google.com&ctz=Europe%2FBrussels" target="_blank">View Calendar</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section-odd">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-7 col-sm-push-5">
-                    <h1>Hoe gaat het <b>in zijn werk?</b></h1>
-
-                    <p>
-                        Tijdens de EBEC strijden verschillende teams tegen elkaar om een gegeven probleem zo goed mogelijk op te lossen. Daarbij start ieder team met dezelfde materialen, maar eigenlijk is de enige beperking jouw eigen verbeelding!De teams die volgens de jury het sterkste, snelste en/of origineelste prototype hebben gebouwd nemen bovendien een toffe prijs naar huis.
-                    </p>
-
-                </div>
-
-                <div class="col-sm-5 col-sm-pull-7">
-                    <div class="polaroids clearfix">
-                        <a title=""> <span class="plugin_picture">
-                            <img src="../static/img/ebec/ebec_group.jpg" alt="" />
-                        </span> </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <h1>Hier is wat <b>praktische info.</b></h1>
-                    <span>
-                        De competitie gaat door in het tweede semester van het academiejaar, meer info verschijnt hier begin 2020.
-						De competitie gaat door op <b>woensdag 4 maart 2020</b> in het Universitair Forum (UFO), Sint-Pietersnieuwstraat 33, Gent. <br>
-						Eventuele informatie in verband met parking en bereikbaarheid vindt u op <a href="https://www.ugent.be/openuniversiteit/nl/contact/route">de site van de Universiteit Gent</a>
-                    </span><br>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-odd">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-					<h1>Ben je overtuigd? <b>Schrijf je dan nu in!</b></h1>
-                    <span>Inschrijvingen zijn per teams van vier personen. Eens je jouw team gevormd hebt en een leuke naam hebt bedacht, hoef je enkel nog in te schrijven begin 2020</a>.</span><br>
                 </div>
             </div>
         </div>
@@ -176,7 +120,6 @@
         </button>
         </div>
     </nav>
-
     <nav class="mobilemenu">
         <div class="menu">
             <ul class="nav navbar-nav text-center" id="nav-mobile">
@@ -193,15 +136,15 @@
         </div>
     </nav>
 
-
-
     <!-- JAVASCRIPT -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
+    <!-- Scripts to load google calendar events -->
+    <script src="../static/scripts/calendar2.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
     <script src="../static/scripts/script-v1.js"></script>
-
 
 </body>
 
