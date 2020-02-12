@@ -3,7 +3,7 @@ $(document).ready(function () {
         menu: '#nav-top, #nav-mobile',
         lockAnchors: false,
 
-        anchors: ['home', 'about', 'courses', 'ebec', 'training', 'partners', 'calendar', 'contact'],
+        anchors: ['home', 'about', 'explore', 'courses', 'ebec', 'training', 'partners', 'calendar', 'contact'],
         navigation: false,
         slidesNavigation: false,
 

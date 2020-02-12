@@ -8920,7 +8920,8 @@ section li:before {
 }
 
 section.hero-about~section h1 b,
-section.hero-about~section h1 strong {
+section.hero-about~section h1 strong,
+section.hero-about~section h2 strong {
   color: #0071b9;
 }
 
@@ -9348,6 +9349,16 @@ nav #nav-top.home>li>a {
   background-color: #0061a0;
 }
 
+.btn-blue2 {
+  color: white;
+  background-color: #00619e;
+}
+
+.btn-blue2:hover {
+  color: white;
+  background-color: #004e81;
+}
+
 .btn-orange {
   color: white;
   background-color: #fbba50;
@@ -9426,5 +9437,14 @@ body {
   min-height: 100%;
 }
 
+.facts {
+  list-style-type: disc;
+  padding: 10px;
+  margin-top: -15px;
+}
+
+.facts li{
+  margin-left: 10px;
+}
 
 /*# sourceMappingURL=app.css.map */
