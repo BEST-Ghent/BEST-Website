@@ -8812,6 +8812,10 @@ section.hero.hero-ebecuniversity .overlay {
   background-color: rgba(145, 199, 55, 0.6);
 }
 
+section.hero.hero-sustainabilityworkshops .overlay {
+  background-color: rgba(115, 160, 45, 0.6);
+}
+
 section.hero.hero-training {
   background-image: url("../img/training/training.jpg");
 }
@@ -8984,6 +8988,19 @@ section.hero-ebecuniversity~section li:before {
   color: #91c737;
 }
 
+section.hero-sustainabilityworkshops~section h1 b,
+section.hero-sustainabilityworkshops~section h1 strong {
+  color: #91c737;
+}
+
+section.hero-sustainabilityworkshops~section~.section-end {
+  background-color: #91c737;
+}
+
+section.hero-sustainabilityworkshops~section li:before {
+  color: #91c737;
+}
+
 section.hero-training~section h1 b,
 section.hero-training~section h1 strong {
   color: #fbba50;
@@ -9070,6 +9087,15 @@ section.hero-partners~section li:before {
 #section-ebec {
   background-color: #79b92e;
 }
+
+#section-sustainabilityworkshops {
+  background-color: #79b92e;
+}
+
+#section-sustainabilityworkshops p {
+  max-width: 770px;
+}
+
 
 #section-ebec p {
   max-width: 770px;
@@ -9378,6 +9404,24 @@ nav #nav-top.home>li>a {
   background-color: #82b331;
 }
 
+.btn-green-center {
+  display: block;             /* Make it block level to center */
+  width: fit-content;         /* Adjust the width based on content */
+  margin: 20px auto;          /* Auto margin to center horizontally */
+  padding: 15px 30px;         /* Increase the padding for a bigger button */
+  font-size: 18px;            /* Larger font size */
+  background-color: #28a745;  /* Green background */
+  border-color: #28a745;      /* Green border */
+  color: white;               /* White text color */
+  text-align: center;         /* Center the text */
+  border-radius: 5px;         /* Rounded corners */
+  font-weight: bold;          /* Make text bold */
+}
+
+.btn-green-center:hover {
+  background-color: #218838;  /* Darker green on hover */
+  border-color: #1e7e34;
+}
 .btn-black {
   color: white;
   background-color: #252829;
