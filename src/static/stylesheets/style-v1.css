@@ -9405,17 +9405,18 @@ nav #nav-top.home>li>a {
 }
 
 .btn-green-center {
-  display: block;             /* Make it block level to center */
-  width: fit-content;         /* Adjust the width based on content */
-  margin: 20px auto;          /* Auto margin to center horizontally */
-  padding: 15px 30px;         /* Increase the padding for a bigger button */
-  font-size: 18px;            /* Larger font size */
-  background-color: #28a745;  /* Green background */
-  border-color: #28a745;      /* Green border */
-  color: white;               /* White text color */
-  text-align: center;         /* Center the text */
-  border-radius: 5px;         /* Rounded corners */
-  font-weight: bold;          /* Make text bold */
+  display: inline-block;       /* Keep the button inline but allow styling */
+  padding: 15px 30px;          /* Increase padding for a bigger button */
+  font-size: 18px;             /* Make the text size larger */
+  background-color: #28a745;   /* Green background */
+  border-color: #28a745;       /* Green border */
+  color: white;                /* White text */
+  text-align: center;          /* Center text inside button */
+  border-radius: 5px;          /* Rounded corners */
+  font-weight: bold;           /* Bold text */
+  margin: 0 auto;              /* Center the button horizontally */
+  display: block;              /* Display block to center the element */
+  width: fit-content;          /* Adjust button size to fit content */
 }
 
 .btn-green-center:hover {
