@@ -8773,7 +8773,7 @@ section.hero p strong {
 }
 
 section.hero.hero-about {
-  background-image: url("../img/about/lbg_jackets.jpg");
+  background-image: url("/static/media/about/lbg_jackets.jpg");
 }
 
 section.hero.hero-about .overlay {
@@ -8781,7 +8781,7 @@ section.hero.hero-about .overlay {
 }
 
 section.hero.hero-sc {
-  background-image: url("../img/sc/ghent.jpg");
+  background-image: url("/static/media/sc/ghent.jpg");
 }
 
 section.hero.hero-sc .overlay {
@@ -8789,7 +8789,7 @@ section.hero.hero-sc .overlay {
 }
 
 section.hero.hero-courses {
-  background-image: url("../img/courses/courses.jpg");
+  background-image: url("/static/media/courses/courses.jpg");
 }
 
 section.hero.hero-courses .overlay {
@@ -8797,7 +8797,7 @@ section.hero.hero-courses .overlay {
 }
 
 section.hero.hero-ebecmiddelbaar {
-  background-image: url("../img/ebec/ebecmiddelbaar.jpg");
+  background-image: url("/static/media/ebec/ebecmiddelbaar.jpg");
 }
 
 section.hero.hero-ebecmiddelbaar .overlay {
@@ -8805,7 +8805,7 @@ section.hero.hero-ebecmiddelbaar .overlay {
 }
 
 section.hero.hero-ebecuniversity {
-  background-image: url("../img/ebec/ebecuniversity.jpg");
+  background-image: url("/static/media/ebec/ebecuniversity.jpg");
 }
 
 section.hero.hero-ebecuniversity .overlay {
@@ -8817,7 +8817,7 @@ section.hero.hero-sustainabilityworkshops .overlay {
 }
 
 section.hero.hero-training {
-  background-image: url("../img/training/training.jpg");
+  background-image: url("/static/media/training/training.jpg");
 }
 
 section.hero.hero-training .overlay {
@@ -8825,7 +8825,7 @@ section.hero.hero-training .overlay {
 }
 
 section.hero.hero-partners {
-  background-image: url("../img/partners/partners_1.jpg");
+  background-image: url("/static/media/partners/partners_1.jpg");
 }
 
 section.hero.hero-partners .overlay {
@@ -8833,7 +8833,7 @@ section.hero.hero-partners .overlay {
 }
 
 section.hero.hero-calendar {
-  background-image: url("../img/about/lbg_jackets.jpg");
+  background-image: url("/static/media/about/lbg_jackets.jpg");
 }
 
 section.hero.hero-calendar .overlay {
@@ -9056,7 +9056,7 @@ section.hero-partners~section li:before {
 }
 
 #section-home {
-  background-image: url("../img/home/home.jpg");
+  background-image: url("/static/media/home/home.jpg");
   background-size: cover;
 }
 
