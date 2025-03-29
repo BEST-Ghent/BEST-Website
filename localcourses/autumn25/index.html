@@ -4,10 +4,12 @@
 
 <head class="templates-head">
 	<title>BEST Ghent</title>
+	
+	<script src="/static/scripts/templates.js" async="false"></script>
 
 	<!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
 		When the templates class is finished, it will automatically remove the barrier, making the browser render the page. -->
-	<style type="text/css">.fouc-barrier {display: none;}</style>
+	<style type="text/css">.fouc-barrier { display: none; }</style>
 </head>
 
 <body>
@@ -335,8 +337,6 @@
 	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
 	<div style="display: none;" class="templates-scripts"></div>
 
-	<!-- Load templates -->
-	<script src="/static/scripts/templates.js"></script>
 </body>
 
 </html>
