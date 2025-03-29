@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 
-<html>
+<html class="fouc-barrier">
 
 <head class="templates-head">
 	<title>BEST Ghent</title>
+
+	<!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
+		When the templates class is finished, it will automatically remove the barrier, making the browser render the page. -->
+	<style type="text/css">.fouc-barrier {display: none;}</style>
 </head>
 
 <body>
@@ -46,7 +50,7 @@
 					</p>
 
 					<p>
-						<a class="btn btn-info" href="survival-guide.html" target="_blank">TODO: Survival guide</a>
+						<a class="btn btn-info" href="/static/media/courses/autumn25/survival-guide.pdf" target="_blank">Survival guide</a>
 						<a class="btn btn-info" href="/index.html" target="_blank">BEST Ghent</a>
 						<a class="btn btn-info" href="https://best.eu.org/" target="_blank">BEST</a>
 					</p>
@@ -328,7 +332,7 @@
 
 	<section class="section-end templates-copyright"></section>
 
-	<!-- JAVASCRIPT -->
+	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
 	<div style="display: none;" class="templates-scripts"></div>
 
 	<!-- Load templates -->

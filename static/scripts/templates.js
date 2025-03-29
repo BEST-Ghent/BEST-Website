@@ -16,7 +16,8 @@ function applyTemplate(indicator, fragmentTxt) {
 
     let instances = document.getElementsByClassName(indicator);
     let fragment = createFragment(fragmentTxt);
-    [...instances].forEach(element => { element.appendChild(fragment)});
+    [...instances].forEach(element => { element.appendChild(fragment); element.classList.remove(indicator); });
+
 }
 
 // This is where all the templates are defined
@@ -58,11 +59,11 @@ function applyTemplates() {
 	<meta name="msapplication-TileImage" content="/static/media/ico/mstile-144x144.png">
 	<meta name="msapplication-config" content="/static/media/ico/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
-`)
+`);
 
     applyTemplate("templates-copyright", `
     <span>©2020-`+new Date().getFullYear()+` BEST Ghent vzw. All rights reserved.</span>
-`)
+`);
 
     applyTemplate("templates-scripts", `
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -70,7 +71,14 @@ function applyTemplates() {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
 	<script src="/static/scripts/script-v1.js"></script>
-`)
+`);
 }
 
-applyTemplates()
+// Removes all fouc-barrier classes in the document
+function removeFOUCbarriers() {
+    let instances = document.getElementsByClassName("fouc-barrier");
+	[...instances].forEach(element => { element.classList.remove("fouc-barrier"); });
+}
+
+applyTemplates();
+removeFOUCbarriers();
