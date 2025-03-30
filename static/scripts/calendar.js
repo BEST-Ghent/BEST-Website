@@ -11,7 +11,7 @@ function handleClientLoad() {
 function getCalendar() {
     var timeMin = new Date().toISOString();
     gapi.client.calendar.events.list({
-        'calendarId': "5bgthi7odqdrqn03inffum4hhs@group.calendar.google.com",
+        'calendarId': "7jfkdjs4s3mqru71uqq7ef0750@group.calendar.google.com",
         'singleEvents': 'true',
         'timeMin': timeMin,
         'fields': 'items(description,location,start,summary)',
@@ -20,12 +20,12 @@ function getCalendar() {
 }
 
 function setCalendar(feed) {
-    calendar = feed;
     loadCalendar(feed);
 }
 
 function loadCalendar(feed) {
     events = feed.result.items;
+    numberOfEvents = events.length;
     var html = "<ul style='list-style: none;'>";
     for (var i = 0; i < numberOfEvents; i++) {
         html += toHTML(events[i]);
