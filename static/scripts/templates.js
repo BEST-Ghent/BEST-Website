@@ -26,6 +26,7 @@ function addGeneral(element, htmlStr) {
 function addScript(element, src) {
 	const script = document.createElement('script');
 	script.src = src;
+	script.async=false;
 	element.appendChild(script);
 }
 
