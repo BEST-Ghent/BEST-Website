@@ -52,12 +52,4 @@ $(document).ready(function () {
             $(item).addClass('active');
         }
     });
-
-    $('.owl-carousel').owlCarousel({
-        items: 1,
-        loop: true,
-        autoHeight: true,
-        dots: true,
-        nav: false
-    });
 });

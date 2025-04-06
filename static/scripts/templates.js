@@ -102,6 +102,7 @@ function applyTemplates() {
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.js");
 		addScript(el, "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js");
+		addScript(el, "/static/scripts/owl-carousel.js");
 		addScript(el, "/static/scripts/script-v1.js");
 	});
 }
