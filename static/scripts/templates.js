@@ -1,3 +1,14 @@
+navMainLinks = {
+	"Home":"/",
+	"About":"/about/",
+	"Courses":"/courses/",
+	"Sustainability Workshops":"/sustainability-workshops/",
+	"Training":"/training/",
+	"Partners":"/partners/",
+	"Events":"/events/",
+	"Contact":"/#contact"
+}
+
 // Removes all fouc-barrier classes in the document
 function removeFOUCbarriers() {
     let instances = document.getElementsByClassName("fouc-barrier");
@@ -33,7 +44,7 @@ function addScript(element, src) {
 // Finds all instances of the indicator class and applies the template to them
 function applyTemplate(indicator, template) {
     const instances = document.getElementsByClassName(indicator);
-    [...instances].forEach(element => { template(element); element.classList.remove(indicator);});
+    [...instances].forEach(element => { template(element); element.classList.remove(indicator); });
 }
 
 // Once all stylesheets that were added as a template have loaded, this callback will lift the FOUC barrier and show the page
@@ -105,6 +116,45 @@ function applyTemplates() {
 		addScript(el, "/static/scripts/owl-carousel.js");
 		addScript(el, "/static/scripts/script-v1.js");
 	});
+
+	applyTemplate("templates-nav-main", el=>{
+		let desktop = `
+		<nav class="navbar navbar-top">
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav" id="nav-top">`;
+		for (const link in navMainLinks) {
+			desktop += `<li><a href="`+navMainLinks[link]+`"><span>`+link+`</span></a></li>`;
+		}
+		desktop+= `
+				</ul>
+			</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=""
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+		</nav>`;
+		addGeneral(el, desktop);
+
+		let mobile = `
+		<nav class="mobilemenu">
+        	<div class="menu">
+            	<ul class="nav navbar-nav text-center" id="nav-mobile">`;
+		for (const link in navMainLinks) {
+			mobile += `<li><a href="`+navMainLinks[link]+`"><span>`+link+`</span></a></li>`;
+		}
+		mobile += `
+				</ul>
+			</div>
+		</nav>`;
+		addGeneral(el, mobile);
+	});
 }
 
-applyTemplates();
+window.addEventListener('pageshow', function (event) {
+	applyTemplates();
+});
