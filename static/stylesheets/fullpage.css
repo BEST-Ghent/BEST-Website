@@ -55,6 +55,7 @@
      -moz-user-select: none; /* mozilla browsers */
      -khtml-user-select: none; /* webkit (konqueror) browsers */
      -ms-user-select: none; /* IE10+ */
+     user-select: none;
      position: absolute;
      z-index: 4;
      top: 50%;
