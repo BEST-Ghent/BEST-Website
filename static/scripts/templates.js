@@ -72,6 +72,7 @@ function applyTemplates() {
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/fullpage.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/bootstrap.css">
+			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/polaroids.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/style-v1.css">
 
 			<!-- FONTS -->

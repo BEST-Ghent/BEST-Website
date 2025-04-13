@@ -1,0 +1,121 @@
+/* Adapted from https://zurb.com/playground/css3-polaroids */
+:root {
+    --background-color: #fff;
+
+    --title-color: #333;
+    --title-size: 18px;
+
+    --start-rotation: -2deg;
+    --hover-rotation: 0deg;
+    --scale: 1;
+    --transition-duration: .15s;
+
+    --shadow: 0 3px 6px rgba(0,0,0,.25);
+}
+
+.polaroids {
+    padding-top: 40px;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.polaroids li {
+    display: inline;
+    padding-left: 0;
+}
+
+.polaroids a {
+    background: var(--background-color);
+    display: inline;
+    float: left;
+    margin: 0 0 0 0;
+    width: auto;
+    padding: 10px 10px 15px;
+
+    text-align: center;
+    font-family: "Marker Felt", sans-serif;
+    text-decoration: none;
+    color: var(--title-color);
+    font-size: var(--title-size);
+
+    -webkit-transform: rotate(var(--start-rotation));
+    -moz-transform: rotate(var(--start-rotation));
+    transform: rotate(var(--start-rotation));
+    
+    -webkit-transition: -webkit-transform var(--transition-duration) linear;
+    -moz-transition: -moz-transform var(--transition-duration) linear;
+    transition: transform var(--transition-duration) linear;
+
+    -webkit-box-shadow: var(--shadow);
+    -moz-box-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+}
+
+.polaroids a:after {
+    content: attr(title);
+}
+
+.polaroids a:hover {
+    position: relative;
+    z-index: 5;
+
+    -webkit-transform: scale(var(--scale));
+    -moz-transform: scale(var(--scale));
+    transform: scale(var(--scale));
+
+    -webkit-transform: rotate(var(--hover-rotation));
+    -moz-transform: rotate(var(--hover-rotation));
+    transform: rotate(var(--hover-rotation));
+}
+  
+.polaroids img {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+    .polaroids {
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+/* Gives semi-random rotations to collections of polaroids, giving the a 'messier' 'post-it' like feel. */
+/* 
+.polaroids li:nth-child(even) a {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    transform: rotate(2deg);
+}
+
+.polaroids li:nth-child(3n) a {
+    -webkit-transform: none;
+    position: relative;
+    top: -5px;
+    -moz-transform: none;
+    transform: none;
+}
+
+.polaroids li:nth-child(5n) a {
+    -webkit-transform: rotate(5deg);
+    position: relative;
+    right: 5px;
+    -moz-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+
+.polaroids li:nth-child(8n) a {
+    position: relative;
+    right: 5px;
+    top: 8px;
+}
+
+.polaroids li:nth-child(11n) a {
+    position: relative;
+    left: -5px;
+    top: 3px;
+}
+*/
