@@ -40,73 +40,139 @@ section.hero p strong {
     font-weight: 300 !important;
 }
 
+
 section.hero.hero-about {
-    background-image: url("/static/media/about/lbg_jackets.jpg");
+    --overlay-color: rgba(0, 113, 185, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/about/lbg_jackets.jpg");
+}
+section.hero-about~section h1 b,
+section.hero-about~section h1 strong {
+    color: #0071b9;
+}
+section.hero-about~section~.section-end {
+    background-color: #0071b9;
+}
+section.hero-about~section li:before {
+    color: #0071b9;
 }
 
-section.hero.hero-about .overlay {
-    background-color: rgba(0, 113, 185, 0.6);
-}
 
 section.hero.hero-sc {
-    background-image: url("/static/media/sc/ghent.jpg");
+    --overlay-color: rgba(0, 113, 185, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/sc/ghent.jpg");
+}
+section.hero-sc~section h1 b,
+section.hero-sc~section h1 strong {
+    color: #0071b9;
+}
+section.hero-sc~section~.section-end {
+    background-color: #0071b9;
+}
+section.hero-sc~section li:before {
+    color: #0071b9;
 }
 
-section.hero.hero-sc .overlay {
-    background-color: rgba(0, 113, 185, 0.6);
-}
 
 section.hero.hero-courses {
-    background-image: url("/static/media/courses/courses.jpg");
+    --overlay-color: rgba(251, 186, 80, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/courses/courses.jpg");
+}
+section.hero-courses~section h1 b,
+section.hero-courses~section h1 strong {
+    color: #fbba50;
+}
+section.hero-courses~section~.section-end {
+    background-color: #fbba50;
+}
+section.hero-courses~section li:before {
+    color: #fbba50;
 }
 
-section.hero.hero-courses .overlay {
-    background-color: rgba(251, 186, 80, 0.6);
-}
 
 section.hero.hero-ebecmiddelbaar {
-    background-image: url("/static/media/ebec/ebecmiddelbaar.jpg");
+    --overlay-color: rgba(145, 199, 55, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/ebec/ebecmiddelbaar.jpg");
+}
+section.hero-ebecmiddelbaar~section h1 b,
+section.hero-ebecmiddelbaar~section h1 strong {
+    color: #91c737;
+}
+section.hero-ebecmiddelbaar~section~.section-end {
+    background-color: #91c737;
+}
+section.hero-ebecmiddelbaar~section li:before {
+    color: #91c737;
 }
 
-section.hero.hero-ebecmiddelbaar .overlay {
-    background-color: rgba(145, 199, 55, 0.6);
-}
 
 section.hero.hero-ebecuniversity {
-    background-image: url("/static/media/ebec/ebecuniversity.jpg");
+    --overlay-color: rgba(145, 199, 55, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/ebec/ebecuniversity.jpg");
+}
+section.hero-ebecuniversity~section h1 b,
+section.hero-ebecuniversity~section h1 strong {
+    color: #91c737;
+}
+section.hero-ebecuniversity~section~.section-end {
+    background-color: #91c737;
+}
+section.hero-ebecuniversity~section li:before {
+    color: #91c737;
 }
 
-section.hero.hero-ebecuniversity .overlay {
-    background-color: rgba(145, 199, 55, 0.6);
-}
 
 section.hero.hero-sustainabilityworkshops .overlay {
     background-color: rgba(115, 160, 45, 0.6);
 }
+section.hero-sustainabilityworkshops~section h1 b,
+section.hero-sustainabilityworkshops~section h1 strong {
+    color: #91c737;
+}
+section.hero-sustainabilityworkshops~section~.section-end {
+    background-color: #91c737;
+}
+section.hero-sustainabilityworkshops~section li:before {
+    color: #91c737;
+}
+
 
 section.hero.hero-training {
-    background-image: url("/static/media/training/training.jpg");
+    --overlay-color: rgba(251, 186, 80, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/training/training.jpg");
+}
+section.hero-training~section h1 b,
+section.hero-training~section h1 strong {
+    color: #fbba50;
+}
+section.hero-training~section~.section-end {
+    background-color: #fbba50;
+}
+section.hero-training~section li:before {
+    color: #fbba50;
 }
 
-section.hero.hero-training .overlay {
-    background-color: rgba(251, 186, 80, 0.6);
-}
 
 section.hero.hero-partners {
-    background-image: url("/static/media/partners/partners_1.jpg");
+    --overlay-color: rgba(37, 40, 41, 0.6);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/partners/partners_1.jpg");
+}
+section.hero-partners~section h1 b,
+section.hero-partners~section h1 strong {
+    color: #252829;
+}
+section.hero-partners~section~.section-end {
+    background-color: #252829;
+}
+section.hero-partners~section li:before {
+    color: #252829;
 }
 
-section.hero.hero-partners .overlay {
-    background-color: rgba(37, 40, 41, 0.6);
-}
 
 section.hero.hero-calendar {
-    background-image: url("/static/media/about/lbg_jackets.jpg");
+    --overlay-color: rgba(255, 186, 80, 0.7);
+    background-image: linear-gradient(var(--overlay-color),var(--overlay-color)), url("/static/media/about/lbg_jackets.jpg");
 }
 
-section.hero.hero-calendar .overlay {
-    background-color: rgba(255, 186, 80, 0.7);
-}
 
 @media only screen and (max-width: 768px) {
     section.hero h1 {
@@ -189,110 +255,6 @@ section li:before {
         padding-top: 40px;
         padding-bottom: 40px;
     }
-}
-
-section.hero-about~section h1 b,
-section.hero-about~section h1 strong {
-    color: #0071b9;
-}
-
-section.hero-about~section~.section-end {
-    background-color: #0071b9;
-}
-
-section.hero-about~section li:before {
-    color: #0071b9;
-}
-
-section.hero-sc~section h1 b,
-section.hero-about~section h1 strong {
-    color: #0071b9;
-}
-
-section.hero-sc~section~.section-end {
-    background-color: #0071b9;
-}
-
-section.hero-sc~section li:before {
-    color: #0071b9;
-}
-
-section.hero-courses~section h1 b,
-section.hero-courses~section h1 strong {
-    color: #fbba50;
-}
-
-section.hero-courses~section~.section-end {
-    background-color: #fbba50;
-}
-
-section.hero-courses~section li:before {
-    color: #fbba50;
-}
-
-section.hero-ebecmiddelbaar~section h1 b,
-section.hero-ebecmiddelbaar~section h1 strong {
-    color: #91c737;
-}
-
-section.hero-ebecmiddelbaar~section~.section-end {
-    background-color: #91c737;
-}
-
-section.hero-ebecmiddelbaar~section li:before {
-    color: #91c737;
-}
-
-section.hero-ebecuniversity~section h1 b,
-section.hero-ebecuniversity~section h1 strong {
-    color: #91c737;
-}
-
-section.hero-ebecuniversity~section~.section-end {
-    background-color: #91c737;
-}
-
-section.hero-ebecuniversity~section li:before {
-    color: #91c737;
-}
-
-section.hero-sustainabilityworkshops~section h1 b,
-section.hero-sustainabilityworkshops~section h1 strong {
-    color: #91c737;
-}
-
-section.hero-sustainabilityworkshops~section~.section-end {
-    background-color: #91c737;
-}
-
-section.hero-sustainabilityworkshops~section li:before {
-    color: #91c737;
-}
-
-section.hero-training~section h1 b,
-section.hero-training~section h1 strong {
-    color: #fbba50;
-}
-
-section.hero-training~section~.section-end {
-    background-color: #fbba50;
-}
-
-section.hero-training~section li:before {
-    color: #fbba50;
-}
-
-section.hero-partners~section h1 b,
-section.hero-partners~section h1 strong {
-    color: #252829;
-}
-
-section.hero-partners~section~.section-end {
-    background-color: #252829;
-}
-
-section.hero-partners~section li:before {
-    color: #252829;
 }
 
 #fullpage h1 {
