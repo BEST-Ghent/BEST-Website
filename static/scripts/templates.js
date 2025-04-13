@@ -74,6 +74,8 @@ function applyTemplates() {
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/bootstrap.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/polaroids.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/typography.css">
+			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/customs.css">
+			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/navigation.css">
 			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/style-v1.css">
 
 			<!-- FONTS -->

@@ -1,0 +1,205 @@
+nav .nav li>a,
+nav .nav li>a span {
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+nav .nav li>a span {
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+}
+
+nav .nav li>a:hover,
+nav .nav li>a:focus,
+nav .nav li>a:active:focus {
+    background-color: transparent;
+}
+
+nav #nav-top li>a,
+nav #nav-top li>a:hover,
+nav #nav-top li>a:focus,
+nav #nav-top li>a:active:focus {
+    color: white;
+    opacity: 0.4;
+}
+
+nav li.active>a,
+nav li.active>a:hover,
+nav li.active>a:focus li.active>a:active:focus {
+    color: white;
+}
+
+nav li.active>a span,
+nav li.active>a:hover span,
+nav li.active>a:focus li.active>a:active:focus span {
+    border-bottom: 2px solid white;
+}
+
+nav #nav-top li.active>a,
+nav #nav-top li.active>a:hover,
+nav #nav-top li.active>a:focus #nav-top li.active>a:active:focus {
+    opacity: 1;
+}
+
+nav #nav-top li:hover>a span,
+nav #nav-top li.active>a span {
+    border-bottom: 2px solid white;
+}
+
+nav #nav-top.about>li>a span {
+    color: grey;
+}
+
+nav #nav-top.about>li.active[data-menuanchor='about']>a span {
+    color: #0071b9;
+    opacity: 1;
+    border-color: #0071b9;
+}
+
+nav #nav-top.home>li>a {
+    opacity: 1;
+    color: white;
+}
+
+.navbar {
+    position: absolute;
+    width: 100%;
+    margin-bottom: 10px;
+    z-index: 10;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+    overflow-y: hidden !important;
+}
+
+.navbar-sticky {
+    width: 100%;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    bottom: 0;
+    /*or bottom, top, right*/
+}
+
+.navbar-sticky .navbar-toggle {
+    position: absolute;
+    bottom: 0;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+}
+
+.navbar-sticky .navbar-toggle .icon-bar {
+    -webkit-transition: .4s;
+    transition: .4s;
+    background-color: white;
+}
+
+.navbar-sticky.move {
+    bottom: 100%;
+    /*or bottom, top, right*/
+    -webkit-transform: translate(0%, 100%);
+    transform: translate(0%, 100%);
+}
+
+.navbar-sticky.move .navbar-toggle {
+    bottom: 100%;
+    margin-bottom: -50px;
+}
+
+.mobilemenu {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: opacity .7s, height 0s .7s;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 0;
+    opacity: 0;
+}
+
+.mobilemenu .menu {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    display: table;
+    height: 100%;
+}
+
+.mobilemenu .menu ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mobilemenu .menu ul span {
+    color: white;
+}
+
+.mobilemenu .menu ul li {
+    transition: height 0s .7s;
+    height: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .mobilemenu {
+        display: none;
+    }
+}
+
+.mobilemenu.active {
+    transition: opacity .7s, height 0s 0s;
+    height: 100%;
+    opacity: 1;
+}
+
+.mobilemenu.active .menu li {
+    transition: height 0s .0s;
+    height: 40px;
+}
+
+.mobilemenu.active .menu li a {
+    width: 50%;
+    margin: 0 25%;
+}
+
+.navbar-top {
+    top: 0;
+    /*position:fixed */ /*needed for sticky*/
+}
+
+.navbar-top .icon-bar {
+    background-color: white;
+}
+
+.navbar-top .navbar-toggle {
+    float: left;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-toggle{
+	position: fixed;
+}
+
+.navbar-top #nav-top li>a,
+.navbar-top #nav-top li>a:hover,
+.navbar-top #nav-top li>a:focus,
+.navbar-top #nav-top li>a:active:focus {
+    opacity: 1;
+}
+
+.navbar-toggle {
+    margin: 8px;
+}

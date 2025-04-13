@@ -25,7 +25,7 @@ function setCalendar(feed) {
 
 function loadCalendar(feed) {
     events = feed.result.items;
-    var html = "<ul style='list-style: none;'>";
+    var html = "<ul style='list-style: none; padding-left: 0;'>";
     for (var i = 0; i < Math.min(events.length, numberOfEvents); i++) {
         html += toHTML(events[i]);
     }
