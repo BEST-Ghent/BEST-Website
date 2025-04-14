@@ -13,6 +13,12 @@ navMainLinks = {
 function removeFOUCbarriers() {
     let instances = document.getElementsByClassName("fouc-barrier");
 	[...instances].forEach(element => { element.classList.remove("fouc-barrier"); });
+
+
+	// When all stylesheets are applied, the heights of fullpage sections might be incorrect. This event will trigger fullpage to readjust
+	var event = document.createEvent('HTMLEvents');
+	event.initEvent('resize', true, false);
+	document.dispatchEvent(event);
 }
 
 // Creates a fragment from the given htmlStr

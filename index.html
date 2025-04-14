@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html  class="fouc-barrier">
+<html>
     
 <head class="templates-head"> 
     <title>BEST Ghent</title>
@@ -270,6 +270,49 @@ window.cookieconsent.initialise({
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.extensions.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#fullpage').fullpage({
+                menu: '#nav-top, #nav-mobile',
+                lockAnchors: false,
+
+                anchors: ['home', 'about', 'courses', 'sustainabilityworkshops', 'training', 'partners', 'calendar', 'contact'],
+                navigation: false,
+                slidesNavigation: false,
+
+                onLeave: function (index, nextIndex, direction) {
+                    // main menu bar position
+                    if (index == 1) {
+                        $('.navbar-sticky').addClass('move');
+                        $('#nav-top').removeClass('home');
+                    }
+                    if (nextIndex == 1) {
+                        $('.navbar-sticky').removeClass('move');
+                        $('#nav-top').addClass('home');
+                    }
+
+                    // main menu css styling
+                    if (index == 2) {
+                        $('#nav-top').removeClass('about');
+                        $('.icon-bar').css('background-color', '');
+                    }
+                    if (nextIndex == 2) {
+                        $('#nav-top').addClass('about');
+                        $('.icon-bar').css('background-color', '#0071b9');
+                    }
+                },
+                afterLoad: function (anchorLink, index, slideAnchor, slideIndex) {
+                    if (index == 1) {
+                        $('#nav-top').addClass('home');
+                    }
+                }
+            });
+
+            
+        });
+    </script>
 </body>
 
 </html>
