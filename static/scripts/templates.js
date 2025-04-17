@@ -13,12 +13,6 @@ navMainLinks = {
 function removeFOUCbarriers() {
     let instances = document.getElementsByClassName("fouc-barrier");
 	[...instances].forEach(element => { element.classList.remove("fouc-barrier"); });
-
-
-	// When all stylesheets are applied, the heights of fullpage sections might be incorrect. This event will trigger fullpage to readjust
-	var event = document.createEvent('HTMLEvents');
-	event.initEvent('resize', true, false);
-	document.dispatchEvent(event);
 }
 
 // Creates a fragment from the given htmlStr
@@ -44,6 +38,8 @@ function addScript(element, src) {
 	const script = document.createElement('script');
 	script.src = src;
 	script.async=false;
+	script.onload = loadedResourceCallback;
+	script.classList.add("dynamic-resource");
 	element.appendChild(script);
 }
 
@@ -53,15 +49,59 @@ function applyTemplate(indicator, template) {
     [...instances].forEach(element => { template(element); element.classList.remove(indicator); });
 }
 
-// Once all stylesheets that were added as a template have loaded, this callback will lift the FOUC barrier and show the page
-let loadedStyleSheets = 0;
-function loadedStylesheetCallback() {
-	loadedStyleSheets++;
+// Once all resources that were added as a template have loaded, this callback will lift the FOUC barrier and show the page
+let loadedResources = 0;
+function loadedResourceCallback() {
+	loadedResources++;
 	
-	let instances = document.getElementsByClassName("dynamic-stylesheet")
-	let totalStyleSheets = [...instances].length
-	if (loadedStyleSheets==totalStyleSheets) {
+	let instances = document.getElementsByClassName("dynamic-resource")
+	let totalResources = [...instances].length
+	if (loadedResources==totalResources) {
+		
+		$('#fullpage').fullpage({
+			menu: '#nav-top, #nav-mobile',
+			lockAnchors: false,
+			animateAnchor: true,
+			scrollBar: false,
+			scrollOverflow: true,
+
+			anchors: ['home', 'about', 'courses', 'sustainabilityworkshops', 'training', 'partners', 'calendar', 'contact'],
+			navigation: false,
+			slidesNavigation: false,
+
+			onLeave: function (index, nextIndex, direction) {
+				// main menu bar position
+				if (index == 1) {
+					$('.navbar-sticky').addClass('move');
+					$('#nav-top').removeClass('home');
+				}
+				if (nextIndex == 1) {
+					$('.navbar-sticky').removeClass('move');
+					$('#nav-top').addClass('home');
+				}
+
+				// main menu css styling
+				if (index == 2) {
+					$('#nav-top').removeClass('about');
+					$('.icon-bar').css('background-color', '');
+				}
+				if (nextIndex == 2) {
+					$('#nav-top').addClass('about');
+					$('.icon-bar').css('background-color', '#0071b9');
+				}
+			},
+			afterLoad: function (anchorLink, index, slideAnchor, slideIndex) {
+				if (index == 1) {
+					$('#nav-top').addClass('home');
+				}
+			}
+		});
+
 		removeFOUCbarriers();
+		
+		const currentSection = window.location.hash.replace('#', '') || 'home';
+		$.fn.fullpage.silentMoveTo(1);
+		$.fn.fullpage.moveTo(currentSection);
 	}
 }
 
@@ -74,21 +114,20 @@ function applyTemplates() {
 			<meta charset="UTF-8">
 
 			<!-- CSS -->
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/fullpage.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/bootstrap.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/polaroids.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/typography.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/customs.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/navigation.css">
-			<link rel="stylesheet" type="text/css" onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="/static/stylesheets/style-v1.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/bootstrap.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/polaroids.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/typography.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/customs.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/navigation.css">
+			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/style-v1.css">
 
 			<!-- FONTS -->
-			<link rel='stylesheet' type='text/css' onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700'>
-			<link rel='stylesheet' type='text/css' onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href='https://fonts.googleapis.com/css?family=Lato:400,200,700,300'>
+			<link rel='stylesheet' type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700'>
+			<link rel='stylesheet' type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href='https://fonts.googleapis.com/css?family=Lato:400,200,700,300'>
 			<!-- font awesome icons -->
-			<link rel="stylesheet" type='text/css' onload="loadedStylesheetCallback();" class="dynamic-stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+			<link rel="stylesheet" type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 			
 			<!-- ICONS -->
 			<link rel="apple-touch-icon" type="image/png" sizes="57x57"   href="/static/media/ico/apple-touch-icon-57x57.png">
@@ -122,8 +161,9 @@ function applyTemplates() {
 
 	applyTemplate("templates-scripts", el=>{
 		addScript(el, "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");
-		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.js");
 		addScript(el, "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
+		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js");
+		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js");
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js");
 		addScript(el, "/static/scripts/owl-carousel.js");
 		addScript(el, "/static/scripts/script-v1.js");
@@ -167,6 +207,6 @@ function applyTemplates() {
 	});
 }
 
-window.addEventListener('pageshow', function (event) {
+window.addEventListener('load', function (event) {
 	applyTemplates();
 });
