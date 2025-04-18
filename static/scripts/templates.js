@@ -161,9 +161,8 @@ function applyTemplates() {
 			<meta name="theme-color" content="#ffffff">
 		`);
 		// CSS
-		addStylesheet(el, "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+		addStylesheet(el, "https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css");
 		addStylesheet(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css");
-		addStylesheet(el, "/static/stylesheets/bootstrap.css");
 		addStylesheet(el, "/static/stylesheets/polaroids.css");
 		addStylesheet(el, "/static/stylesheets/typography.css");
 		addStylesheet(el, "/static/stylesheets/customs.css");
