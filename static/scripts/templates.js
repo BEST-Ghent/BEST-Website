@@ -15,6 +15,63 @@ function removeFOUCbarriers() {
 	[...instances].forEach(element => { element.classList.remove("fouc-barrier"); });
 }
 
+// Handles the final stages of showing the page, making sure FOUC barriers are lifted at the correct time and animations happen in the correct order.
+function finishPageCreation() {
+
+	// Initiates the fullpage plugin when there is an element with id="fullpage". If there is no such element, fullpage will not be initialized.
+	// This has to happen after jquery is loaded because fullpage requires it.
+	$('#fullpage').fullpage({
+		menu: '#nav-top, #nav-mobile',
+		lockAnchors: false,
+		animateAnchor: true,
+		scrollBar: false,
+		scrollOverflow: true,
+
+		anchors: ['home', 'about', 'courses', 'sustainabilityworkshops', 'training', 'partners', 'calendar', 'contact'],
+		navigation: false,
+		slidesNavigation: false,
+
+		onLeave: function (index, nextIndex, direction) {
+			// main menu bar position
+			if (index == 1) {
+				$('.navbar-sticky').addClass('move');
+				$('#nav-top').removeClass('home');
+			}
+			if (nextIndex == 1) {
+				$('.navbar-sticky').removeClass('move');
+				$('#nav-top').addClass('home');
+			}
+
+			// main menu css styling
+			if (index == 2) {
+				$('#nav-top').removeClass('about');
+				$('.icon-bar').css('background-color', '');
+			}
+			if (nextIndex == 2) {
+				$('#nav-top').addClass('about');
+				$('.icon-bar').css('background-color', '#0071b9');
+			}
+		},
+		afterLoad: function (anchorLink, index, slideAnchor, slideIndex) {
+			if (index == 1) {
+				$('#nav-top').addClass('home');
+			}
+		}
+	});
+
+	removeFOUCbarriers();
+	
+	// If fullpage is active on the page, do the following fullpage related stuff.
+	// This has to happen AFTER the FOUC barriers are lifted, otherwise fullpage will not update (aka animate) the page correctly.
+	if ($('html').hasClass('fp-enabled')) {
+
+		// Creates scrolling animation when the page is linked to using an anchor. f.e. if some page links to home/#contact, this will go to the main home slide first and then scroll down to #contact
+		const sectionInURL = window.location.hash.replace('#', '') || 'home'; // Gets the correct section from the url ('/home/#contact' -> 'contact'). If no anchor is given, the default is 'home'
+		$.fn.fullpage.silentMoveTo(1); // moves to the first section instantly without animation
+		$.fn.fullpage.moveTo(sectionInURL); // Scrolls down using animation
+	}
+}
+
 // Creates a fragment from the given htmlStr
 function createFragment(htmlStr) {
 
@@ -33,11 +90,23 @@ function addGeneral(element, htmlStr) {
 	element.appendChild(fragment);
 }
 
-// Adds, loads and runs a script from a given source address
+// Adds a stylesheet from a given source address
 function addScript(element, src) {
 	const script = document.createElement('script');
 	script.src = src;
 	script.async=false;
+	script.onload = loadedResourceCallback;
+	script.classList.add("dynamic-resource");
+	element.appendChild(script);
+
+}
+
+// Adds, loads and runs a script from a given source address
+function addStylesheet(element, src) {
+	const script = document.createElement('link');
+	script.rel = "stylesheet";
+	script.type = "text/css";
+	script.href = src;
 	script.onload = loadedResourceCallback;
 	script.classList.add("dynamic-resource");
 	element.appendChild(script);
@@ -49,86 +118,26 @@ function applyTemplate(indicator, template) {
     [...instances].forEach(element => { template(element); element.classList.remove(indicator); });
 }
 
-// Once all resources that were added as a template have loaded, this callback will lift the FOUC barrier and show the page
+// Once all resources that were added as a template have loaded, this callback will trigger the final stage of the page creation
 let loadedResources = 0;
 function loadedResourceCallback() {
 	loadedResources++;
 	
-	let instances = document.getElementsByClassName("dynamic-resource")
-	let totalResources = [...instances].length
+	const instances = document.getElementsByClassName("dynamic-resource");
+	const totalResources = [...instances].length;
 	if (loadedResources==totalResources) {
-		
-		$('#fullpage').fullpage({
-			menu: '#nav-top, #nav-mobile',
-			lockAnchors: false,
-			animateAnchor: true,
-			scrollBar: false,
-			scrollOverflow: true,
-
-			anchors: ['home', 'about', 'courses', 'sustainabilityworkshops', 'training', 'partners', 'calendar', 'contact'],
-			navigation: false,
-			slidesNavigation: false,
-
-			onLeave: function (index, nextIndex, direction) {
-				// main menu bar position
-				if (index == 1) {
-					$('.navbar-sticky').addClass('move');
-					$('#nav-top').removeClass('home');
-				}
-				if (nextIndex == 1) {
-					$('.navbar-sticky').removeClass('move');
-					$('#nav-top').addClass('home');
-				}
-
-				// main menu css styling
-				if (index == 2) {
-					$('#nav-top').removeClass('about');
-					$('.icon-bar').css('background-color', '');
-				}
-				if (nextIndex == 2) {
-					$('#nav-top').addClass('about');
-					$('.icon-bar').css('background-color', '#0071b9');
-				}
-			},
-			afterLoad: function (anchorLink, index, slideAnchor, slideIndex) {
-				if (index == 1) {
-					$('#nav-top').addClass('home');
-				}
-			}
-		});
-
-		removeFOUCbarriers();
-		
-		const currentSection = window.location.hash.replace('#', '') || 'home';
-		$.fn.fullpage.silentMoveTo(1);
-		$.fn.fullpage.moveTo(currentSection);
+		finishPageCreation();
 	}
 }
 
 // This is where all the templates are defined
 function applyTemplates() {
 
-    applyTemplate("templates-head",el=>{
+    applyTemplate("templates-head", el=>{
 		addGeneral(el, `
 			<meta name="viewport" content="width=device-width">
 			<meta charset="UTF-8">
 
-			<!-- CSS -->
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/bootstrap.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/polaroids.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/typography.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/customs.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/navigation.css">
-			<link rel="stylesheet" type="text/css" onload="loadedResourceCallback();" class="dynamic-resource" href="/static/stylesheets/style-v1.css">
-
-			<!-- FONTS -->
-			<link rel='stylesheet' type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700'>
-			<link rel='stylesheet' type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href='https://fonts.googleapis.com/css?family=Lato:400,200,700,300'>
-			<!-- font awesome icons -->
-			<link rel="stylesheet" type='text/css' onload="loadedResourceCallback();" class="dynamic-resource" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-			
 			<!-- ICONS -->
 			<link rel="apple-touch-icon" type="image/png" sizes="57x57"   href="/static/media/ico/apple-touch-icon-57x57.png">
 			<link rel="apple-touch-icon" type="image/png" sizes="60x60"   href="/static/media/ico/apple-touch-icon-60x60.png">
@@ -151,9 +160,23 @@ function applyTemplates() {
 			<meta name="msapplication-config" content="/static/media/ico/browserconfig.xml">
 			<meta name="theme-color" content="#ffffff">
 		`);
+		// CSS
+		addStylesheet(el, "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+		addStylesheet(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css");
+		addStylesheet(el, "/static/stylesheets/bootstrap.css");
+		addStylesheet(el, "/static/stylesheets/polaroids.css");
+		addStylesheet(el, "/static/stylesheets/typography.css");
+		addStylesheet(el, "/static/stylesheets/customs.css");
+		addStylesheet(el, "/static/stylesheets/navigation.css");
+		addStylesheet(el, "/static/stylesheets/style-v1.css");
+		// FONTS
+		addStylesheet(el, "https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700");
+		addStylesheet(el, "https://fonts.googleapis.com/css?family=Lato:400,200,700,300");
+		// font awesome icons
+		addStylesheet(el, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
 	});
 
-	applyTemplate("templates-copyright",el=>{
+	applyTemplate("templates-copyright", el=>{
 		addGeneral(el, `
 			<span>©2020-`+new Date().getFullYear()+` BEST Ghent vzw. All rights reserved.</span>
 		`);
