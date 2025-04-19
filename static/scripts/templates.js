@@ -1,11 +1,11 @@
 navMainLinks = {
 	"Home":"/",
-	"About":"/about/",
-	"Courses":"/courses/",
-	"Sustainability Workshops":"/sustainability-workshops/",
-	"Training":"/training/",
-	"Partners":"/partners/",
-	"Events":"/events/",
+	"About":"/about",
+	"Courses":"/courses",
+	"Sustainability Workshops":"/sustainability-workshops",
+	"Training":"/training",
+	"Partners":"/partners",
+	"Events":"/events",
 	"Contact":"/#contact"
 }
 
@@ -188,18 +188,28 @@ function applyTemplates() {
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js");
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js");
 		addScript(el, "/static/scripts/owl-carousel.js");
-		addScript(el, "/static/scripts/script-v1.js");
+		addScript(el, "/static/scripts/navigation.js");
 	});
 
 	applyTemplate("templates-nav-main", el=>{
+
+		var currentPage = self.location.href.split('/').at(-2); // A url splits from "base/stuff/.../currentPage/" into ['base', 'stuff', ..., 'currentPage', '']
+
+		let links = "";
+		for (const link in navMainLinks) {
+			links += `
+			<li class="`+((navMainLinks[link] == "/"+currentPage) ? "active" : "")+`">
+				<a href="`+navMainLinks[link]+`">
+					<span>`+link+`</span>
+				</a>
+			</li>`;
+		}
+
 		let desktop = `
 		<nav class="navbar navbar-top">
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav" id="nav-top">`;
-		for (const link in navMainLinks) {
-			desktop += `<li><a href="`+navMainLinks[link]+`"><span>`+link+`</span></a></li>`;
-		}
-		desktop+= `
+				<ul class="nav navbar-nav" id="nav-top">`
+					+links+`
 				</ul>
 			</div>
 			<div class="navbar-header">
@@ -217,11 +227,8 @@ function applyTemplates() {
 		let mobile = `
 		<nav class="mobilemenu">
         	<div class="menu">
-            	<ul class="nav navbar-nav text-center" id="nav-mobile">`;
-		for (const link in navMainLinks) {
-			mobile += `<li><a href="`+navMainLinks[link]+`"><span>`+link+`</span></a></li>`;
-		}
-		mobile += `
+            	<ul class="nav navbar-nav text-center" id="nav-mobile">`
+					+links+`
 				</ul>
 			</div>
 		</nav>`;
