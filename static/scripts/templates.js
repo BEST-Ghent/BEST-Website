@@ -27,7 +27,6 @@ function finishPageCreation() {
 		scrollBar: false,
 		scrollOverflow: true,
 
-		anchors: ['home', 'about', 'courses', 'sustainabilityworkshops', 'training', 'partners', 'calendar', 'contact'],
 		navigation: false,
 		slidesNavigation: false,
 

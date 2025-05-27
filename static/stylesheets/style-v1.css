@@ -258,13 +258,11 @@ section li:before {
 }
 
 #fullpage h1 {
-    color: white;
     font-weight: 100;
     padding-bottom: 20px;
 }
 
 #fullpage p {
-    color: white;
     font-weight: 300;
     padding-bottom: 51px;
     max-width: 570px;
@@ -286,77 +284,6 @@ section li:before {
     background-size: cover;
 }
 
-
-#section-about {
-    background-color: white;
-}
-
-#section-about h1 {
-    color: black;
-    padding-top: 35px;
-}
-
-#section-about p {
-    color: #666666;
-}
-
-@media only screen and (max-width: 768px) {
-    #section-about h1 {
-        padding-top: 0px;
-    }
-}
-
-#section-courses {
-    background-color: #faa925;
-}
-
-#section-ebec {
-    background-color: #79b92e;
-}
-
-#section-sustainabilityworkshops {
-    background-color: #79b92e;
-}
-
-#section-sustainabilityworkshops p {
-    max-width: 770px;
-}
-
-
-#section-ebec p {
-    max-width: 770px;
-}
-
-#section-training {
-    background-color: #faa925;
-}
-
-#section-partners {
-    background-color: #0071b9;
-}
-
-#section-contact {
-    background-color: #24272b;
-    text-align: left;
-    color: #faa925;
-}
-
-#section-contact .footer {
-    position: absolute;
-    height: 10px;
-    background-color: white;
-    opacity: 0.4;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-}
-
-#section-agenda {
-    background-color: #ffbc00;
-    text-align: left;
-    color: #faa925;
-}
-
 :focus {
     outline: none !important;
 }
@@ -369,7 +296,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    /* Preserve aspet ratio */
+    /* Preserve aspect ratio */
     min-width: 100%;
     min-height: 100%;
 }
