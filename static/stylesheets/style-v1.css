@@ -279,11 +279,6 @@ section li:before {
     }
 }
 
-#section-home {
-    background-image: url("/static/media/home/home.jpg");
-    background-size: cover;
-}
-
 :focus {
     outline: none !important;
 }

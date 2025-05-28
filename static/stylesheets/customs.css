@@ -134,3 +134,6 @@ a.btn {
 .sec-white h1 {
     color: black;
 }
+.sec-img {
+    background-size: cover;
+}

@@ -18,6 +18,40 @@ function removeFOUCbarriers() {
 // Handles the final stages of showing the page, making sure FOUC barriers are lifted at the correct time and animations happen in the correct order.
 function finishPageCreation() {
 
+	function updateSectionStyle(prevIndex, nextIndex) {
+
+		const sections = $('.fp-section');
+		const prevSection = sections.eq(prevIndex-1);
+		const nextSection = sections.eq(nextIndex-1);
+
+		// Move the menu bar down for the first slide (it is down by default, so also move it up for all the other slides)
+		if (nextIndex != 1) {
+			$('.navbar-sticky').addClass('placement-top');
+		}
+		else {
+			$('.navbar-sticky').removeClass('placement-top');
+		}
+
+		// Image sections need the navigation to be white instead of gray
+		if (nextSection.hasClass('sec-img')) {
+			$('#nav-top').addClass('in-sec-img');
+		}
+		else {
+			$('#nav-top').removeClass('in-sec-img');
+		}
+
+		// White sections need the primary color of the navbar to change from white to blue
+		if (nextSection.hasClass('sec-white')) {
+			$('#nav-top').addClass('in-sec-white');
+			$('.icon-bar').css('background-color', 'var(--site-blue)');
+		}
+		else {
+			$('#nav-top').removeClass('in-sec-white');
+			$('.icon-bar').css('background-color', '');
+		}
+
+	}
+
 	// Initiates the fullpage plugin when there is an element with id="fullpage". If there is no such element, fullpage will not be initialized.
 	// This has to happen after jquery is loaded because fullpage requires it.
 	$('#fullpage').fullpage({
@@ -30,31 +64,11 @@ function finishPageCreation() {
 		navigation: false,
 		slidesNavigation: false,
 
-		onLeave: function (index, nextIndex, direction) {
-			// main menu bar position
-			if (index == 1) {
-				$('.navbar-sticky').addClass('move');
-				$('#nav-top').removeClass('home');
-			}
-			if (nextIndex == 1) {
-				$('.navbar-sticky').removeClass('move');
-				$('#nav-top').addClass('home');
-			}
-
-			// main menu css styling
-			if (index == 2) {
-				$('#nav-top').removeClass('about');
-				$('.icon-bar').css('background-color', '');
-			}
-			if (nextIndex == 2) {
-				$('#nav-top').addClass('about');
-				$('.icon-bar').css('background-color', '#0071b9');
-			}
+		onLeave: function (prevIndex, nextIndex, direction) {
+			updateSectionStyle(prevIndex, nextIndex);
 		},
 		afterLoad: function (anchorLink, index, slideAnchor, slideIndex) {
-			if (index == 1) {
-				$('#nav-top').addClass('home');
-			}
+			updateSectionStyle(-1, index);
 		}
 	});
 

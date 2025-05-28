@@ -46,17 +46,17 @@ nav #nav-top li.active>a span {
     border-bottom: 2px solid white;
 }
 
-nav #nav-top.about>li>a span {
+nav #nav-top.in-sec-white>li>a span {
     color: grey;
 }
 
-nav #nav-top.about>li.active[data-menuanchor='about']>a span {
+nav #nav-top.in-sec-white>li.active>a span {
     color: #0071b9;
     opacity: 1;
     border-color: #0071b9;
 }
 
-nav #nav-top.home>li>a {
+nav #nav-top.in-sec-img>li>a {
     opacity: 1;
     color: white;
 }
@@ -107,14 +107,17 @@ nav #nav-top.home>li>a {
     background-color: white;
 }
 
-.navbar-sticky.move {
+.navbar-sticky.placement-top {
     bottom: 100%;
     /*or bottom, top, right*/
     -webkit-transform: translate(0%, 100%);
+    -moz-transform: translate(0%, 100%);
+    -o-transform: translate(0%, 100%);
+    -ms-transform: translate(0%, 100%);
     transform: translate(0%, 100%);
 }
 
-.navbar-sticky.move .navbar-toggle {
+.navbar-sticky.placement-top .navbar-toggle {
     bottom: 100%;
     margin-bottom: -50px;
 }
