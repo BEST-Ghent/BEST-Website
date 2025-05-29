@@ -53,7 +53,7 @@ function finishPageCreation() {
 	}
 
 	// Initiates the fullpage plugin when there is an element with id="fullpage". If there is no such element, fullpage will not be initialized.
-	// This has to happen after jquery is loaded because fullpage requires it.
+	// This has to happen after jquery is loaded because fullpage requires jquery.
 	$('#fullpage').fullpage({
 		menu: '#nav-top, #nav-mobile',
 		lockAnchors: false,
