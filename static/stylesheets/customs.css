@@ -7,31 +7,42 @@
     --site-blue: rgb(0, 113, 185);
     --site-orange: rgb(250, 169, 37);
     --site-yellow: rgb(255, 188, 0);
-    --site-light-gray: rgb(102, 102, 102);
-    --site-dark-gray: rgb(36, 39, 43);
     --site-white: rgb(255,255,255);
+    --site-light-gray: rgb(245, 245, 245);
+    --site-gray: rgb(102, 102, 102);
+    --site-dark-gray: rgb(36, 39, 43);
     --site-black: rgb(0,0,0);
+    --site-error-color: rgb(255, 0, 212);
 }
 
 
 
 .text-blue {
-    color: #0071b9;
+    color: var(--site-blue);
 }
 .text-orange {
-    color: #fbba50;
+    color: var(--site-orange);
+}
+.text-yellow {
+    color: var(--site-yellow);
 }
 .text-green {
-    color: #91c737;
-}
-.text-black {
-    color: #252829;
+    color: var(--site-green);
 }
 .text-white {
-    color: white;
+    color: var(--site-white);
 }
-.text-grey {
-    color: rgb(87, 87, 87);
+.text-light-gray {
+    color: var(--site-light-gray);
+}
+.text-gray {
+    color: var(--site-gray);
+}
+.text-dark-gray {
+    color: var(--site-dark-gray);
+}
+.text-black {
+    color: var(--site-black);
 }
 
 
@@ -56,6 +67,21 @@
     color: var(--site-white);
     background-color: var(--site-green);
 }
+.sec-white {
+    color: var(--site-gray);
+    background-color: var(--site-white);
+}
+.sec-white h1 {
+    color: var(--site-black);
+}
+.sec-light-gray {
+    color: var(--site-gray);
+    background-color: var(--site-light-gray);
+}
+.sec-gray {
+    color: var(--site-white);
+    background-color: var(--site-gray);
+}
 .sec-dark-gray {
     color: var(--site-white);
     background-color: var(--site-dark-gray);
@@ -63,13 +89,6 @@
 .sec-black {
     color: var(--site-white);
     background-color: var(--site-black);
-}
-.sec-white {
-    color: var(--site-light-gray);
-    background-color: var(--site-white);
-}
-.sec-white h1 {
-    color: var(--site-black);
 }
 .sec-img {
     background: center top;
@@ -90,8 +109,14 @@
 .overlay-green {
     background-color: color-mix(in srgb,var(--site-green),#0000 40%);
 }
+.overlay-white {
+    background-color: color-mix(in srgb,var(--site-white),#0000 40%);
+}
 .overlay-light-gray {
     background-color: color-mix(in srgb,var(--site-light-gray),#0000 40%);
+}
+.overlay-gray {
+    background-color: color-mix(in srgb,var(--site-gray),#0000 40%);
 }
 .overlay-dark-gray {
     background-color: color-mix(in srgb,var(--site-dark-gray),#0000 40%);
@@ -99,77 +124,44 @@
 .overlay-black {
     background-color: color-mix(in srgb,var(--site-black),#0000 40%);
 }
-.overlay-white {
-    background-color: color-mix(in srgb,var(--site-white),#0000 40%);
-}
 
 
 
 a.btn-blue {
-    color: white;
-    background-color: #0071b9;
-}
-a.btn-blue:hover {
-    color: white;
-    background-color: #0061a0;
+    color: var(--site-white);
+    background-color: var(--site-blue);
 }
 a.btn-orange {
-    color: white;
-    background-color: #fbba50;
-}
-a.btn-orange:hover {
-    color: white;
-    background-color: #fab037;
+    color: var(--site-white);
+    background-color: var(--site-orange);
 }
 a.btn-yellow {
-    color: white;
-    background-color: #ffcc3c;
-}
-a.btn-yellow:hover {
-    color: white;
-    background-color: #ffc31b;
+    color: var(--site-white);
+    background-color: var(--site-yellow);
 }
 a.btn-green {
-    color: white;
-    background-color: #91c737;
-}
-a.btn-green:hover {
-    color: white;
-    background-color: #82b331;
-}
-a.btn-green-center {
-    display: inline-block;          /* Keep the button inline but allow styling */
-    padding: 15px 30px;             /* Increase padding for a bigger button */
-    font-size: 18px;                /* Make the text size larger */
-    background-color: #28a745;    /* Green background */
-    border-color: #28a745;        /* Green border */
-    color: white;                 /* White text */
-    text-align: center;             /* Center text inside button */
-    border-radius: 5px;             /* Rounded corners */
-    font-weight: bold;              /* Bold text */
-    margin: 0 auto;                 /* Center the button horizontally */
-    display: block;                 /* Display block to center the element */
-    width: fit-content;             /* Adjust button size to fit content */
-}
-a.btn-green-center:hover {
-    background-color: #218838;    /* Darker green on hover */
-    border-color: #1e7e34;
-}
-a.btn-black {
-    color: white;
-    background-color: #252829;
-}
-a.btn-black:hover {
-    color: white;
-    background-color: #191b1c;
+    color: var(--site-white);
+    background-color: var(--site-green);
 }
 a.btn-white {
-    color: black;
-    background-color: white;
+    color: var(--site-black);
+    background-color: var(--site-white);
 }
-a.btn-white:hover {
-    color: black;
-    background-color: #f2f2f2;
+a.btn-light-gray {
+    color: var(--site-black);
+    background-color: var(--site-light-gray);
+}
+a.btn-gray {
+    color: var(--site-white);
+    background-color: var(--site-gray);
+}
+a.btn-dark-gray {
+    color: var(--site-white);
+    background-color: var(--site-dark-gray);
+}
+a.btn-black {
+    color: var(--site-white);
+    background-color: var(--site-black);
 }
 button,
 a.btn {
@@ -180,6 +172,24 @@ a.btn {
     margin: 7px;
     border: none;
     text-transform: uppercase;
+    filter: brightness(108%);
+}
+a.btn-blue:hover,
+a.btn-orange:hover,
+a.btn-yellow:hover,
+a.btn-green:hover,
+a.btn-gray:hover,
+a.btn-dark-gray:hover,
+a.btn-black {
+    color: var(--site-white);
+}
+a.btn-white:hover,
+a.btn-light-gray:hover {
+    color: var(--site-black);
+}
+button:hover,
+a.btn:hover {
+    filter: brightness(95%);
 }
 
 
@@ -255,4 +265,29 @@ a.btn {
 .hero p b,
 .hero p strong {
     font-weight: 300 !important;
+}
+@media only screen and (max-width: 768px) {
+    section.hero h1 {
+        margin-top: 100px;
+    }
+    section.hero p {
+        margin-bottom: 100px;
+    }
+}
+
+
+
+section.section-odd {
+    background-color: var(--site-light-gray);
+}
+section.section-end {
+    background-color: var(--site-error-color); /* The section ends should always be part of a style */
+    color: var(--site-white);
+    padding: 14px;
+}
+section.section-end span {
+    font-size: 12px;
+    display: block;
+    margin: auto;
+    text-align: center;
 }

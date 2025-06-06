@@ -6,71 +6,30 @@
 body {
     font-size: 160%;
     line-height: 1.5;
-}
-
-@media only screen and (max-width: 768px) {
-    section.hero h1 {
-        margin-top: 100px;
-    }
-    section.hero p {
-        margin-bottom: 100px;
-    }
+    font-family: "Lato", sans-serif !important;
 }
 
 section {
-    color: #666666;
+    color: var(--site-gray);
     font-weight: 300;
-    background-color: white;
+    background-color: var(--site-white);
     padding-top: 100px;
     padding-bottom: 100px;
 }
-
 section h1 {
-    color: black;
+    color: var(--site-black);
     font-weight: 100;
     margin-bottom: 45px;
 }
-
 section h1 b,
 section h1 strong {
     font-weight: 500 !important;
 }
-
-section button,
-section a.btn {
-    margin-top: 35px;
-}
-
-section.section-odd {
-    background-color: #F5F5F5;
-}
-
-section.section-end {
-    background-color: slategrey;
-    color: white;
-    padding: 14px;
-}
-
-section.section-end span {
-    font-size: 12px;
-    display: block;
-    margin: auto;
-    text-align: center;
-}
-
-section p {
-    margin-bottom: 24px;
-}
-
 section ul {
     padding-left: 0px;
-}
-
-section ul {
     list-style: none;
     padding: 0;
 }
-
 section li:before {
     position: relative;
     top: 1px;
@@ -83,7 +42,6 @@ section li:before {
     -moz-osx-font-smoothing: grayscale;
     padding: 0 10px;
 }
-
 @media only screen and (max-width: 768px) {
     section {
         padding-top: 40px;
@@ -95,14 +53,12 @@ section li:before {
     font-weight: 100;
     padding-bottom: 20px;
 }
-
 #fullpage p {
     font-weight: 300;
     padding-bottom: 51px;
     max-width: 570px;
     margin: auto;
 }
-
 @media only screen and (max-width: 768px) {
     #fullpage p {
         padding-bottom: 10px;
@@ -115,10 +71,6 @@ section li:before {
 
 :focus {
     outline: none !important;
-}
-
-body {
-    font-family: "Lato", sans-serif !important;
 }
 
 #error {
