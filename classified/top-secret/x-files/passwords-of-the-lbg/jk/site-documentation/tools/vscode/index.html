@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html class="fouc-barrier">
+
+<head class="templates-head">
+    <base href="/classified/top-secret/x-files/passwords-of-the-lbg/jk/site-documentation/">
+	<title>BEST Ghent</title>
+	<script src="/static/scripts/templates.js" async="false"></script>
+
+	<!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
+		When the templates class is finished, it will automatically remove the barrier, making the browser render the page. -->
+	<style type="text/css">.fouc-barrier { display: none; }</style>
+</head>
+
+<body class="style-blue">
+
+    <!-- Introduction -->
+    <section class="hero sec-img" style="background-image: url('static/media/tools/vscode/vscode_vibe_img.png');">
+        <div class="overlay-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <h1>Discover <b>VS Code</b>.</h1>
+                        <p>
+                            VS Code is an open source code editor developed by Microsoft.
+                            <br>
+                            You are of course free to use any code editor you fancy, but if this is your first time managing any kind of codebase, it might be wise to start here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloading/Installing -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 text-left">
+                    <h1>Downloading/Installing</h1>
+                    <p>
+                        <ol>
+                            <li>
+                                First, download the VS Code installer from the <a href="https://code.visualstudio.com/download" target="_blank">official download page</a>.
+                            </li>
+                            <li>
+                                Next, run the installer. The default options are usually quite good, except that they don't generate a desktop icon, so make sure to tick that box when you see it.
+                            </li>
+                            <li>
+                                VS Code has built in support for source control using git, but uses the git installation on your machine, so you need to have <a href="tools/git">git installed</a> to use these features.
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/vscode_logo.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Server -->
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/tools/vscode/live_server_logo.png">
+                    <img width="100%" src="static/media/tools/vscode/Go_Live_example.png">
+                </div>
+                <div class="col-sm-9 text-left">
+                    <h1>Live Server extension</h1>
+                    <p>
+                        When you make a change to the code of the website, you'll probably want to see how that change affects the website itself.
+                        One way to do this (but please <b>don't</b>), is to make a change, push it to github and see what it looks like on the official, public site.
+                    </p>
+                    <p>
+                        If you'd work like this, you would waste a lot of time and generate a lot of <a href="tools/git">commits</a>.
+                        Too many pointless commits will clutter the commit history and make it difficult to understand what changes where made when and for what reason.
+                        More importantly you would risk publishing some kind of bug or maybe private information to the public website that is accesible by everyone.
+                    </p>
+                    <p>
+                        So what do you do? Luckily for us, VS Code comes with a deluge of extensions. 
+                        One of them is called <a href="https://ritwickdey.github.io/vscode-live-server/" target="_blank">Live Server</a>.
+                        Live Server will open a <b>locally</b> hosted version of your code in your browser and automatically updates this version when you hit save.
+                    </p>
+                    <p>
+                        This means you can make any change, hit <i>ctrl+s</i> and instantly see what this change will look like in the final product.
+                        All from the comfort of your own machine! (works offline too!)
+                    </p>
+                    <p>
+                        To <b>install</b> this extension, go to the extensions tab in VS Code (<i>ctrl+shift+X</i>), search for Live Server and install the one made by <i>Ritwick Dey</i>.
+                        There is also an extension called Live Preview, made by Microsoft, but at the time of writing, this is still under development.
+                    </p>
+                    <p>
+                        Once installed, a <b>Go Live</b> button will appear in the bottom right corner of your VS Code window.
+                        When you go live, it will try to open whatever file you have open at that moment. If that is a html file, it will go to that page, else it will open the homepage (the root index.html).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+	<section class="section-end templates-copyright"></section>
+
+    <!-- TODO: fix navigation for documentation pages -->
+    <div class="templates-nav-main"></div>
+
+	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
+	<div style="display: none;" class="templates-scripts"></div>
+
+</body>
+
+</html>

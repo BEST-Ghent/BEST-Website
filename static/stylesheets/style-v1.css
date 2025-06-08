@@ -9,6 +9,8 @@ body {
     font-family: "Lato", sans-serif !important;
 }
 
+
+
 section {
     color: var(--site-gray);
     font-weight: 300;
@@ -49,6 +51,8 @@ section li:before {
     }
 }
 
+
+
 #fullpage h1 {
     font-weight: 100;
     padding-bottom: 20px;
@@ -68,6 +72,8 @@ section li:before {
         height: auto;
     }
 }
+
+
 
 :focus {
     outline: none !important;
