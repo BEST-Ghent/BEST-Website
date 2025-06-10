@@ -1,12 +1,27 @@
-navMainLinks = {
-	"Home":"/",
-	"About":"/about",
-	"Courses":"/courses",
-	"Sustainability Workshops":"/sustainability-workshops",
-	"Training":"/training",
-	"Partners":"/partners",
-	"Events":"/events",
-	"Contact":"/#contact"
+navigationDescriptions = {
+	"site-home": {
+		"Home":"#home",
+		"About":"#about",
+		"Courses":"#courses",
+		"Sustainability Workshops":"#sustainabilityworkshops",
+		"Training":"#training",
+		"Partners":"#partners",
+		"Events":"#calendar",
+		"Contact":"#contact"
+	},
+	"site-main": {
+		"Home":"/",
+		"About":"/about",
+		"Courses":"/courses",
+		"Sustainability Workshops":"/sustainability-workshops",
+		"Training":"/training",
+		"Partners":"/partners",
+		"Events":"/events",
+		"Contact":"/#contact"
+	},
+	"documentation-main": {
+		"Home":""
+	}
 }
 
 // Removes all fouc-barrier classes in the document
@@ -143,6 +158,50 @@ function loadedResourceCallback() {
 	}
 }
 
+function genNavLinks(element) {
+
+	// TODO: maybe make a more sofisticated system to detect the current page (to set the active link correctly)
+	var currentPage = self.location.href.split('/').at(-2); // A url splits from "base/stuff/.../currentPage/" into ['base', 'stuff', ..., 'currentPage', '']
+
+	let links = "";
+	if (navDesc = navigationDescriptions[element.dataset.navDesc]) {
+		for (const linkName in navDesc) {
+
+			let href=navDesc[linkName];
+			if (href[0]=="#") { // If the href starts with a #, it is implied to reference a fullpage section. Which means we have to set the 'data-menuanchor' attribute
+				links += `
+				<li data-menuanchor="`+href.slice(1)+`">
+					<a href="`+href+`">
+						<span>`+linkName+`</span>
+					</a>
+				</li>`; // No need to set an active class to the active link, the fullpage plugin does this for us.
+			}
+			else { // Will set the active class when href=="/"+currentPage
+				links += `
+				<li class="`+((href == "/"+currentPage) ? "active" : "")+`">
+					<a href="`+href+`">
+						<span>`+linkName+`</span>
+					</a>
+				</li>`;
+			}
+		}
+	}
+	else { // Displays an error message when there is no existing navigation description specified (or none at all)
+		links += `
+		<li style="background-color:var(--site-error-color);">
+			<a href="">
+				<span>Please specify a navigation description by setting the "data-nav-desc" attribute to the name of an existing navigation description.</span>
+			</a>
+		</li>
+		<li style="background-color:var(--site-error-color);">
+			<a href="">
+				<span>For more info, read the documentation</span>
+			</a>
+		</li>`; // TODO: include correct documentation link
+	}
+	return links;
+}
+
 // This is where all the templates are defined
 function applyTemplates() {
 
@@ -204,19 +263,42 @@ function applyTemplates() {
 		addScript(el, "/static/scripts/navigation.js");
 	});
 
+	applyTemplate("templates-nav-fullpage", el=>{
+		
+		let links = genNavLinks(el);
+
+		let desktop = `
+		<nav class="navbar navbar-sticky">
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav" id="nav-top">`
+					+links+`
+				</ul>
+			</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+		</nav>`;
+		addGeneral(el, desktop);
+
+		let mobile = `
+		<nav class="mobilemenu">
+        	<div class="menu">
+            	<ul class="nav navbar-nav text-center" id="nav-mobile">`
+					+links+`
+				</ul>
+			</div>
+		</nav>`;
+		addGeneral(el, mobile);
+	});
+
 	applyTemplate("templates-nav-main", el=>{
-
-		var currentPage = self.location.href.split('/').at(-2); // A url splits from "base/stuff/.../currentPage/" into ['base', 'stuff', ..., 'currentPage', '']
-
-		let links = "";
-		for (const link in navMainLinks) {
-			links += `
-			<li class="`+((navMainLinks[link] == "/"+currentPage) ? "active" : "")+`">
-				<a href="`+navMainLinks[link]+`">
-					<span>`+link+`</span>
-				</a>
-			</li>`;
-		}
+		
+		let links = genNavLinks(el);
 
 		let desktop = `
 		<nav class="navbar navbar-top">
