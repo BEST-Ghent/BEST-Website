@@ -19,6 +19,16 @@ navigationDescriptions = {
 		"Events":"/events",
 		"Contact":"/#contact"
 	},
+	"documentation-home":{
+		"Home":"#home",
+		"Tools":"#tools",
+		"Hosting":"#hosting",
+		"Structure":"#structure",
+		"Code":"#code",
+		"Templates":"#templates",
+		"Documentation":"#documentation",
+		"Contact":"#contact"
+	},
 	"documentation-main": {
 		"Home":""
 	}
