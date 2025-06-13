@@ -20,11 +20,61 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <h1>Discover <b>Git</b>.</h1>
+                        <h1>How to: <b>Git</b></h1>
                         <p>
                             
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 text-left">
+                    <h1>Downloading/Installing</h1>
+                    <p>
+                        <ol>
+                            <li>
+                                First, download the (latest) Git installer from the <a href="https://git-scm.com/downloads" target="_blank">official download page</a>.
+                            </li>
+                            <li>
+                                Next, run the installer. The default options are usually fine.
+                            </li>
+                            <li>
+                                To check that Git is installed correctly, type git in the command prompt. If this gives you a list of git commands, you're set and VS Code should be able to detect and use your Git version.
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/git_logo.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    <h1>A note on <b>authentication</b></h1>
+                    <p>
+                        Git does not use "accounts" or "users".
+                        The only time any credentials are involved is when you try to push your changes to an <b>external server</b>, like GitHub.
+                        This means that when you push to GitHub for the first time, you will be asked to authenticate.
+                    </p>
+                    <p>
+                        The confusing thing is <b>how</b> you're asked to authenticate. You will be presented with a prompt for username and password, and surprise: Filling in your GitHub username and password will not work.
+                        This is because what GitHub actually wants is your username and a <b>token</b>.
+                        These tokens usually have expiry dates as well. All in the name of security.
+                    </p>
+                    <p>
+                        You can create a token for your account on GitHub's website.
+                        If you don't want to have to log in again every few months you might want to set the expiry date to never, even though GitHub does not recommend this.
+                    </p>
                 </div>
             </div>
         </div>
