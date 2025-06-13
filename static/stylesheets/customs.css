@@ -280,10 +280,15 @@ a.btn:hover {
 section.section-odd {
     background-color: var(--site-light-gray);
 }
+
+
+
 section.section-end {
     background-color: var(--site-error-color); /* The section ends should always be part of a style */
     color: var(--site-white);
     padding: 14px;
+    width:100%;
+    margin-top:auto;
 }
 section.section-end span {
     font-size: 12px;

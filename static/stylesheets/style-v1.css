@@ -3,10 +3,18 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.carousel.css");
 @import url("//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.css");
 
+html {
+    height: 100%;
+}
 body {
     font-size: 160%;
     line-height: 1.5;
     font-family: "Lato", sans-serif !important;
+    margin:0;
+    min-height:100%;
+
+    display: flex;
+    flex-direction: column;
 }
 
 
