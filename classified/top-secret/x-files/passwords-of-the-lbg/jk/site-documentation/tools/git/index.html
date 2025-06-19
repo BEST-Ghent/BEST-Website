@@ -80,6 +80,130 @@
         </div>
     </section>
     
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    <h1>Basic Git <b>operations</b></h1>
+                    <p>
+                        There are a lot of things you can do using Git.
+                        While VS Code provides a nice interface to perform these operations, Git also has a CLI or Command Line Interface.
+                        A third party Git client like <a href="https://git-fork.com/">fork</a> will of course also expose all these options.
+                    </p>
+
+
+                    <h2>Cloning</h2>
+                    <pre><code>
+git clone [url_to_repository] [directory]
+git clone https://github.com/BEST-Ghent/BEST-Website.git BEST-Website-folder
+                    </code></pre>
+                    <p>
+                        The clone command allows you to clone a remote repository (like the one containing our website) onto your computer.
+                        This includes the entire commit history and all branches.
+                        <br>
+                        You can also specify a directory to clone the files into.
+                        If you have already made a folder for this, you can leave this field empty and the repository will be cloned into your current working directory.
+                    </p>
+
+
+                    <h2>Diff and Status</h2>
+                    <pre><code>
+git diff
+git status
+                    </code></pre>
+                    <p>
+                        <code>git diff</code> shows the changes between your code/files and the last active commit <b>that are not staged</b>.
+                        <br>
+                        <code>git status</code> displays changes <b>that are staged</b>.
+                        <br>
+                        An example: When you have freshly cloned the website's repository, it's last commit will be the one used to display the public site.
+                        By default, this is the active commit.
+                        If you make changes to the files in your local folder, they will be displayed when using <code>git diff</code>.
+                        You can prepare these changes to be committed by staging them (more on staging next).
+                        When changes are staged, they will show up when when using <code>git status</code>.
+                        When you later commit these changes, they will disapear from the status, as they won't differ anymore from the (new) active commit.
+                    </p>
+                    
+
+                    <h2>Staging</h2>
+                    <pre><code>
+git add [file]
+git add training/32-jan-2025/index.html
+git reset [file]
+git reset training/32-jan-2025/index.html
+                    </code></pre>
+                    <p>
+                        To stage a newly created file or changes to a file, use <code>git add</code>.
+                        To unstage them, use <code>git reset</code>.
+                    </p>
+                    <p>
+                        Now why stage anything? Well, staged changes can be solidified by committing them.
+                    </p>
+
+
+                    <h2>Commits</h2>
+                    <pre><code>
+git commit -m “[descriptive message]”
+git commit -m “Added a page for the next training.”
+                    </code></pre>
+                    <p>
+                        When you commit your changes, you create a snapshot of your code/files at a certain point in time.
+                        This snapshot is not a direct copy of your entire project, but rather a list of all the changes since the previous commit.
+                        In the example code above, there is also the option to give the commit a name/title.
+                        Many Git clients allow you to specify a title <b>and</b> a description.
+                        Whilst this can also be done using the CLI, the command becomes longer and more complicated.
+                    </p>
+                    <p>
+                        It is important to note that <code>git commit</code> will only commit staged changes.
+                        If you forget to stage your changes, you will create an empty commit, so make sure to check that all your changes are staged by using <code>git status</code>.
+                    </p>
+                    <p>
+                        Please give <b>every</b> commit you make a descriptive title.
+                        "Update index.html" for example, is not descriptive.
+                        "Update Deloitte description" is better and "Updated Deloitte description" is great :-)
+                        Good descriptions make it easier to track 
+                        There is now still one final step before your changes reach the website: Pushing them to GitHub.
+                    </p>
+
+
+                    <h2>Pushing</h2>
+                    <pre><code>
+git push [alias] [branch]
+git push origin master
+                    </code></pre>
+                    <p>
+                        Changes, commits, branches,... are all part of a repository.
+                        But the repository on our computer is cloned (a copy) of the repository on GitHub.
+                        This means that when we commit something on our computer, we do it to our <b>local</b> repository.
+                        To push these changes to the repository on GitHub, we can use <code>git push</code>.
+                        A repository can link to other remote repositories via aliases.
+                        When a repository is cloned, a default alias called origin is created, linking to the original repository.
+                    </p>
+                    <p>
+                        When a branch is specified, only the changes to that branch will be pushed to the remote.
+                        It is common practice to <b>always specify</b> the branch to use when pushing, because when none is specified, it will try to push all branches, which is usually not intended.
+                        The master branch is the main branch where most of the development takes place.
+                        If you're new to all of this, creating new branches will probably not be nescessary for you.
+                    </p>
+                    <p>
+                        A note about the name master:
+                        At some point, the default branch name for new repositories on GitHub was changed from "master" to "main" because master was too kinky.
+                        The repository of our page was made before that change, hence the name of our master branch.
+                        Branches can be renamed, but there is not really a reason to do so.
+                        If someday, someone does take offense to the name master, they can change the name to whatever they think is better.
+                        My personal favourite main branch name is "home" by the way.
+                    </p>
+
+
+                    <h2>Cheatsheet</h2>
+                    <p>
+                        For a cheatsheet containing the most common git commands (the ones listed above and more), click <a href="https://education.github.com/git-cheat-sheet-education.pdf" target="_blank">here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 	<section class="section-end templates-copyright"></section>
 
     <div class="templates-nav-main" data-nav-desc="documentation-main"></div>
