@@ -188,7 +188,7 @@ function genNavLinks(element) {
 			}
 			else { // Will set the active class when href=="/"+currentPage
 				links += `
-				<li class="`+((href == "/"+currentPage) ? "active" : "")+`">
+				<li class="`+((href.split('/').at(-1) == currentPage) ? "active" : "")+`">
 					<a href="`+href+`">
 						<span>`+linkName+`</span>
 					</a>
