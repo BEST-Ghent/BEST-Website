@@ -1,4 +1,6 @@
-navigationDescriptions = {
+import variables from "/static/scripts/variables.js"
+
+let navigationDescriptions = {
 	"site-home": {
 		"Home":"#home",
 		"About":"#about",
@@ -30,7 +32,9 @@ navigationDescriptions = {
 		"Contact":"#contact"
 	},
 	"documentation-main": {
-		"Home":""
+		"Home":"",
+		"VS Code":"tools/vscode",
+		"Git":"tools/git"
 	}
 }
 
@@ -174,7 +178,8 @@ function genNavLinks(element) {
 	var currentPage = self.location.href.split('/').at(-2); // A url splits from "base/stuff/.../currentPage/" into ['base', 'stuff', ..., 'currentPage', '']
 
 	let links = "";
-	if (navDesc = navigationDescriptions[element.dataset.navDesc]) {
+	let navDesc = navigationDescriptions[element.dataset.navDesc]
+	if (navDesc) {
 		for (const linkName in navDesc) {
 
 			let href=navDesc[linkName];
@@ -346,6 +351,28 @@ function applyTemplates() {
 		};
 		el.classList.add("copy-content-on-click");
 		el.title = "click to copy";
+	})
+	
+	applyTemplate("templates-var", el=>{
+		const varName = el.dataset.varName;
+		const parts = varName.split(".");
+		let v = variables;
+		for (const part of parts) { // Traverse the variable tree to get the right variable
+			v = v[part];
+		}
+		if (v) {
+			delete el.dataset.varName; // We delete the data-var-name attribute to make the DOM cleaner, but we only do this if the variable is valid, so it can be used for debugging.
+			if (v.type=="text") {
+				el.innerHTML = v.text;
+			}
+			if (v.type=="email") {
+				el.innerHTML = "<a href='mailto:"+v.email+"'>"+v.email+"</a>"
+			}
+		}
+		else {
+			el.style = "background-color:var(--site-error-color);";
+			el.innerHTML = "ERROR: unknown variable '"+varName+"'";
+		}
 	})
 }
 
