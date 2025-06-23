@@ -339,6 +339,14 @@ function applyTemplates() {
 		</nav>`;
 		addGeneral(el, mobile);
 	});
+
+	applyTemplate("templates-copy-content-on-click", el=>{
+		el.onclick = function() {
+			navigator.clipboard.writeText(el.innerHTML);
+		};
+		el.classList.add("copy-content-on-click");
+		el.title = "click to copy";
+	})
 }
 
 window.addEventListener('load', function (event) {

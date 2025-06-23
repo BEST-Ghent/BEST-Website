@@ -67,7 +67,8 @@
                         This means that when you push to GitHub for the first time, you will be asked to authenticate.
                     </p>
                     <p>
-                        The confusing thing is <b>how</b> you're asked to authenticate. You will be presented with a prompt for username and password, and surprise: Filling in your GitHub username and password will not work.
+                        The confusing thing is <b>how</b> you're asked to authenticate.
+                        You will be presented with a prompt for username and password, and surprise: Filling in your GitHub username and password will not work.
                         This is because what GitHub actually wants is your username and a <b>token</b>.
                         These tokens usually have expiry dates as well. All in the name of security.
                     </p>
@@ -178,12 +179,16 @@ git push origin master
                         To push these changes to the repository on GitHub, we can use <code>git push</code>.
                         A repository can link to other remote repositories via aliases.
                         When a repository is cloned, a default alias called origin is created, linking to the original repository.
-                    </p>
-                    <p>
                         When a branch is specified, only the changes to that branch will be pushed to the remote.
                         It is common practice to <b>always specify</b> the branch to use when pushing, because when none is specified, it will try to push all branches, which is usually not intended.
                         The master branch is the main branch where most of the development takes place.
                         If you're new to all of this, creating new branches will probably not be nescessary for you.
+                    </p>
+                    <p>
+                        <b>Important</b>: <code>git push</code> will ask for some authentication (as mentioned above).
+                        But on top of that, it will only work if your GitHub account has the nescessary permissions on GitHub.
+                        This is to prevent random people from pushing changes to the site.
+                        So make sure to ask someone to add your account to the repository on GitHub.
                     </p>
                     <p>
                         A note about the name master:
@@ -203,7 +208,41 @@ git push origin master
             </div>
         </div>
     </section>
+
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    <h1>How to get the <b>code</b> of the <b>website</b></h1>
+                    <p>
+                        Using the commands mentioned above, you could in theory figure out how to clone the site's repository to your computer.
+                        But if you just want to get started, you can follow this tutorial:
+                        <ol>
+                            <li>
+                                Open the command prompt. You can search for cmd on Windows and for Terminal on mac and Linux.
+                            </li>
+                            <li>
+                                Set your working directory to the folder where you want to clone the code into.
+                                You can check your current working directory by typing <code>cd</code> on Windows or <code>pwd</code> on Unix based systems.
+                                You can google how to change your current working directory.
+                                Usually opening the command prompt will copy the directory you're currently in.
+                            </li>
+                            <li>
+                                To clone the sites code, use the following command: <code class="templates-copy-content-on-click">git clone https://github.com/BEST-Ghent/BEST-Website.git</code>.
+                            </li>
+                            <li>
+                                Once the repository is cloned, you can open the folder in VS Code and start making changes.
+                                You can commit and push them using VS Code's built-in Git support.
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
     
+
+
 	<section class="section-end templates-copyright"></section>
 
     <div class="templates-nav-main" data-nav-desc="documentation-main"></div>

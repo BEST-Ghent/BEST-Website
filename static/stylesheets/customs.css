@@ -296,3 +296,9 @@ section.section-end span {
     margin: auto;
     text-align: center;
 }
+
+
+
+.copy-content-on-click {
+    cursor:pointer;
+}
