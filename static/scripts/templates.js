@@ -34,7 +34,9 @@ let navigationDescriptions = {
 	"documentation-main": {
 		"Home":"",
 		"VS Code":"tools/vscode",
-		"Git":"tools/git"
+		"Git":"tools/git",
+		"Hosting":"hosting",
+		"Structure":"structure",
 	}
 }
 

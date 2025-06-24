@@ -4,6 +4,7 @@
 
 <head class="templates-head">
 	<title>BEST Ghent</title>
+    <base href="/classified/top-secret/x-files/passwords-of-the-lbg/jk/site-documentation/">
 	
 	<script src="/static/scripts/templates.js" type="module" async="false"></script>
 
@@ -12,23 +13,148 @@
 	<style type="text/css">.fouc-barrier { display: none; }</style>
 </head>
 
-<body>
-    <section class="hero">
-        <div class="overlay">
+<body class="style-green">
+
+    <!-- Introduction -->
+    <section class="hero sec-img" style="background-image: url('static/media/hosting/registrar_vibe_img.png');">
+        <div class="overlay-green">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
 
                         <h1>How we <b>host</b> our site.</h1>
                         <p>
-                            TODO
+                            TLDR: using GitHub Pages and Namecheap.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h1>GitHub <b>Pages</b></h1>
+                    <p>
+                        GitHub Pages is a service provided by GitHub that hosts any static content in a repository as a website.
+                        This is how we can just create a new .html file and have it turn into a page on the website.
+                        More on static sites on our <a href="structure">structure</a> page.
+                    </p>
+                    <p>
+                        You can find the GitHub Pages settings under Settings > Pages. The settings should be as follows:
+                        <ol>
+                            <li>
+                                <b>Source: Deploy from a branch</b>. This means the site will come directly from a branch, without any extra processing.
+                            </li>
+                            <li>
+                                <b>Branch: master, Source: / (root)</b>. We deploy our site from the master branch and from the root folder.
+                            </li>
+                            <li>
+                                <b>Custom domain: www.bestghent.eu</b>. It is important to add the www prefix, otherwise GitHub gets confused. <a>bestghent.eu</a> gets redirected to <a>www.bestghent.eu</a> via Namecheap.
+                            </li>
+                            <li>
+                                <b>Enforce HTTPS</b>. This will make sure all traffic to our site is encrypted and safe.
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/github_logo.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/namecheap_logo.png">
+                </div>
+                <div class="col-sm-9">
+                    <h1>Namecheap</h1>
+                    <p>
+                        As the name implies, Namecheap provides domain names for economic prices.
+                        Our domain, <a href="https://www.bestghent.eu/" target="_blank">bestghent.eu</a>, is registered using their cheapest, simplest plan.
+                        We don't pay for hosting, as we're hosted via GitHub Pages and we don't pay for an email service.
+                    </p>
+                    <p>
+                        All we ask Namecheap to do is redirect all requests to <a href="https://www.bestghent.eu/" target="_blank">bestghent.eu</a> to our GitHub Pages setup.
+                        This is done by having the following host records under the Advanced DNS section on the dashboard:
+                        <ol>
+                            <li>
+                                <b>A Record @ 185.199.108.153</b>
+                            </li>
+                            <li>
+                                <b>A Record @ 185.199.109.153</b>
+                            </li>
+                            <li>
+                                <b>A Record @ 185.199.110.153</b>
+                            </li>
+                            <li>
+                                <b>A Record @ 185.199.111.153</b>
+                            </li>
+                            <li>
+                                <b>CNAME Record www best-ghent.github.io.</b>
+                            </li>
+                        </ol>
+                        The A Records point our domain name to GitHub's servers.
+                        Those will redirect <a>bestghent.eu</a> to <a>www.bestghent.eu</a> and act as the servers serving the sites content.
+                        The CNAME Record points all www requests to our organisation's account on GitHub.
+                        This allows GitHub to know it is our side they need to serve to the client and not someone else's.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <img width="100%" src="static/media/hosting/namecheap_dashboard.png">
+            </div>
+        </div>
+    </section>
     
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <H1>Help! The site is <b>down</b>!</H1>
+                    <p>
+                        In case the site is down, as long as GitHub itself is still up, this documentation can still be accessed by everyone.
+                        Simply <a href="tools/git">clone the repository</a>, and access the docs using the <a href="tools/vscode">Live Server extension in VS Code</a>.
+                    </p>
+                    <p>
+                        Now, how to debug: There is of course no complete tutorial on how to debug something like this, but there are places you can start to look.
+                        <ol>
+                            <li>
+                                <b>A single page is down</b>: This likely means there is only a problem with the file containing that page.
+                                Make sure the file is named <code>index.html</code> and is located in the correct folder.
+                            </li>
+                            <li>
+                                <b>A page gives a completely blank screen</b>. This sounds like a problem with the FOUC-barrier.
+                                You can check for error messages by using Chrome DevTools (can be opened by pressing ctrl+shift+c).
+                                Make sure you included the nescessary boilerplate correctly. A guide on this can be found <a href="code/make-a-page">here</a>.
+                            </li>
+                            <li>
+                                <b>GitHub</b>: as we are hosted using their services, it makes sense to check if everything on their side is set up correctly.
+                                Maybe there is a general outage, maybe some settings were changed,...
+                                Make sure to check any emails from GitHub regarding changes to GitHub Pages.
+                            </li>
+                            <li>
+                                <b>Namecheap</b>: same deal with them.
+                                Make sure everything is set up correctly as described above, check for emails, ...
+                                If you're lucky, we just forgot to pay them and we can get the site back by renewing our subscription.
+                            </li>
+                        </ol>
+                        If you encounter other problems and found a way to fix them, you can add them to this list to help your successors.
+                    </p>
+                    <p>
+                        Didn't find an answer in the documentation? You can find who to contact at the <a href="#contact">bottom</a> of the documentations homepage.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 	<section class="section-end templates-copyright"></section>
 
     <div class="templates-nav-main" data-nav-desc="documentation-main"></div>
