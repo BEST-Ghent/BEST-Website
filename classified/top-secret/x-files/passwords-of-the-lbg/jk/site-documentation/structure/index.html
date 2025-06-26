@@ -33,6 +33,7 @@
         </div>
     </section>
 
+    <!-- Static sites -->
     <section>
         <div class="container">
             <div class="row">
@@ -45,13 +46,253 @@
                     <p>
                         If we create a file <code>index.html</code> in a folder <code>hello</code>, we can find the corresponding page using the link <a>bestghent.eu/hello/</a>.
                         We could also create two pages in the same folder, like <code>hello1.html</code> and <code>hello2.html</code>, but then we get the less aesthetically pleasing <a>bestghent.eu/hello/hello1.html</a> and <a>bestghent.eu/hello/hello2.html</a>.
-                        This makes <code>index.html</code> special, as it is the default page to be loaded when no file is specified.
+                        This makes <code>index.html</code> special, as it is the default page to be loaded when no file is specified in the url.
+                    </p>
+                    <p>
                         On this website, we <b>only</b> use <code>index.html</code> files to keep our links nice and tidy.
                         This means we create seperate folders for every page we create.
+                        The only exception to this is the <code>404.html</code> page in the root folder that is displayed when someone tries to access a page that doesn't exist.
+                    </p>
+                    <p>
+                        The folders of pages with related content can share a parent folder.
+                        The <code>tools/git/</code> and <code>tools/vscode/</code> pages in this documentation are an example of this.
                     </p>
                 </div>
                 <div class="col-sm-3">
                     <img width="100%" src="static/media/github_logo.png">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The static folder -->
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img width="100%" src="static/media/structure/static_folder.png">
+                </div>
+                <div class="col-sm-9">
+                    <h1>The <b>static</b> folder</h1>
+                    <p>
+                        Websites require a lot of images to display properly. Most of them also need JavaScript and Stylesheets and maybe even some pdf or mp3 files.
+                        All these files have to be <b>stored</b> in the repository to be accessible to the client, but where?
+                    </p>
+                    <p>
+                        One approach for storing these assets could be the following:
+                        If you have a page like <code>training/index.html</code>, you could store your assets in that folder: <code>training/img1.png</code>.
+                        This works well for images that are only used once on the entire site.
+                        Now imagine we have a profile picture of a board member <code>boardie.png</code>:
+                        This image could be used in the about page, in a members page, maybe on the page of an event they are hosting, ...
+                        This approach would mean <b>copying</b> the same image multiple times.
+                        It also means you can't easily categorize images by type (like pfp's) and easily find the one you're looking for.
+                    </p>
+                    <p>
+                        This is why we went with a centralized approach: The <b>static</b> folder.
+                    </p>
+                    <p>
+                        <b>Every</b> file that is not a page (i.e. an <code>index.html</code> file) is stored in the <code>static/</code> folder.
+                        There are only 3 exceptions to this rule: The <code>CNAME</code> file, the <code>404.html</code> page and the <code>README.md</code>.
+                        The CNAME file links the repository to our domainname (<a href="https://www.bestghent.eu">bestghent.eu</a>) and has to be in the root folder to serve its purpose.
+                        The README file serves as a description of the repository to newcomers and will only be displayed by GitHub when in the root folder.
+                    </p>
+                    <p>
+                        Technically there is another exception to this rule.
+                        This documentation has its own static folder containing all files that are not related to the main site.
+                        The documentation does use the main static folder to access the elements it has in common with the main site like stylesheets and scripts.
+                        This second static folder exists to seperate documentation files from the main site and because the documentation is considered it's own website and therefore redefines the root folder (more information <a href="documentation">here</a>).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Static folder subdivision -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1><b>Subdivision</b> of the static folder</h1>
+                    <p>
+                        Just dumping every file that is not a page into the static folder is sadly not good for most people's sanity.
+                        Because of this, the static folder is subdivided into 3 more folders: scripts, stylesheets and media.
+                    </p>
+                    <p>
+                        To this day, all files on this site could always be categorized into one these three folders.
+                        If this ever stops being the case, you could create a new category for these new files.
+                        Or, if this category-defying menace of a file is too unique to be categorized, drop it straight into <code>static/</code> itself.
+                    </p>
+
+                    <h3><code>static/scripts/</code> and <code>static/stylesheets/</code></h3>
+                    <p>
+                        All JavaScript files should go in the scripts folder and all CSS files should go in the stylesheets folder.
+                        This is to distinguish vital code that affects the entire page from more individualized assets that only affect their general viscinity.
+                        More on JavaScript and Stylesheets <a href="code">here</a>.
+                    </p>
+                    <p>
+                        At the point of writing, the scripts and Stylesheets in these folders are so generic, general and scarce in numbers that they are not sorted into further subfolders.
+                        If more subdivisions ever become nescessary, feel free to make them, but be wary of the final note at the bottom of this page on moving files.
+                    </p>
+
+                    <h3><code>static/media/</code></h3>
+                    <p>
+                        As the name implies, all images, pdf's, sound effects, ... go here.
+                        The media folder itself also has some categories to further structure the files inside.
+                        The most important ones are <code>static/media/pages/</code> and <code>static/media/people/</code>.
+                    </p>
+                    <ol>
+                        <li>
+                            <h4><code>static/media/pages/</code></h4>
+                            <p>
+                                This folder is for the media that is specific to a single page.
+                                This means that files that are unique to the about page will be in <code>static/media/pages/about</code>.
+                                An example is the banner on the homepage.
+                                This is a picture of someone wearing a BEST sweater at a lake.
+                                It is only used by the homepage, on the homepage and therefore resides in <code>static/media/pages/home/</code>.
+                            </p>
+                            <p>
+                                It can be tempting when creating a new page to put every new image into that new page's media folder.
+                                The problem is that if this file is later deemed cool enough to be used elsewhere (which is very common with images of people/groups f.e.), it is still linked to that one page.
+                                So in that case the file must be moved to a different location, which poses the risk of breaking pages that are currently using it (see the note on moving files below).
+                            </p>
+                            <p>
+                                So where does a file go if it is not unique to a single page?
+                                For these files there are other folders in <code>static/media/</code>, like the people folder.
+                                Just as with the main <code>static/</code> folder, files that are too unique to be categorized can just be dumped into <code>static/media/</code> itself.
+                            </p>
+                        </li>
+                        <li>
+                            <h4><code>static/media/people/</code></h4>
+                            <p>
+                                Every image or document that is related to a person goes into the folder of that person in here.
+                                For example: A profile picture for the autumn course of 2025 of Emmanuel Obiringa will go into <code>static/media/people/Emmanuel Obiringa/Emmanuel_pfp_autumn_course_2025.jpg</code>.
+                                Know that there will be many images with similar meanings in one person's folder, so be specific when naming them.
+                                Just <code>Emmanuel_pfp.jpg</code> is not specific enough, as he might want a different pfp for different events.
+                                Renaming files can cause a mess (see the note on moving files below), so try to get the name right first try.
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Unused & Broken pages -->
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1><b>Unused</b> pages</h1>
+                    <p>
+                        A page is considered unused when:
+                        The page is not (meant to) be accessed by anyone anymore, won't be missed in any way if removed and, <b>importantly</b>, there are no links anywhere on the website that link to it anymore.
+                        If all of these criteria are met, you can remove that page (delete the <code>index.html</code> and the folder that contained it) from the site.
+                    </p>
+                    <p>
+                        Removing unused pages helps keeping the codebase contained in size and should be done whenever a page becomes unused.
+                        It is important to know that removing a page from the code base <b>does not</b> remove it from the commit history.
+                        You will always be able to access anything that has ever been part of the website by checking out a commit from that time using Git.
+                        So don't worry when removing something: It was archived the moment it was added to the site.
+                        This is also why it is important to <b>never</b> add passwords or other sensitive information to the website, because it will be technically be accessible until the site's repository itself is removed from GitHub.
+                    </p>
+                    <p>
+                        If a page is unused or not can sometimes be a bit of a gray area.
+                        Think of the page of an event from a long time ago.
+                        Is it still used? No, but does it hurt to still exist? Also no.
+                        In cases like this, it might be wise to <b>discuss</b> the removal of that page with the President, or at an LV.
+                    </p>
+                    <p>
+                        Pages of local courses should remain accessible to the participants by their original link.
+                        They should not be relocated (as that would break the link) and are never considered unused.
+                        This is why all local course pages go into the <code>localcourses/</code> folder.
+                        This prevents them from cluttering the root directory.
+                    </p>
+                    <h1><b>Broken</b> pages</h1>
+                    <p>
+                        When making changes to the website, it is good practice to <b>check</b> if those changes unintentionally affected <b>other pages</b> than the one you worked on.
+                        This can be especially tricky when tinkering with the template system, as almost all pages rely on it.
+                        Still, it can happen that a page breaks because someone forgot to check if their changes broke something or simply because programming is hard and the internet is ever-changing.
+                    </p>
+                    <p>
+                        A page is considered broken when
+                        content doesn't render (correctly),
+                        widgets like links, buttons, ... don't work anymore,
+                        dynamic content like the events in the calendar is not retrieved correctly
+                        or anything else is <b>not as it is supposed to be</b>.
+                    </p>
+                    <p>
+                        If a page is broken, it should either be fixed or removed.
+                        For active pages it is clear that they should be fixed, and unused pages should already be removed due to being unused.
+                        But for pages where it's not clear if they are unused or not, their level of disrepair can be a deciding factor:
+                        If it is <b>not worth</b> the effort to repair a page that is already not really used anymore, don't repair it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rule summary -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Rule <b>summary</b> and <b>good practice</b></h1>
+                    <p>
+                        Please follow these rules as described above. They exist to keep the site structured and easy to navigate for both the client and yourself.
+                        <ol>
+                            <li>
+                                All page files are called <code>index.html</code>.
+                            </li>
+                            <li>
+                                All non-page files, aside the exceptions mentioned above, reside in the <code>static/</code> folder.
+                            </li>
+                            <li>
+                                All JavaScript files go into <code>static/scripts/</code>.
+                                All Stylesheets go into <code>static/stylesheets/</code>.
+                            </li>
+                            <li>
+                                All images, pdf's, sound effects, ... go into <code>static/media/</code>
+                            </li>
+                            <li>
+                                Use the <code>static/media/pages/</code> directory as little as possible by categorizing files correctly.
+                            </li>
+                            <li>
+                                Every file that is related to a person goes into that person's <code>static/media/people/</code> folder.
+                            </li>
+                            <li>
+                                Remove unused pages.
+                            </li>
+                            <li>
+                                Always repair or remove broken pages.
+                            </li>
+                        </ol>
+                        If you feel like there is a rule missing, or want to change an existing rule, add them to this page with an explanation about <b>why</b> the rule exists.
+                        Before changing existing rules, make sure you don't hinder the original intentions of that rule (like the static folder preventing file repetition).
+                    </p>
+                    <p>
+                        Also make sure the new rule is applied <b>consistently</b> to the entire codebase and not only to new files.
+                        f.e. when you make a rule saying all folder names should start with the letter 'a', make sure to also rename all existing folders accordingly.
+                        If only half the codebase uses a rule, then it's not a rule but a mess.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Moving files -->
+    <section class="section-odd">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>A note on <b>moving</b> files</h1>
+                    <p>
+                        The largest disadvantage of sharing a file among many different pages is that when you delete, move, rename,... that file, all of the pages that reference it will not be able to find it anymore.
+                        This means you should really think about the name and place of new files when you add them, because moving them later might be a hassle and could break many different pages at once.
+                    </p>
+                    <p>
+                        You can still do this if you think a restructuring of the files is nescessary, but make sure that, afterwards, you check <b>every single page</b> for missing files/being broken.
+                    </p>
                 </div>
             </div>
         </div>
