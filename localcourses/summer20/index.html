@@ -1,65 +1,21 @@
 <!DOCTYPE html>
 
-<html>
+<html class="fouc-barrier">
 
-<head>
+<head class="templates-head">
 	<title>BEST Ghent</title>
-	<meta name="viewport" content="width=device-width">
-	<meta charset="UTF-8">
+	
+	<script src="/static/scripts/templates.js" type="module" async="false"></script>
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.css">
-	<link rel="stylesheet" type="text/css" href="/static/stylesheets/style-v1.css">
-
-	<!-- FONTS -->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,200,700,300' rel='stylesheet' type='text/css'>
-	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> <!-- font awsome icons -->
-
-	<!-- Google Analytics -->
-	<script>
-		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-		ga('create', 'UA-101240085-1', 'auto');
-		ga('send', 'pageview');
-	</script>
+	<!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
+		When the templates class is finished, it will automatically remove the barrier, making the browser render the page. -->
+	<style type="text/css">.fouc-barrier { display: none; }</style>
 </head>
 
-<!-- ICONS -->
-<link rel="apple-touch-icon" sizes="57x57" href="/static/media/ico/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/static/media/ico/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/static/media/ico/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/static/media/ico/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/static/media/ico/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/static/media/ico/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/static/media/ico/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/static/media/ico/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/static/media/ico/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/static/media/ico/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/static/media/ico/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/static/media/ico/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/static/media/ico/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/static/media/ico/manifest.json">
-<link rel="mask-icon" href="/static/media/ico/safari-pinned-tab.svg" color="#0572ba">
-<link rel="shortcut icon" href="/static/media/ico/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-TileImage" content="/static/media/ico/mstile-144x144.png">
-<meta name="msapplication-config" content="/static/media/ico/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
+<body class="style-blue">
 
-<body>
-	<section class="hero hero-sc">
-		<div class="overlay">
+	<section class="hero sec-img" style="background-image: url('/static/media/pages/sc/ghent.jpg');">
+		<div class="overlay-blue">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
@@ -92,9 +48,11 @@
 				</div>
 				<div class="col-sm-5">
 					<div class="polaroids clearfix">
-						<a title=""> <span class="plugin_picture">
-							<img src="/static/media/sc/sc18.JPG" alt="">
-						</span> </a>
+						<a title="">
+							<span class="plugin_picture">
+								<img src="/static/media/pages/sc/sc18.JPG" alt="">
+							</span>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -102,8 +60,7 @@
 	</section>
 
 	<section style="overflow:hidden;padding:0;margin:0">
-		<iframe width="100%" height="560" src="https://www.youtube.com/embed/fLXhjLlJ1Rs?showinfo=0&controls=0&modestbranding=1&rel=0"
-			frameborder=0 allowfullscreen></iframe>
+		<iframe width="100%" height="560" src="https://www.youtube.com/embed/fLXhjLlJ1Rs?showinfo=0&controls=0&modestbranding=1&rel=0" frameborder=0 allowfullscreen></iframe>
 	</section>
 
 	<section class="section-odd">
@@ -155,10 +112,12 @@
 				<div class="col-sm-12">
 					<h1 class="text-center">What about the <b>academic part?</b></h1>
 					<p>
-                        Nowadays sustainability is a hot topic! But how can we, the engineers of tomorrow, contribute to the fight against global warming? Let’s make the world a greener place with 20 other great minds who think alike!
+                        Nowadays sustainability is a hot topic! But how can we, the engineers of tomorrow, contribute to the fight against global warming?
+						Let’s make the world a greener place with 20 other great minds who think alike!
                         <br><br>
-                        We have a very motivated team of teachers that cannot wait to give you fascinating classes and labs about building in a more sustainable way. There will be a focus on both mechanical and civil solutions and improvements.
-						Come aboard and join us in the beautiful Ghent to explore the possibilities of blue energy through a series of interesting classes and labs
+                        We have a very motivated team of teachers that cannot wait to give you fascinating classes and labs about building in a more sustainable way.
+						There will be a focus on both mechanical and civil solutions and improvements.
+						Come aboard and join us in the beautiful Ghent to explore the possibilities of blue energy through a series of interesting classes and labs.
                     </p>
 				</div>
 			</div>
@@ -176,7 +135,7 @@
 				<!---<div class="col-sm-1 text-center"></div>--->
 				<div class="col-sm-12 text-center">
 					<div class="card">
-						<img class="card-img-top img-circle" width="200em" src="/static/media/sc/ct/mo.jpg" alt="Main Organiser">
+						<img class="card-img-top img-circle" width="200em" src="/static/media/pages/sc/ct/mo.jpg" alt="Main Organiser">
 						<div class="card-block">
 							<h4 class="card-title">Roxanne Vander Straeten</h4>
 							<p class="card-text">
@@ -256,7 +215,9 @@
 			<div class="row">
 				<div class="col-sm-12">
                     <h1 class="text-center"> <b>Preliminary Schedule</b> </h1>
-					<img class="img-center" src="/static/media/sc/schedule.png" alt="Schedule">
+					<object width="100%" height="500px" type="application/pdf" data="/static/media/pages/sc/schedule.png">
+						<p>It seems we are having trouble showing the schedule.</p>
+					</object>
 				</div>
 			</div>
 		</div>
@@ -268,9 +229,9 @@
 				<div class="col-sm-12">
 					<h1 class="text-center"><b>Syllabus and Prematerials</b></h1>
 					<p>
-                        All the materials that are relevant for the course will appear hear, when they are ready. These materials will enlarge your insight on sustainable construction and mechanics
-						and related technologies. Going through these doucments is necessary to understand the topics that will be discussed
-						during the Course.
+                        All the materials that are relevant for the course will appear hear, when they are ready.
+						These materials will enlarge your insight on sustainable construction and mechanics and related technologies.
+						Going through these doucments is necessary to understand the topics that will be discussed during the Course.
 					</p>
 					<p class="text-center">
 						<a class="btn btn-info" href="https://drive.google.com/file/d/1u4J0EpUZWPQJbaJg2Dpf5HA-oDde8ZHJ/view?usp=sharing" target="_blank">Comming later</a>
@@ -293,16 +254,13 @@
 			</div>
 	</section>
 
-	<section class="section-end">
-		<span>2020 © BEST Ghent vzw. All rights reserved.</span>
-	</section>
+	<section class="section-end templates-copyright"></section>
 
-	<!-- JAVASCRIPT -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
-	<script src="/static/scripts/script-v1.js"></script>
+    <div class="templates-nav-main" data-nav-desc="site-main"></div>
+
+	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
+	<div style="display: none;" class="templates-scripts"></div>
+
 </body>
 
 </html>
