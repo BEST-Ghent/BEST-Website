@@ -52,21 +52,37 @@
     background-color: var(--site-blue);
     mix-blend-mode: multiply;
 }
+.sec-blue h1 {
+    color: var(--site-white);
+}
 .sec-blue a {
     color: var(--site-orange);
 }
+
 .sec-orange {
     color: var(--site-white);
     background-color: var(--site-orange);
 }
+.sec-orange h1 {
+    color: var(--site-white);
+}
+
 .sec-yellow {
     color: var(--site-white);
     background-color: var(--site-yellow);
 }
+.sec-yellow h1 {
+    color: var(--site-white);
+}
+
 .sec-green {
     color: var(--site-white);
     background-color: var(--site-green);
 }
+.sec-green h1 {
+    color: var(--site-white);
+}
+
 .sec-white {
     color: var(--site-gray);
     background-color: var(--site-white);
@@ -74,22 +90,39 @@
 .sec-white h1 {
     color: var(--site-black);
 }
+
 .sec-light-gray {
     color: var(--site-gray);
     background-color: var(--site-light-gray);
 }
+.sec-light-gray h1 {
+    color: var(--site-gray);
+}
+
 .sec-gray {
     color: var(--site-white);
     background-color: var(--site-gray);
 }
+.sec-gray h1 {
+    color: var(--site-white);
+}
+
 .sec-dark-gray {
     color: var(--site-white);
     background-color: var(--site-dark-gray);
 }
+.sec-dark-gray h1 {
+    color: var(--site-white);
+}
+
 .sec-black {
     color: var(--site-white);
     background-color: var(--site-black);
 }
+.sec-black h1 {
+    color: var(--site-white);
+}
+
 .sec-img {
     background: center top;
     background-size: cover;

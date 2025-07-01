@@ -254,6 +254,7 @@ function applyTemplates() {
 		addStylesheet(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css");
 		addStylesheet(el, "/static/stylesheets/polaroids.css");
 		addStylesheet(el, "/static/stylesheets/typography.css");
+		addStylesheet(el, "/static/stylesheets/prism.css");
 		addStylesheet(el, "/static/stylesheets/customs.css");
 		addStylesheet(el, "/static/stylesheets/navigation.css");
 		addStylesheet(el, "/static/stylesheets/style-v1.css");
@@ -265,12 +266,14 @@ function applyTemplates() {
 	});
 
 	applyTemplate("templates-copyright", el=>{
+		el.classList.add("section-end");
 		addGeneral(el, `
 			<span>©2020-`+new Date().getFullYear()+` BEST Ghent vzw. All rights reserved.</span>
 		`);
 	});
 
 	applyTemplate("templates-scripts", el=>{
+		el.style.display = 'none';
 		addScript(el, "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js");
 		addScript(el, "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js");
@@ -278,6 +281,7 @@ function applyTemplates() {
 		addScript(el, "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js");
 		addScript(el, "/static/scripts/owl-carousel.js");
 		addScript(el, "/static/scripts/navigation.js");
+		addScript(el, "/static/scripts/prism.js");
 	});
 
 	applyTemplate("templates-nav-fullpage", el=>{
@@ -349,7 +353,7 @@ function applyTemplates() {
 
 	applyTemplate("templates-copy-content-on-click", el=>{
 		el.onclick = function() {
-			navigator.clipboard.writeText(el.innerHTML);
+			navigator.clipboard.writeText(el.textContent);
 		};
 		el.classList.add("copy-content-on-click");
 		el.title = "click to copy";

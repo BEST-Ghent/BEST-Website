@@ -2,37 +2,14 @@
 
 <html class="fouc-barrier">
     
-<head class="templates-head"> 
+<head class="templates-head">
     <title>BEST Ghent</title>
     <script src="/static/scripts/templates.js" type="module" async="false"></script>
 
     <!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
-		When the templates class is finished, it will automatically remove the barrier, making the browser render the page. -->
+		When the templates system is finished, it will automatically remove the barrier, making the browser render the page. -->
 	<style type="text/css">.fouc-barrier { display: none; }</style>
 </head>
-
-
-<!-- Cookie notification (we don't use cookies at the moment)-->
-<!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-    "palette": {
-        "popup": {
-            "background": "#edeff5",
-            "text": "#838391"
-        },
-        "button": {
-            "background": "#4b81e8"
-        }
-    },
-    "position": "bottom-left",
-    "content": {
-        "message": "BEST Ghent uses cookies to ensure you get the best experience on our website."
-    }
-})});
-</script> -->
 
 <body>
     <div id="fullpage">
@@ -227,10 +204,12 @@ window.cookieconsent.initialise({
     <div class="templates-nav-fullpage" data-nav-desc="site-home"></div>
     
 	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
-	<div style="display: none;" class="templates-scripts"></div>
+	<div class="templates-scripts"></div>
+    
     <!-- Scripts to load google calendar events -->
     <script src="static/scripts/calendar.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
 </body>
 
 </html>
