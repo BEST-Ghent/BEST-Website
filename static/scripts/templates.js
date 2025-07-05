@@ -37,6 +37,8 @@ let navigationDescriptions = {
 		"Git":"tools/git",
 		"Hosting":"hosting",
 		"Structure":"structure",
+		"Make-a-page":"code/make-a-page",
+		"List":"code/list",
 	}
 }
 
@@ -134,7 +136,7 @@ function addGeneral(element, htmlStr) {
 	element.appendChild(fragment);
 }
 
-// Adds a stylesheet from a given source address
+// Adds, loads and runs a script from a given source address
 function addScript(element, src) {
 	const script = document.createElement('script');
 	script.src = src;
@@ -145,7 +147,7 @@ function addScript(element, src) {
 
 }
 
-// Adds, loads and runs a script from a given source address
+// Adds a stylesheet from a given source address
 function addStylesheet(element, src) {
 	const script = document.createElement('link');
 	script.rel = "stylesheet";
@@ -182,6 +184,7 @@ function genNavLinks(element) {
 	let links = "";
 	let navDesc = navigationDescriptions[element.dataset.navDesc]
 	if (navDesc) {
+		delete element.dataset.navDesc; // We delete the data-nav-desc attribute to make the DOM cleaner, but we only do this if it is valid, so it can be used for debugging.
 		for (const linkName in navDesc) {
 
 			let href=navDesc[linkName];
@@ -217,6 +220,40 @@ function genNavLinks(element) {
 		</li>`; // TODO: include correct documentation link
 	}
 	return links;
+}
+
+function renderVariable(v) {
+	if (v.type=="text") {
+		return v.text;
+	}
+	if (v.type=="email") {
+		return "<a href='mailto:"+v.email+"'>"+v.email+"</a>"
+	}
+	if (v.type=="phone") {
+		return "<a href='tel:"+v.number+"'>"+v.number+"</a>"
+	}
+	console.log("ERROR: unknown or undefined variable type");
+	return "<span style='background-color:var(--site-error-color);'>ERROR: unknown or undefined variable type</span>"
+}
+
+// Returns a dict with all leaf node variables
+function getAllVariables(currentVar=variables, root="", dict={}) {
+	if (currentVar.type) { // If the variable has a type, it is a leaf node
+		dict[root] = currentVar
+		return dict;
+	}
+	let wip = {};
+	for (const key in currentVar) {
+		let nextRoot;
+		if (root=="") {
+			nextRoot = key;
+		}
+		else {
+			nextRoot = root+"."+key;
+		}
+		wip = Object.assign({}, wip, getAllVariables(currentVar[key], nextRoot, dict));
+	}
+	return wip;
 }
 
 // This is where all the templates are defined
@@ -351,6 +388,28 @@ function applyTemplates() {
 		addGeneral(el, mobile);
 	});
 
+	// Uses the "templates-copy-content-on-click", so must appear before that
+	applyTemplate("templates-variable-table", el=>{
+		let table = "<table class='w3table'>";
+		table+=`
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Value</th>
+		</tr>`;
+		const vars = getAllVariables();
+		for (const varName in vars) {
+			table+=`
+				<tr>
+					<td><code class="templates-copy-content-on-click">`+varName+`</code></td>
+					<td>`+vars[varName].type+`</td>
+					<td>`+renderVariable(vars[varName])+`</td>
+				</tr>`
+		}
+		table+="</table>";
+		addGeneral(el, table);
+	})
+
 	applyTemplate("templates-copy-content-on-click", el=>{
 		el.onclick = function() {
 			navigator.clipboard.writeText(el.textContent);
@@ -361,24 +420,30 @@ function applyTemplates() {
 	
 	applyTemplate("templates-var", el=>{
 		const varName = el.dataset.varName;
-		const parts = varName.split(".");
-		let v = variables;
-		for (const part of parts) { // Traverse the variable tree to get the right variable
-			v = v[part];
-		}
-		if (v) {
-			delete el.dataset.varName; // We delete the data-var-name attribute to make the DOM cleaner, but we only do this if the variable is valid, so it can be used for debugging.
-			if (v.type=="text") {
-				el.innerHTML = v.text;
+		if (varName) {
+			const parts = varName.split(".");
+			let v = variables;
+			for (const part of parts) { // Traverse the variable tree to get the right variable
+				v = v[part];
+				if (v==undefined) { // If the variable name is invalid, v can become undefined.
+					v = undefined; // This will trigger the error code below.
+					break;
+				}
+				if (part=="type") { // Variables cannot be named type because this undermines how variables are rendered.
+					v = undefined; // This will trigger the error code below.
+					break;
+				}
 			}
-			if (v.type=="email") {
-				el.innerHTML = "<a href='mailto:"+v.email+"'>"+v.email+"</a>"
+			if (v && v.type) {
+				delete el.dataset.varName; // We delete the data-var-name attribute to make the DOM cleaner, but we only do this if the variable is valid, so it can be used for debugging.
+				el.innerHTML = renderVariable(v);
+				return; // Returns to indicate success and avoid the error code below
 			}
 		}
-		else {
-			el.style = "background-color:var(--site-error-color);";
-			el.innerHTML = "ERROR: unknown variable '"+varName+"'";
-		}
+		// if any part above results in an error, it will not return and print the following error message.
+		el.style = "background-color:var(--site-error-color);";
+		el.innerHTML = "ERROR: unknown or invalid variable: '"+varName+"'";
+		console.log("ERROR: unknown or invalid variable: '"+varName+"'");
 	})
 }
 

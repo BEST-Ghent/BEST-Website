@@ -12,7 +12,7 @@
     --site-gray: rgb(102, 102, 102);
     --site-dark-gray: rgb(36, 39, 43);
     --site-black: rgb(0,0,0);
-    --site-error-color: rgb(255, 0, 212);
+    --site-error-color: rgb(255, 0, 212); /* Used to show something is wrong, often used by the template system */
 }
 
 
@@ -180,7 +180,7 @@ a.btn-white {
     color: var(--site-black);
     background-color: var(--site-white);
 }
-a.btn-light-gray {
+a.btn-light-gray { /* This button will appear as a btn-white because of the 108% brightness. The difference only becomes apparent when hovering over the buttons. */
     color: var(--site-black);
     background-color: var(--site-light-gray);
 }
@@ -213,7 +213,7 @@ a.btn-yellow:hover,
 a.btn-green:hover,
 a.btn-gray:hover,
 a.btn-dark-gray:hover,
-a.btn-black {
+a.btn-black:hover {
     color: var(--site-white);
 }
 a.btn-white:hover,
@@ -334,4 +334,18 @@ section.section-end span {
 
 .copy-content-on-click {
     cursor:pointer;
+}
+
+/* Based on https://www.w3schools.com/html/html_tables.asp */
+table.w3table {
+    border-collapse: collapse;
+    width: 100%;
+}
+table.w3table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+table.w3table tr:nth-child(even) {
+    background-color: #dddddd;
 }
