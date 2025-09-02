@@ -94,6 +94,16 @@ variables.people.RubenVanWatermeulen.email = {
     email:"ruben.van.watermeulen@best-eu.org"
 }
 
+variables.people.PenelopeDeBouver = {};
+variables.people.PenelopeDeBouver.name = {
+    type:"text",
+    text:"Penelope De Bouver"
+}
+variables.people.PenelopeDeBouver.email = {
+    type:"email",
+    email:"penelope.de.bouver@best-eu.org"
+}
+
 variables.people.SienDiels = {};
 variables.people.SienDiels.name = {
     type:"text",
