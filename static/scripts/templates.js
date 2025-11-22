@@ -4,11 +4,11 @@ let navigationDescriptions = {
 	"site-home": {
 		"Home":"#home",
 		"About":"#about",
+		"Events":"#calendar",
 		"Courses":"#courses",
 		"Sustainability Workshops":"#sustainabilityworkshops",
 		"Training":"#training",
 		"Partners":"#partners",
-		"Events":"#calendar",
 		"Contact":"#contact"
 	},
 	"site-main": {
