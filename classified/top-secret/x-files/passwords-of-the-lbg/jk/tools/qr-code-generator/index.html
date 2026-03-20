@@ -34,7 +34,8 @@
                 <div class="col-sm-6 text-center">
                     <h1>Settings</h1>
                     <label for>Text</label><br>
-                    <textarea id="text" rows="1" oninput="genQR()">bestghent.eu</textarea>
+                    <textarea id="text" rows="1" oninput="genQR()">bestghent.eu</textarea><br>
+                    QR code will be a <span class="modulecount">1</span>x<span class="modulecount">1</span> square.
                     <br>
                     <label>Transparent Background</label>
                     <input id="transparent" type="checkbox" oninput="genQR()" checked>
@@ -48,12 +49,12 @@
                     <label>Karel?</label>
                     <input id="logo_karel" type="checkbox" oninput="genQR()" checked>
                     <br>
-                    <label>QR size</label><br>
-                    <input id="qr_size" type="number" oninput="genQR()" value="400">
+                    <label>QR size (px/square)</label><br>
+                    <input id="qr_size" type="number" oninput="genQR()" value="16" min="1"><br>
+                    QR code dimensions will be <span class="qr_size">16</span>x<span class="qr_size">16</span>px
                     <br>
-                    <label>Logo size</label><br>
-                    <input id="logo_size" type="number" oninput="genQR()" value="80">
-                    
+                    <label>Logo size (#of squares)</label><br>
+                    <input id="logo_size" type="number" oninput="genQR()" value="7" step="2" min="1">
                 </div>
                 <div class="col-sm-6 text-center">
                     
@@ -81,21 +82,19 @@
             var colorDark = document.getElementById("color").value;
             var colorLight = "white"
             var qr_size = document.getElementById("qr_size").value;
-            var logo_size = document.getElementById("logo_size").value;
             var do_logo = document.getElementById("logo").checked;
             var logo_src = document.getElementById("logo_karel").checked?"KAREL.png":"BEST.png";
 
             var qr = new QRCode(domel, {
                 // ====== Basic
                 text: text,
-                width: qr_size,
-                height: qr_size,
+                width: 1,
+                height: 1,
                 colorDark : colorDark,
                 colorLight : transparent_bg?"transparent":colorLight,
                 correctLevel : QRCode.CorrectLevel.H, // L, M, Q, H
                 
                 // ====== dotScale
-                /*
                 dotScale: 1, // For body block, must be greater than 0, less than or equal to 1. default is 1
                 
                 dotScaleTiming: 1, // Dafault for timing block , must be greater than 0, less than or equal to 1. default is 1
@@ -105,24 +104,21 @@
                 dotScaleA: 1, // Dafault for alignment block, must be greater than 0, less than or equal to 1. default is 1
                 dotScaleAO: undefined, // For alignment outer block, must be greater than 0, less than or equal to 1. default is 1
                 dotScaleAI: undefined, // For alignment inner block, must be greater than 0, less than or equal to 1. default is 1
-                */
             
                 // ====== Quiet Zone
-                /*
                 quietZone: 0,
-                quietZoneColor: "rgba(0,0,0,0)",
-                */
+                quietZoneColor: "#00000000",
 
                 // ====== Logo
-                
-                logo: do_logo?logo_src:undefined, // Relative address, relative to `easy.qrcode.min.js`
+                /*
+                logo: undefined, // Relative address, relative to `easy.qrcode.min.js`
                 logoWidth: logo_size, // fixed logo width. default is `width/3.5`
                 logoHeight: logo_size, // fixed logo height. default is `heigth/3.5`
                 logoMaxWidth: undefined, // Maximum logo width. if set will ignore `logoWidth` value
                 logoMaxHeight: undefined, // Maximum logo height. if set will ignore `logoHeight` value
                 logoBackgroundColor: colorLight, // Logo backgroud color, Invalid when `logBgTransparent` is true; default is '#ffffff'
                 logoBackgroundTransparent: false, // Whether use transparent image, default is false
-                
+                */
 
                 // ====== Backgroud Image
                 /*
@@ -176,55 +172,60 @@
                 */
             
                 // ===== Event Handler
-                
-                onRenderingStart: undefined,
+                onRenderingStart: ()=>{domel.style.display = "none";},
                 onRenderingEnd: onRenderFinished,
                 
-            
                 // ===== Versions
-                /*
                 version: 0, // The symbol versions of QR Code range from Version 1 to Version 40. default 0 means automatically choose the closest version based on the text length.
-                */     
             
                 // ===== Binary(hex) data mode
-                /*
                 binary: false, // Whether it is binary mode, default is text mode. 
-                */ 
                 
                 // ===== Tooltip
-                /*
                 tooltip: false, // Whether set the QRCode Text as the title attribute value of the QRCode div
-                */
             
                 // ==== CORS
-                /*
                 crossOrigin: null, // String which specifies the CORS setting to use when retrieving the image. null means that the crossOrigin attribute is not set.
-                */
             
                 // =====  Drawing method
-                
                 drawer: 'canvas', // Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
-                
             
                 // =====  UTF-8 without BOM
-                /*
                 utf8WithoutBOM: true
-                */   
-
             });
+
+            // Make sure img size is a multiple of the modulecount
+            moduleCount = qr._oQRCode.moduleCount;
+            Array.from(document.getElementsByClassName("modulecount")).forEach(el=>{el.innerHTML = moduleCount})
+            qr_size = moduleCount * qr_size;
+            Array.from(document.getElementsByClassName("qr_size")).forEach(el=>{el.innerHTML = qr_size})
+            qr.resize(qr_size, qr_size);
 
             function onRenderFinished() {
                 var canvas = domel.childNodes[0];
-                if (transparent_bg && do_logo) {
+                pixel_per_module = qr_size/moduleCount;
+                var logo_size = document.getElementById("logo_size").value;
+
+                var side = ((moduleCount - logo_size) / 2)*pixel_per_module;
+                logo_size = qr_size - 2*side;
+
+                if (do_logo) {
                     var ctx = canvas.getContext('2d');
                     var offset = qr_size/2-logo_size/2;
-                    ctx.clearRect(offset,offset,logo_size,logo_size);
+                    if (transparent_bg) {
+                        ctx.clearRect(offset,offset,logo_size,logo_size);
+                    }
+                    else {
+                        ctx.fillStyle = "#ffffffff";
+                        ctx.fillRect(offset,offset,logo_size,logo_size);
+                    }
                     var logo = new Image();
                     logo.onload = () => {
                         ctx.drawImage(logo, offset,offset, logo_size, logo_size);
                         var downloadButton = document.getElementById("download");
                         downloadButton.href = canvas.toDataURL("image/png");
                         downloadButton.download = "qrcode.png";
+                        domel.style.display = "block";
                     }
                     logo.src = logo_src;
                 }
@@ -232,6 +233,7 @@
                     var downloadButton = document.getElementById("download");
                     downloadButton.href = canvas.toDataURL("image/png");
                     downloadButton.download = "qrcode.png";
+                    domel.style.display = "block";
                 }
             }
         }
