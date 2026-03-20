@@ -215,7 +215,7 @@
 
             function onRenderFinished() {
                 var canvas = domel.childNodes[0];
-                if (transparent_bg) {
+                if (transparent_bg && do_logo) {
                     var ctx = canvas.getContext('2d');
                     var offset = qr_size/2-logo_size/2;
                     ctx.clearRect(offset,offset,logo_size,logo_size);
