@@ -71,15 +71,6 @@
 	<div class="templates-scripts"></div>
 
     <script type="text/javascript">
-        fetch("https://script.google.com/macros/s/AKfycbx0MO202dWdrIRpEnMpTNFE-239jQWAf3BID-9rlamEB03k4bNewxR9zNswGfJwBk4-YQ/exec", {
-            redirect: "follow",
-            method: "POST",
-            body: JSON.stringify({test:"test2"}),
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8",
-            },
-        })
-
         function genQR() {
             var domel = document.getElementById("qrcode");
             domel.childNodes.forEach(child => {
@@ -247,7 +238,6 @@
             }
         }
         genQR();
-        document.getElementById("text").on
     </script>
 </body>
 
