@@ -33,6 +33,7 @@ let navigationDescriptions = {
 		"Contact":"#contact"
 	},
 	"documentation-main": {
+		"Mini-PA":"/mini-pa",
 		"Home":"",
 		"VS Code":"tools/vscode",
 		"Git":"tools/git",
@@ -40,6 +41,13 @@ let navigationDescriptions = {
 		"Structure":"structure",
 		"Make-a-page":"code/make-a-page",
 		"List":"code/list",
+	},
+	"mini-pa-main": {
+		"Home":"/mini-pa",
+		"LV's":"/mini-pa/lvs",
+		"Tools":"/mini-pa/tools",
+		"Office":"/mini-pa/office",
+		"Docs":"/mini-pa/site-documentation"
 	}
 }
 
