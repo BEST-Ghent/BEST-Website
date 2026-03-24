@@ -117,11 +117,11 @@ variables.people.SienDiels.email = {
 
 
 variables.position = {};
-variables.position.President = variables.people.AurelieScibetta;
-variables.position.Secretary = variables.people.AurelieScibetta;
-variables.position.VPHR = variables.people.MartinaMatiec;
-variables.position.TreasurerVPER = variables.people.SienDiels;
-variables.position.VPPR = variables.people.JitseDecoodt;
+variables.position.President = variables.people.JitseDecoodt;
+variables.position.Secretary = variables.people.ClaraBaetens;
+variables.position.VPHR = variables.people.EmmanuelObiringa;
+variables.position.TreasurerVPER = variables.people.HannesCoulembier;
+variables.position.VPPR = variables.people.CharlotteVandewalle;
 variables.position.ITresponsible = variables.people.HannesCoulembier;
 
 
