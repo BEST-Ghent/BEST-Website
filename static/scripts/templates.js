@@ -19,7 +19,6 @@ let navigationDescriptions = {
 		"Training":"/training",
 		"Partners":"/partners",
 		"Events":"/events",
-		"Office":"/office",
 		"Contact":"/#contact"
 	},
 	"documentation-home":{
