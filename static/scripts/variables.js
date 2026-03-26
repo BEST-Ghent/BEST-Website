@@ -84,6 +84,16 @@ variables.people.Karel.email = {
     email:"karel.karel@best-eu.org"
 }
 
+variables.people.LotteDHoker = {};
+variables.people.LotteDHoker.name = {
+    type:"text",
+    text:"Lotte D' Hoker"
+}
+variables.people.LotteDHoker.email = {
+    type:"email",
+    email:"lotte.d.hoker@best-eu.org"
+}
+
 variables.people.MartinaMatiec = {};
 variables.people.MartinaMatiec.name = {
     type:"text",
