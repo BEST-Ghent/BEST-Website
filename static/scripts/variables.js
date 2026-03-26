@@ -54,6 +54,16 @@ variables.people.HannesCoulembier.email = {
     email:"hannes.coulembier@best-eu.org"
 }
 
+variables.people.JasperVanderLinde = {};
+variables.people.JasperVanderLinde.name = {
+    type:"text",
+    text:"Jasper Van der Linde"
+}
+variables.people.JasperVanderLinde.email = {
+    type:"email",
+    email:"jasper.van.der.linde@best-eu.org"
+}
+
 variables.people.JitseDecoodt = {};
 variables.people.JitseDecoodt.name = {
     type:"text",
@@ -84,6 +94,16 @@ variables.people.MartinaMatiec.email = {
     email:"martina.matiec@best-eu.org"
 }
 
+variables.people.RandallScheirlinckx = {};
+variables.people.RandallScheirlinckx.name = {
+    type:"text",
+    text:"Randall Scheirlinckx"
+}
+variables.people.RandallScheirlinckx.email = {
+    type:"email",
+    email:"randall.scheirlinckx@best-eu.org"
+}
+
 variables.people.RubenVanWatermeulen = {};
 variables.people.RubenVanWatermeulen.name = {
     type:"text",
@@ -103,6 +123,17 @@ variables.people.PenelopeDeBouver.email = {
     type:"email",
     email:"penelope.de.bouver@best-eu.org"
 }
+
+variables.people.SeppeMeillander = {};
+variables.people.SeppeMeillander.name = {
+    type:"text",
+    text:"Seppe Meillander"
+}
+variables.people.SeppeMeillander.email = {
+    type:"email",
+    email:"seppe.meillander@best-eu.org"
+}
+
 
 variables.people.SienDiels = {};
 variables.people.SienDiels.name = {
