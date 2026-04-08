@@ -101,7 +101,7 @@
             // res.data.sort(el=>el.name).reverse().forEach(element => {
             res.data.forEach(element => {
                 let button = document.createElement("a");
-                button.innerText = element.name;
+                button.innerHTML = element.name;
                 button.classList.add("btn","btn-blue");
                 button.onclick = () => {
                     window.location.href = "#"+element.id;
@@ -124,7 +124,7 @@
             document.getElementById("lv-display").style.display='inherit';
 
             Array.from(document.getElementsByClassName("lv-loading")).forEach(el => {
-                el.innerText = "loading...";
+                el.innerHTML = "loading...";
                 Array.from(el.children).forEach(child => el.removeChild(child));
             });
 
@@ -143,64 +143,68 @@
                 sheetCache[anchor] = res.data;
                 if (anchor == getAnchor()) BuildLV(res.data); // Only BuildLV() if anchor is still the same after waiting on loading the data
             });
+        }
+        
+        function BuildLV(rows) {
 
-            function BuildLV(rows) {
-
-                let descriptionHeader = rows[0].filter(item=> { return item!=""; });
-                let descriptionData   = rows[1].filter(item=> { return item!=""; });
-                let attendanceHeader  = rows[2].filter(item=> { return item!=""; });
-                let attendanceData    = rows.slice(3).map(row => { // Return all rows except the first 3
-                    return row.filter((el, index) => { // For every row, filter out
-                        return rows[2][index] != "";   // When the header row is empty
-                    });
-                });
-
-                document.getElementById("lv-title").innerText        = descriptionData[0];
-                document.getElementById("lv-description").innerText  = descriptionData[1];
-                
-                // Generate agenda
-                let lvAgenda = document.getElementById("lv-agenda");
-                let lvAgendaList = document.createElement("ul");
-                descriptionData[2].split(";").forEach(point => {
-                    let p = document.createElement("li");
-                    p.innerText = point;
-                    lvAgendaList.appendChild(p);
-                });
-                lvAgenda.innerText = "";
-                lvAgenda.appendChild(lvAgendaList);
-
-                document.getElementById("lv-date").innerText     = new Date(descriptionData[3]).toLocaleString(["en"], { year: "numeric", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit"});
-                document.getElementById("lv-location").innerText = descriptionData[4];
-                
-                // Generate attendance table
-                let lvAttendance = document.getElementById("lv-attendance");
-                let lvAttendanceList = document.createElement("table");
-                lvAttendanceList.classList.add("table");
-                lvAttendanceList.classList.add("table-striped");
-                lvAttendanceList.classList.add("table-bordered");
-                let lvAttendanceListHeader = document.createElement("thead");
-                let lvAttendanceListHeaderRow = document.createElement("tr");
-                attendanceHeader.forEach(d => {
-                    let item = document.createElement("th");
-                    item.innerText = d;
-                    lvAttendanceListHeaderRow.appendChild(item);
-                });
-                lvAttendanceListHeader.appendChild(lvAttendanceListHeaderRow);
-                lvAttendanceList.appendChild(lvAttendanceListHeader);
-                let lvAttendanceListBody = document.createElement("tbody");
-                attendanceData.forEach(attend => {
-                    let p = document.createElement("tr");
-                    attend.forEach(d => {
-                        let item = document.createElement("td");
-                        item.innerText = d;
-                        p.appendChild(item);
-                    });
-                    lvAttendanceListBody.appendChild(p);
-                });
-                lvAttendance.innerText = "";
-                lvAttendanceList.appendChild(lvAttendanceListBody);
-                lvAttendance.appendChild(lvAttendanceList);
+            let description = {};
+            for (let i = 0; i < rows[0].length; i++) {
+                let head = rows[0][i];
+                if (head == "") continue;
+                description[head] = rows[1][i];
             }
+            let attendanceHeader  = rows[2].filter(item=> { return item!=""; });
+            let attendanceData    = rows.slice(3).map(row => { // Return all rows except the first 3 (which are description header, description data and attendance header)
+                return row.filter((el, index) => { // For every row, filter out
+                    return rows[2][index] != "";   // When the header row is empty
+                });
+            });
+
+            document.getElementById("lv-title").innerHTML        = description["Title"];
+            document.getElementById("lv-description").innerHTML  = description["Description"];
+            
+            // Generate agenda
+            let lvAgenda = document.getElementById("lv-agenda");
+            let lvAgendaList = document.createElement("ul");
+            description["Agenda (seperate topics by \";\")"].split(";").forEach(point => {
+                let p = document.createElement("li");
+                p.innerHTML = point;
+                lvAgendaList.appendChild(p);
+            });
+            lvAgenda.innerHTML = "";
+            lvAgenda.appendChild(lvAgendaList);
+
+            document.getElementById("lv-date").innerHTML     = new Date(description["Date (dd/mm/yyyy hh:MM)"]).toLocaleString(["en"], { year: "numeric", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit"});
+            document.getElementById("lv-location").innerHTML = description["Location"];
+            
+            // Generate attendance table
+            let lvAttendance = document.getElementById("lv-attendance");
+            let lvAttendanceList = document.createElement("table");
+            lvAttendanceList.classList.add("table");
+            lvAttendanceList.classList.add("table-striped");
+            lvAttendanceList.classList.add("table-bordered");
+            let lvAttendanceListHeader = document.createElement("thead");
+            let lvAttendanceListHeaderRow = document.createElement("tr");
+            attendanceHeader.forEach(d => {
+                let item = document.createElement("th");
+                item.innerHTML = d;
+                lvAttendanceListHeaderRow.appendChild(item);
+            });
+            lvAttendanceListHeader.appendChild(lvAttendanceListHeaderRow);
+            lvAttendanceList.appendChild(lvAttendanceListHeader);
+            let lvAttendanceListBody = document.createElement("tbody");
+            attendanceData.forEach(attend => {
+                let p = document.createElement("tr");
+                attend.forEach(d => {
+                    let item = document.createElement("td");
+                    item.innerHTML = d;
+                    p.appendChild(item);
+                });
+                lvAttendanceListBody.appendChild(p);
+            });
+            lvAttendance.innerHTML = "";
+            lvAttendanceList.appendChild(lvAttendanceListBody);
+            lvAttendance.appendChild(lvAttendanceList);
         }
 
         function getAnchor() {
@@ -217,7 +221,7 @@
             let entries = Object.fromEntries(new FormData(form));
 
             Array.from(document.getElementsByClassName("lv-loading")).forEach(el => {
-                el.innerText = "loading...";
+                el.innerHTML = "loading...";
                 Array.from(el.children).forEach(child => el.removeChild(child));
             });
 
@@ -230,10 +234,9 @@
             .then(res => res.json())
             .then(res => {
                 if (res.status == null | res.status != "success") throw new Error(res);
-                if (Object.keys(sheetCache).find(el=>(el==anchor))) {
-                    delete sheetCache[anchor];
-                }
-                loadLV();
+                
+                sheetCache[anchor] = res.data;
+                if (anchor == getAnchor()) BuildLV(res.data); // Only BuildLV() if anchor is still the same after waiting on loading the data
             });
         }
 
