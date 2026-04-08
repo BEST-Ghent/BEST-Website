@@ -12,7 +12,7 @@
 	<style type="text/css">.fouc-barrier { display: none; }</style>
 </head>
 
-<body>
+<body class="style-dark-gray">
     <!-- Introduction -->
     <section class="hero sec-img" style="background-image: url('/static/media/pages/partners/partners_1.jpg');">
         <div class="overlay-black">
@@ -33,39 +33,44 @@
             <div class="row">
                 <div class="col-sm-6 text-center">
                     <h1>Settings</h1>
-                    <label for>Text</label><br>
-                    <textarea id="text" rows="1" oninput="genQR()">bestghent.eu</textarea><br>
-                    QR code will be a <span class="modulecount">1</span>x<span class="modulecount">1</span> square.
-                    <br>
-                    <label>Transparent Background</label>
-                    <input id="transparent" type="checkbox" oninput="genQR()" checked>
-                    <br>
-                    <label>Color</label>
-                    <input id="color" type="color" oninput="genQR()">
-                    <br>
-                    <label>Logo?</label>
-                    <input id="logo" type="checkbox" oninput="genQR()" checked>
-                    <br>
-                    <label>Karel?</label>
-                    <input id="logo_karel" type="checkbox" oninput="genQR()" checked>
-                    <br>
-                    <label>QR size (px/square)</label><br>
-                    <input id="qr_size" type="number" oninput="genQR()" value="16" min="1"><br>
-                    QR code dimensions will be <span class="qr_size">16</span>x<span class="qr_size">16</span>px
-                    <br>
-                    <label>Logo size (#of squares)</label><br>
-                    <input id="logo_size" type="number" oninput="genQR()" value="7" step="2" min="1">
+                    <p>
+                        <label for>Text</label><br>
+                        <!-- maxlentgh 1273 is the maximum number of characters that fit in a maximum size QR code at highest correction level -->
+                        <textarea id="text" rows="1" oninput="genQR()" maxlength="1273">bestghent.eu</textarea><br>
+                        QR code will be a <span class="modulecount">1</span>x<span class="modulecount">1</span> square.
+                        <br>
+                        <label>Transparent Background</label>
+                        <input id="transparent" type="checkbox" oninput="genQR()" checked>
+                        <br>
+                        <label>Color</label>
+                        <input id="color" type="color" oninput="genQR()">
+                        <br>
+                        <label>Logo?</label>
+                        <input id="logo" type="checkbox" oninput="genQR()" checked>
+                        <br>
+                        <label>Karel?</label>
+                        <input id="logo_karel" type="checkbox" oninput="genQR()" checked>
+                        <br>
+                        <label>QR size (px/square)</label><br>
+                        <input id="qr_size" type="number" oninput="genQR()" value="16" min="1"><br>
+                        QR code dimensions will be <span class="qr_size">16</span>x<span class="qr_size">16</span>px
+                        <br>
+                        <label>Logo size (#of squares)</label><br>
+                        <input id="logo_size" type="number" oninput="genQR()" value="7" step="2" min="1">
+                    </p>
                 </div>
-                <div class="col-sm-6 text-center">
-                    
-                    <div id="qrcode"></div>
+                <div class="col-sm-6 text-center" style="overflow: hidden;">
+                    <img id="QRdisplay" width="100%">
+                    <div id="qrcode" style="display:none;"></div>
                     <a id="download" class="btn btn-blue">Download</a>
                 </div>
             </div>
         </div>
     </section>
+    
+    <section class="templates-copyright"></section>
 
-    <!-- <div class="templates-nav-fullpage" data-nav-desc="documentation-home"></div> -->
+    <div class="templates-nav-main" data-nav-desc="mini-pa-main"></div>
 
 	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
 	<div class="templates-scripts"></div>
@@ -172,7 +177,7 @@
                 */
             
                 // ===== Event Handler
-                onRenderingStart: ()=>{domel.style.display = "none";},
+                onRenderingStart: null,
                 onRenderingEnd: onRenderFinished,
                 
                 // ===== Versions
@@ -223,17 +228,21 @@
                     logo.onload = () => {
                         ctx.drawImage(logo, offset,offset, logo_size, logo_size);
                         var downloadButton = document.getElementById("download");
-                        downloadButton.href = canvas.toDataURL("image/png");
+                        var display = document.getElementById("QRdisplay");
+                        img = canvas.toDataURL("image/png");
+                        downloadButton.href = img;
+                        display.src = img;
                         downloadButton.download = "qrcode.png";
-                        domel.style.display = "block";
                     }
                     logo.src = logo_src;
                 }
                 else {
                     var downloadButton = document.getElementById("download");
-                    downloadButton.href = canvas.toDataURL("image/png");
+                    var display = document.getElementById("QRdisplay");
+                    img = canvas.toDataURL("image/png");
+                    downloadButton.href = img;
+                    display.src = img;
                     downloadButton.download = "qrcode.png";
-                    domel.style.display = "block";
                 }
             }
         }
