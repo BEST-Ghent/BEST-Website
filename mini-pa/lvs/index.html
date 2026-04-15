@@ -66,7 +66,7 @@
                                 <option value="Late">Late</option>
                                 <option value="Not Present">Not Present</option>
                             </select>
-                            <a class="btn btn-blue" onclick="setAttendance();">sign up</a>
+                            <a id="lv-signup-button" class="btn btn-blue" onclick="setAttendance();">sign up</a>
                         </form>
                     </div>
                     <h3>Attendance</h3>
@@ -155,6 +155,7 @@
             });
         }
         
+        let attendanceEmails = [];
         function BuildLV(rows) {
 
             let description = {};
@@ -174,6 +175,10 @@
                 row.map(el => { if (el && el != "") isEmpty = false; });
                 return !isEmpty;
             });
+
+            // Gets usefull column indices (-1 of not found)
+            let personIndex = attendanceHeader.findIndex(el => el.trim().toLowerCase() == "person");
+            let votingRightsIndex = attendanceHeader.findIndex(el => el.trim().toLowerCase() == "voting rights");
 
             document.getElementById("lv-title").innerHTML        = description["Title"];
             document.getElementById("lv-description").innerHTML  = description["Description"];
@@ -220,6 +225,50 @@
             lvAttendance.innerHTML = "";
             lvAttendanceList.appendChild(lvAttendanceListBody);
             lvAttendance.appendChild(lvAttendanceList);
+
+            if (personIndex != -1) { // If a person column if present, we can generate statistics about it and compare to currently entered email in the form.
+                // Generate statistics
+                let lvAttendanceInfo = document.createElement("span");
+                let validOnes = attendanceData.filter(el => el[personIndex].includes("@")); // This makes sure entries like Karel are not counted
+                if (validOnes.length == 0) {
+                    lvAttendanceInfo.innerHTML = "No one signed up yet.";
+                }
+                else {
+                    if (votingRightsIndex != -1) { // There is a voting rights column
+                        let confirmed = validOnes.filter(el => el[votingRightsIndex] != '');
+                        if (confirmed.length == 0) {
+                            lvAttendanceInfo.innerHTML = (validOnes.length == 1) ? "1 person signed up. Awaiting voting rights confirmation." : `${validOnes.length} people signed up. All awaiting voting rights confirmation.`
+                        }
+                        else {
+                            let unconfirmedCount = validOnes.length - confirmed.length;
+                            let peopleWithVotingRights = confirmed.filter(el => isAffirmative(el[votingRightsIndex]))
+                            let votingRightsCount = peopleWithVotingRights.length;
+                            lvAttendanceInfo.innerHTML = `${votingRightsCount} out of ${confirmed.length} ` + ((unconfirmedCount == 0) ? "": "confirmed") + " people have voting rights. "
+                                                            + ((unconfirmedCount == 0) ? "" :
+                                                                ((unconfirmedCount > 1)  ? `${unconfirmedCount} people awaiting confirmation.` : "One person awaiting confirmation."));
+                        }
+                    }
+                    else {
+                        lvAttendanceInfo.innerHTML = (validOnes.length == 1) ? "1 person signed up." : `${validOnes.length} people signed up.`;
+                    }
+                }
+                lvAttendance.appendChild(lvAttendanceInfo);
+    
+                // Update attendanceEmails with latest info and update signupbutton accordingly
+                attendanceEmails = attendanceData.map(row => row[personIndex]);
+                updateSignUpButton();
+            }
+        }
+
+        function isAffirmative(s) {
+            switch (s.trim().toLowerCase()) {
+                case "y":
+                case "yes":
+                case "ja":
+                case "yep":
+                    return true
+                return false;
+            }
         }
 
         function getAnchor() {
@@ -264,6 +313,19 @@
                     "Content-Type": "text/plain;charset=utf-8",
                 },
             })
+        }
+        
+        // If email is already registered, change SING UP button to UPDATE STATUS
+        const button = document.getElementById("lv-signup-button");
+        const emailForm = document.getElementById("email");
+        emailForm.addEventListener("input", updateSignUpButton);
+        function updateSignUpButton() {
+            if (attendanceEmails.find(v => emailForm.value == v)) {
+                button.innerHTML = "Update status";
+            }
+            else {
+                button.innerHTML = "Sign Up";
+            }
         }
     </script>
 </body>
