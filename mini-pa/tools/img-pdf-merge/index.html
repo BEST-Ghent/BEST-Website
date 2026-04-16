@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="fouc-barrier">
+    
+<head class="templates-head">
+    <title>BEST Ghent</title>
+    <script src="/static/scripts/templates.js" type="module" async="false"></script>
+    <script src="https://unpkg.com/pdf-lib"></script>
+    
+    <!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
+		When the templates system is finished, it will automatically remove the barrier, making the browser render the page. -->
+	<style type="text/css">.fouc-barrier { display: none; }</style>
+    <style>
+        #dropzone {
+            width: 100%;
+            min-height: 400px;
+            color: rgb(100, 100, 100);
+            border: 4px dashed var(--site-dark-gray);
+            padding: 3rem;
+            line-height: 140%;
+            font-size: 2.6rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        #queue div {
+            display: block;
+            span {
+                width: 300px;
+                text-align: left;
+                overflow: hidden;
+                white-space: nowrap;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+            i {
+                color: var(--site-dark-gray);
+            }
+        }
+    </style>
+</head>
+
+<body class="style-dark-gray">
+    <!-- Introduction -->
+    <section class="hero sec-img" style="background-image: url('/static/media/pages/partners/partners_1.jpg');">
+        <div class="overlay-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <h1>convert to PDF and merge</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <div id="dropzone">
+                        <input type="file" style="display:none;">
+                        <div id="dropzone-content">
+                            drag & drop files here
+                            <div id="queue"></div>
+                        </div>
+                    </div>
+                    <p>
+                        Supported file types: pdf, png & jpeg/jpg
+                    </p>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <iframe id="result" width="100%" height="600em"></iframe>
+                    <a class="btn btn-dark-gray" id="download-button">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="templates-copyright"></section>
+
+    <div class="templates-nav-main" data-nav-desc="mini-pa-main"></div>
+
+	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
+	<div class="templates-scripts"></div>
+
+    <script type="text/javascript">
+        // Setting up dropzone
+        const dropzone = document.getElementById("dropzone");
+        const dropzoneContent = document.getElementById("dropzone-content");
+        const dropzoneinput = document.querySelector("#dropzone input");
+        // Dropzone drag and drop behaviour
+        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); }, false); // By default browsers will try to open files themselves when dragging over them
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            if (e.dataTransfer.items[0].kind !== "file") { throw new Error("Not a file"); }
+            Array.from(e.dataTransfer.files).forEach(file=>uploadFile(file));
+        });
+        // Dropzone clicked behaviour
+        dropzone.addEventListener("click", (e) => {
+            if (e.target == dropzone || e.target == dropzoneContent) {
+                dropzoneinput.value = null;
+                dropzoneinput.click();
+                dropzoneinput.onchange = (e) => {
+                    Array.from(e.target.files).forEach(file=>uploadFile(file));
+                }
+            }
+        });
+
+        // Handling file uploads
+        const PNGMagic = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+        const JPEGMagic = [0xff, 0xd8, 0xff];
+        const PDFMagic = [0x25, 0x50, 0x44, 0x46, 0x2D]
+        function checkMagicNumber(header, buffer, offset = 0) {
+            return header.every((byte, index) => byte === buffer[offset + index]);
+        }
+
+        let files = [];
+        function uploadFile(file) {
+            const fr = new FileReader();
+            fr.readAsDataURL(file);
+            fr.onload = async ()=> {
+                const buffer = Uint8Array.fromBase64(fr.result.split(",")[1]);
+                let type = "unsupported";
+                if (checkMagicNumber(PDFMagic, buffer.slice(0, 5))) {
+                    type = "pdf";
+                }
+                if (checkMagicNumber(PNGMagic, buffer.slice(0, 8))) {
+                    type = "png";
+                }
+                if (checkMagicNumber(JPEGMagic, buffer.slice(0,3))) {
+                    type = "jpeg";
+                }
+                files.push({
+                    filename: file.name,
+                    filetype: type,
+                    url: fr.result
+                });
+                buildQueue();
+            }
+        }
+
+        // Display a queue with all selected items
+        function buildQueue() {
+            const queue = document.getElementById("queue");
+            Array.from(queue.children).forEach(child => queue.removeChild(child));
+            queue.innerHTML = "";
+
+            files.forEach((file, index) => {
+                let item = document.createElement("div");
+                let txt = document.createElement("span");
+                txt.innerHTML = file.filename;
+                item.appendChild(txt);
+                let x = document.createElement("i");
+                let u = document.createElement("i");
+                let d = document.createElement("i");
+                x.classList.add("fa-solid", "fa-xmark");
+                u.classList.add("fa-solid", "fa-arrow-up");
+                d.classList.add("fa-solid", "fa-arrow-down");
+                x.onclick = () => { files.splice(index, 1); buildQueue(); }
+                if (index > 0) u.onclick = () => { [files[index], files[index-1]] = [files[index-1], files[index]]; buildQueue(); }
+                if (index < files.length-1) d.onclick = () => { [files[index], files[index+1]] = [files[index+1], files[index]]; buildQueue(); }
+                item.appendChild(x);
+                item.appendChild(u);
+                item.appendChild(d);
+
+                queue.appendChild(item);
+            });
+
+            GenPDF();
+        }
+
+        async function GenPDF() {
+            let pdfDoc = await PDFLib.PDFDocument.create();
+
+            for (const file of files) {
+                if (file.filetype == "png") {
+                    let img = await pdfDoc.embedPng(file.url);
+                    let page = pdfDoc.addPage([img.width, img.height]);
+                    page.drawImage(img);
+                }
+                if (file.filetype == "jpeg") {
+                    let img = await pdfDoc.embedJpg(file.url);
+                    let page = pdfDoc.addPage([img.width, img.height]);
+                    page.drawImage(img);
+                }
+                if (file.filetype == "pdf") {
+                    let pdf = await PDFLib.PDFDocument.load(file.url);
+                    let pages = await pdfDoc.copyPages(pdf, Array.from({length:pdf.getPageCount()}, (v,k)=>k)); // Currently copies all pages. Might add custom page selection in the future
+                    pages.forEach(page => { pdfDoc.addPage(page); });
+                }
+            }
+            
+            const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true, addDefaultPage: pdfDoc.getPageCount() == 0 });
+            document.getElementById("result").src = pdfDataUri;
+            const downloadButton = document.getElementById("download-button");
+            downloadButton.href = pdfDataUri;
+            downloadButton.download = "merged";
+        }
+    </script>
+</body>
+
+</html>
