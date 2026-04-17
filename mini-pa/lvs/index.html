@@ -179,6 +179,7 @@
             // Gets usefull column indices (-1 of not found)
             let personIndex = attendanceHeader.findIndex(el => el.trim().toLowerCase() == "person");
             let votingRightsIndex = attendanceHeader.findIndex(el => el.trim().toLowerCase() == "voting rights");
+            let attendanceIndex = attendanceHeader.findIndex(el => el.trim().toLowerCase() == "attendance");
 
             document.getElementById("lv-title").innerHTML        = description["Title"];
             document.getElementById("lv-description").innerHTML  = description["Description"];
@@ -226,21 +227,27 @@
             lvAttendanceList.appendChild(lvAttendanceListBody);
             lvAttendance.appendChild(lvAttendanceList);
 
-            if (personIndex != -1) { // If a person column if present, we can generate statistics about it and compare to currently entered email in the form.
+            if (personIndex != -1 & attendanceIndex != -1) { // If a person column if present, we can generate statistics about it and compare to currently entered email in the form.
                 // Generate statistics
                 let lvAttendanceInfo = document.createElement("span");
                 let validOnes = attendanceData.filter(el => el[personIndex].includes("@")); // This makes sure entries like Karel are not counted
-                if (validOnes.length == 0) {
-                    lvAttendanceInfo.innerHTML = "No one signed up yet.";
+                let presentOnes = validOnes.filter(el => isComing(el[attendanceIndex]));
+                if (presentOnes.length == 0) {
+                    if (validOnes.length == 0) {
+                        lvAttendanceInfo.innerHTML = "No one signed up yet.";
+                    }
+                    else {
+                        lvAttendanceInfo.innerHTML = "No one is coming.";
+                    }
                 }
                 else {
                     if (votingRightsIndex != -1) { // There is a voting rights column
-                        let confirmed = validOnes.filter(el => el[votingRightsIndex] != '');
+                        let confirmed = presentOnes.filter(el => el[votingRightsIndex] != '');
                         if (confirmed.length == 0) {
-                            lvAttendanceInfo.innerHTML = (validOnes.length == 1) ? "1 person signed up. Awaiting voting rights confirmation." : `${validOnes.length} people signed up. All awaiting voting rights confirmation.`
+                            lvAttendanceInfo.innerHTML = (presentOnes.length == 1) ? "1 person is coming. Awaiting voting rights confirmation." : `${presentOnes.length} people are coming. All awaiting voting rights confirmation.`
                         }
                         else {
-                            let unconfirmedCount = validOnes.length - confirmed.length;
+                            let unconfirmedCount = presentOnes.length - confirmed.length;
                             let peopleWithVotingRights = confirmed.filter(el => isAffirmative(el[votingRightsIndex]))
                             let votingRightsCount = peopleWithVotingRights.length;
                             lvAttendanceInfo.innerHTML = `${votingRightsCount} out of ${confirmed.length} ` + ((unconfirmedCount == 0) ? "": "confirmed") + " people have voting rights. "
@@ -249,7 +256,7 @@
                         }
                     }
                     else {
-                        lvAttendanceInfo.innerHTML = (validOnes.length == 1) ? "1 person signed up." : `${validOnes.length} people signed up.`;
+                        lvAttendanceInfo.innerHTML = (presentOnes.length == 1) ? "1 person is coming." : `${presentOnes.length} people are coming.`;
                     }
                 }
                 lvAttendance.appendChild(lvAttendanceInfo);
@@ -268,6 +275,17 @@
                 case "yep":
                     return true
                 return false;
+            }
+        }
+
+        function isComing(s) {
+            switch(s.trim().toLowerCase()) {
+                case "present":
+                case "late":
+                    return true;
+                case "not present":
+                    return false;
+                return true;
             }
         }
 
