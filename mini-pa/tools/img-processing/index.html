@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html class="fouc-barrier">
+    
+<head class="templates-head">
+    <title>BEST Ghent</title>
+    <script src="/static/scripts/templates.js" type="module" async="false"></script>
+    
+    <!-- This page loads stylesheets with javascript, causing FOUC's. To prevent this, we add this FOUC barrier (which should also be added as a class in the <html> tag).
+		When the templates system is finished, it will automatically remove the barrier, making the browser render the page. -->
+	<style type="text/css">.fouc-barrier { display: none; }</style>
+        <style>
+        #dropzone {
+            width: 100%;
+            min-height: 400px;
+            color: rgb(100, 100, 100);
+            border: 4px dashed var(--site-orange);
+            padding: 3rem;
+            line-height: 140%;
+            font-size: 2.6rem;
+
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        #final-bg {
+            background-color: var(--site-white);
+            animation: rainbow-bg 10s infinite;
+            min-height: 400px;
+            padding: 3rem;
+        }
+        @keyframes rainbow-bg {
+            0%  {background-color: var(--site-white);}
+            20%  {background-color: var(--site-orange);}
+            40%  {background-color: var(--site-blue);}
+            60%  {background-color: var(--site-green);}
+            80%  {background-color: var(--site-black);}
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="style-orange">
+    <!-- Introduction -->
+    <section class="hero sec-img" style="background-image: url('/static/media/pages/partners/partners_1.jpg');">
+        <div class="overlay-orange">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Remove image backgrounds & more</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 text-center">
+                    <div id="dropzone">
+                        <input type="file" style="display:none;">
+                        <div id="dropzone-content">
+                            Drag image onto this
+                        </div>
+                        <img id="original-img">
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div id="effects"></div>
+                    <select id="add-effects" value="">
+                        <option value="" selected disabled hidden> - Add effects - </option>
+                        <option>Replace Color</option>
+                        <option>Remove BG</option>
+                        <option>Grayscale</option>
+                        <option>Sapia</option>
+                        <option>Invert</option>
+                    </select>
+                    <a class="btn btn-orange" id="download-button">Download</a>
+                </div>
+                <div class="col-sm-5 text-center">
+                    <div id="final-bg">
+                        <canvas id="canvas" style="display:none;"></canvas>
+                        <img id="final-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="templates-copyright"></section>
+
+    <div class="templates-nav-main" data-nav-desc="mini-pa-main"></div>
+
+	<!-- Placeholder for javascript imports (imported using the templates.js file) -->
+	<div class="templates-scripts"></div>
+
+    <script type="text/javascript">
+        // Setting up dropzone
+        const dropzone = document.getElementById("dropzone");
+        const dropzoneContent = document.getElementById("dropzone-content");
+        const dropzoneinput = document.querySelector("#dropzone input");
+        // Dropzone drag and drop behaviour
+        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); }, false); // By default browsers will try to open files themselves when dragging over them
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            if (e.dataTransfer.items[0].kind !== "file") { throw new Error("Not a file"); }
+            uploadFile(e.dataTransfer.files[0]);
+        });
+        // Dropzone clicked behaviour
+        dropzone.addEventListener("click", (e) => {
+            dropzoneinput.value = null;
+            dropzoneinput.click();
+            dropzoneinput.onchange = (e) => {
+                Array.from(e.target.files).forEach(file=>uploadFile(file));
+            }
+        });
+
+        const addEffects = document.getElementById("add-effects");
+        addEffects.addEventListener("change", e => {
+            if (addEffects.value == "Replace Color")    addReplaceEffect();
+            if (addEffects.value == "Remove BG")        addBGRemoveEffect();
+            if (addEffects.value == "Grayscale")        addGrayScaleEffect();
+            if (addEffects.value == "Sapia")            addSapiaEffect();
+            if (addEffects.value == "Invert")           addInvertEffect();
+            genEffectQueue();
+            addEffects.value = "";
+        });
+
+
+        const originalImg = document.getElementById("original-img");
+        const finalImg = document.getElementById("final-img");
+        const canvas = document.getElementById("canvas");
+        const downloadButton = document.getElementById("download-button");
+        function uploadFile(file) {
+            const fr = new FileReader();
+            fr.onload = () => {
+                dropzoneContent.style.display = "none";
+                originalImg.src = fr.result;
+                process();
+            }
+            fr.readAsDataURL(file);
+        }
+
+
+        // Effects
+        let effectID = 0;
+        const effectQueue = {};
+        function addReplaceEffect() {
+            let container = document.createElement("div");
+            let tlabel = document.createElement("span");
+            tlabel.innerHTML = "target: ";
+            let flabel = document.createElement("span");
+            flabel.innerHTML = "final: ";
+            
+            addTitle(container, "Replace ", effectID);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(tlabel);
+            let target = genRGBinput("#ffffff");
+            container.appendChild(target);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(flabel);
+            let final = genRGBinput("#ff0000");
+            container.appendChild(final);
+
+            effectQueue[effectID] = {
+                node: container,
+                generator: () => {
+                    let [tr,tg,tb] = hexToRGB(target.value);
+                    let [fr,fg,fb] = hexToRGB(final.value);
+                    return genReplaceEffect([tr,fr],[tg,fg],[tb,fb]);
+                }
+            };
+            effectID+=1;
+        }
+
+        function addBGRemoveEffect() {
+            let container = document.createElement("div");
+            
+            addTitle(container, "Remove BG ", effectID);
+
+            container.appendChild(document.createElement("br"));
+
+            let tlabel = document.createElement("span");
+            tlabel.innerHTML = "target: ";
+            container.appendChild(tlabel);
+
+            let target = genRGBinput("#ffffff");
+            container.appendChild(target);
+
+            container.appendChild(document.createElement("br"));
+
+            let trlabel = document.createElement("span");
+            trlabel.innerHTML = "treshold: ";
+            container.appendChild(trlabel);
+
+            let treshold = genColorInputNode();
+            treshold.value = 10;
+            container.appendChild(treshold);
+
+            effectQueue[effectID] = {
+                node: container,
+                generator: () => {
+                    return genBGRemoveEffect(hexToRGB(target.value), treshold.value);
+                }
+            };
+            effectID+=1;
+        }
+
+        function addGrayScaleEffect() {
+            let container = document.createElement("div");
+            
+            addTitle(container, "Grayscale ", effectID);
+
+            container.appendChild(document.createElement("br"));
+
+            let tlabel = document.createElement("span");
+            tlabel.innerHTML = "weights: ";
+            container.appendChild(tlabel);
+
+            let weights = genRGBinput("#ffffff");
+            container.appendChild(weights);
+
+            effectQueue[effectID] = {
+                node: container,
+                generator: () => {
+                    let [r,g,b] = hexToRGB(weights.value);
+                    let s = r+g+b;
+                    return genGrayScaleEffect(r/s,g/s,b/s);
+                }
+            };
+            effectID+=1;
+        }
+
+        function addSapiaEffect() {
+            
+            let container = document.createElement("div");
+            
+            addTitle(container, "Sapia ", effectID);
+
+            effectQueue[effectID] = {
+                node: container,
+                generator: () => {
+                    return genSapiaEffect();
+                }
+            };
+            effectID+=1;
+        }
+
+        function addInvertEffect() {
+            let container = document.createElement("div");
+            
+            addTitle(container, "Invert ", effectID);
+
+            container.appendChild(document.createElement("br"));
+
+            let tlabel = document.createElement("span");
+            tlabel.innerHTML = "invert alpha: ";
+            container.appendChild(tlabel);
+
+            let alpha = genTickboxNode();
+            container.appendChild(alpha);
+
+            effectQueue[effectID] = {
+                node: container,
+                generator: () => {
+                    return genInvertEffect(alpha.checked);
+                }
+            };
+            effectID+=1;
+        }
+
+
+        function genReplaceEffect(R=[], G=[], B=[], matchAll=true) {
+            if (matchAll==true) {
+                return (r,g,b,a) => {
+                    match = true;
+                    if (R[0]!=undefined && r!=R[0]) match = false;
+                    if (G[0]!=undefined && g!=G[0]) match = false;
+                    if (B[0]!=undefined && b!=B[0]) match = false;
+                    if (match) return [
+                        (R[0]!=undefined)?R[1]:r,
+                        (G[0]!=undefined)?G[1]:g,
+                        (B[0]!=undefined)?B[1]:b,
+                        a
+                    ]
+                    return [
+                        r,
+                        g,
+                        b,
+                        a
+                    ]
+                }
+            }
+            return (r,g,b,a) => {
+                return [
+                    (r==R[0])?R[1]:r,
+                    (g==G[0])?G[1]:g,
+                    (b==B[0])?B[1]:b,
+                    a
+                ]
+            }
+        }
+
+        function genBGRemoveEffect(target=[255,255,255], tres=30) {
+            return (r,g,b,a) => {
+                let avgDis =   (Math.abs(r-target[0]) +
+                                Math.abs(b-target[1]) +
+                                Math.abs(b-target[2]))/3;
+                if (avgDis <= tres) {
+                    return [r,g,b,avgDis];
+                }
+                return [r,g,b,a];
+            };
+        }
+
+        function genGrayScaleEffect(wr=1/3, wg=1/3, wb=1/3) {
+            return (r,g,b,a) => {
+                let w = wr*r+wg*g+wb*b;
+                return [w,w,w,a]
+            }
+        }
+
+        function genSapiaEffect() {
+            return (r,g,b,a) => {
+                return [
+                    Math.min(Math.round(0.393 * r + 0.769 * g + 0.189 * b), 255),
+                    Math.min(Math.round(0.349 * r + 0.686 * g + 0.168 * b), 255),
+                    Math.min(Math.round(0.272 * r + 0.534 * g + 0.131 * b), 255),
+                    a
+                ]
+            }
+        }
+
+        function genInvertEffect(alpha=false) {
+            if (alpha) {
+                return (r,g,b,a) => {
+                    return [255-r,255-g,255-b,255-a]
+                }
+            }
+            return (r,g,b,a) => {
+                return [255-r,255-g,255-b,a]
+            }
+        }
+
+        const effectDOM = document.getElementById("effects");
+        function genEffectQueue() {
+            effectDOM.innerHTML = '';
+            Object.entries(effectQueue).forEach(e => {
+                effectDOM.appendChild(e[1].node);
+            });
+            process();
+        }
+
+        // Actual processing
+        const ctx = canvas.getContext("2d", {willReadFrequently:true});
+        function process() {
+            let img = new Image();
+            img.addEventListener("load", () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                shader();
+                let finalImgURL = canvas.toDataURL("image/png");
+                finalImg.src = finalImgURL;
+                downloadButton.href = finalImgURL;
+                downloadButton.download = "img.png"
+            });
+            img.src = originalImg.src;
+
+            function shader() {
+                let effects = getEffects();
+                const w = canvas.width;
+                const h = canvas.height;
+                const p = ctx.getImageData(0, 0, w, h);
+                for (let x=0; x<w; x++) {
+                    for (let y=0; y<h; y++) {
+                        let ri = y*(4*w) + x*4;
+                        var r = p.data[ri+0];
+                        var g = p.data[ri+1];
+                        var b = p.data[ri+2];
+                        var a = p.data[ri+3];
+                        for (effect of effects) {
+                            [r,g,b,a] = effect(r,g,b,a);
+                        }
+                        p.data[ri+0] = r;
+                        p.data[ri+1] = g;
+                        p.data[ri+2] = b;
+                        p.data[ri+3] = a;
+                    }
+                }
+                ctx.putImageData(p, 0, 0);
+            }
+        }
+
+        function getEffects() {
+            return Object.entries(effectQueue).map(e=>{return e[1].generator()});
+        }
+        
+        addBGRemoveEffect();
+        genEffectQueue();
+
+        // Helper functions
+        function hexToRGB(hex) {
+            // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+            var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ] : null;
+        }
+        function genRGBinput(initValue="#000000") {
+            let picker = document.createElement("input");
+            picker.type="color";
+            picker.alpha = true;
+            picker.value = initValue;
+            picker.onchange = process;
+            return picker;
+        }
+        function genColorInputNode() {
+            let input = document.createElement("input");
+            input.type= "number";
+            input.min = 0;
+            input.max = 255;
+            input.onchange = process;
+            return input;
+        }
+        function genTickboxNode() {
+            let tickbox = document.createElement("input");
+            tickbox.checked = false;
+            tickbox.type="checkbox";
+            tickbox.onchange = process;
+            return tickbox;
+        }
+        function genTrashCan(effectID) {
+            let trash = document.createElement("i");
+            trash.classList.add("fa-solid", "fa-trash")
+            trash.onclick = () => { delete effectQueue[effectID]; genEffectQueue(); };
+            return trash;
+        }
+        function addTitle(c, t, effectID) {
+            let title = document.createElement("b");
+            title.innerHTML = t;
+            let trash = genTrashCan(effectID);
+            c.appendChild(title);
+            c.appendChild(trash);
+        }
+    </script>
+</body>
+
+</html>
