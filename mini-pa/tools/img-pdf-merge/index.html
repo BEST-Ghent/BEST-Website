@@ -74,8 +74,11 @@
                     </p>
                 </div>
                 <div class="col-sm-6 text-center">
+                    <a class="btn btn-dark-gray" id="download-button" style="display:none;">Download</a>
+                    <p>
+                        Pdf will not show when too large. Download button will appear when ready.
+                    </p>
                     <iframe id="result" width="100%" height="600em"></iframe>
-                    <a class="btn btn-dark-gray" id="download-button">Download</a>
                 </div>
             </div>
         </div>
@@ -111,6 +114,9 @@
             }
         });
 
+        
+        const downloadButton = document.getElementById("download-button");
+
         // Handling file uploads
         const PNGMagic = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
         const JPEGMagic = [0xff, 0xd8, 0xff];
@@ -121,6 +127,7 @@
 
         let files = [];
         function uploadFile(file) {
+            downloadButton.style.display = "none";
             const fr = new FileReader();
             fr.readAsDataURL(file);
             fr.onload = async ()=> {
@@ -167,7 +174,7 @@
                 item.appendChild(x);
                 item.appendChild(u);
                 item.appendChild(d);
-
+                
                 queue.appendChild(item);
             });
 
@@ -197,9 +204,9 @@
             
             const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true, addDefaultPage: pdfDoc.getPageCount() == 0 });
             document.getElementById("result").src = pdfDataUri;
-            const downloadButton = document.getElementById("download-button");
             downloadButton.href = pdfDataUri;
             downloadButton.download = "merged";
+            downloadButton.style.display = "";
         }
     </script>
 </body>
