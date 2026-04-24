@@ -44,6 +44,14 @@
                         <br>
                         <label>Color</label>
                         <input id="color" type="color" oninput="genQR()">
+                        <select value="" onchange="setColor(value); value='';">
+                            <option value="" selected disabled hidden> - BEST Colors - </option>
+                            <option value="#faa519">Orange</option>
+                            <option value="#1973be">Blue</option>
+                            <option value="#69cd28">Green</option>
+                            <option value="#000000">Black</option>
+                            <option value="#ffffff">White</option>
+                        </select>
                         <br>
                         <label>Logo?</label>
                         <input id="logo" type="checkbox" oninput="genQR()" checked>
@@ -76,6 +84,12 @@
 	<div class="templates-scripts"></div>
 
     <script type="text/javascript">
+
+        function setColor(value) {
+            document.getElementById("color").value = value;
+            genQR();
+        }
+
         function genQR() {
             var domel = document.getElementById("qrcode");
             domel.childNodes.forEach(child => {
