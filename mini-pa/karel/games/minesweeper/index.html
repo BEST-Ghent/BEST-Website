@@ -33,6 +33,7 @@
                 <div class="col-sm-12 text-center">
                     <p>
                         <a id="todays-game-button" class="btn btn-orange">Today's game</a>
+                        <a id="random-game-button" class="btn btn-orange">Random game</a>
                         <label for="seed-game">Seed:</label>
                         <input id="seed-game" name="seed-game" type="text" class="btn btn-orange"></input>
                     </p>
@@ -55,6 +56,8 @@
 
         const todays_game_button = document.getElementById("todays-game-button");
         todays_game_button.onclick = start_todays_game;
+        const random_game_button = document.getElementById("random-game-button");
+        random_game_button.onclick = start_random_game;
         const seed_game_input = document.getElementById("seed-game");
         seed_game_input.oninput = (e) => { start_seeded_game(seed_game_input.value); };
 
@@ -73,6 +76,11 @@
             start_seeded_game((new Date()).toLocaleDateString(["en"], { day: "numeric", month: "numeric", year: "numeric"}));
         }
 
+        const rng = new RNG(new Date());
+        function start_random_game() {
+            start_seeded_game(rng.str(16));
+        }
+
         const canvasDOM = document.getElementById("canvas");
         const size = {
             width:30,
@@ -81,7 +89,7 @@
         const bombs = 99;
 
         if (!getAnchor()) {
-            start_todays_game();
+            start_random_game();
         }
         else {
             start_game(canvasDOM, getAnchor(), size, bombs);

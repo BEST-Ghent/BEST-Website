@@ -45,4 +45,9 @@ class RNG {
         const f = this.float(a, b);
         return Math.round(f);
     }
+    str(len) {
+        let res = "";
+        for (let i = 0; i < len; i++) res += this.int(0, 15).toString(16);
+        return res;
+    }
 }
