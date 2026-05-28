@@ -94,12 +94,14 @@ export function start_game(canvasDOM, start_hash, board_size, bomb_count) {
     populate_bombs();
 
     canvas.onclick = (e) => {
+        if (game_over) return true;
         const rect = canvas.getBoundingClientRect();
         const coord = new Coord(Math.floor((e.clientX - rect.left) * size.width / canvas.width), Math.floor((e.clientY - rect.top) * size.height / canvas.height));
         on_left_click(coord);
     }
 
     canvas.oncontextmenu = (e) => {
+        if (game_over) return true;
         const rect = canvas.getBoundingClientRect();
         const coord = new Coord(Math.floor((e.clientX - rect.left) * size.width / canvas.width), Math.floor((e.clientY - rect.top) * size.height / canvas.height));
         on_right_click(coord);
@@ -189,7 +191,7 @@ function populate_bombs() {
     }
 }
 
-export function draw() {
+function draw() {
     ctx.fillStyle = "#FF000055"; // Error overlay
     if (game_over) {
         for (let x = 0; x < size.width; x++) {
