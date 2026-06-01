@@ -85,8 +85,7 @@
         function start_todays_game() {
             start_seeded_game((new Date()).toLocaleDateString(["en"], { day: "numeric", month: "numeric", year: "numeric"}));
         }
-
-        const rng = new RNG(new Date());
+        const rng = new RNG((new Date()).toJSON());
         function start_random_game() {
             start_seeded_game(rng.str(16));
         }
