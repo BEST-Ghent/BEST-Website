@@ -44,6 +44,7 @@ let navigationDescriptions = {
 	"mini-pa-main": {
 		"Home":"/mini-pa",
 		"LV's":"/mini-pa/lvs",
+		"Karel":"/mini-pa/karel",
 		"Tools":"/mini-pa/tools",
 		"Office":"/mini-pa/office",
 		"Docs":"/mini-pa/site-documentation"
